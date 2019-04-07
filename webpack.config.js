@@ -11,6 +11,9 @@ module.exports = {
   mode: env,
   entry: ['babel-polyfill', './src'], // this is where our app lives
   devtool: 'source-map', // this enables debugging with source in chrome devtools
+  devServer: {
+    hot: true,
+  },
   module: {
     rules: [
       {
@@ -37,7 +40,7 @@ module.exports = {
               plugins: () => [autoprefixer()],
               sourceMap: true,
             },
-          },          
+          },
           {
             loader: 'sass-loader',
             options: {
