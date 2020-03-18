@@ -27,10 +27,10 @@ export function getLetters(callback) {
 }
 
 // adds a letter
-export function addLetter(letter) {
+export function addLetter(letter, title) {
   const letters = firebase.database().ref('Letters/');
   const score = 0;
-  letters.push({ letter, score });
+  letters.push({ letter, score, title });
 }
 
 // adds a like to the letter
