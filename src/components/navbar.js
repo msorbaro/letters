@@ -26,13 +26,14 @@ class NavBar extends Component {
     }).catch((error) => {
       console.log('wait, could not sign out');
     });
+    this.setState({ authenticated: false });
   }
 
   renderNav() {
     if (this.state.authenticated) {
       return (
         <div className="navRight">
-          <li id="letters"><NavLink to="/"><Button className="actionButton" id="signoutButton" onClick={this.signout}>Sign Out</Button></NavLink></li>
+          <li id="logout"><NavLink to="/"><Button className="actionButton" id="signoutButton" onClick={this.signout}>Sign Out</Button></NavLink></li>
           <li id="thoughts"><NavLink to="/thoughts"><Button className="actionButton" id="signinButton">Thoughts</Button></NavLink></li>
           <li id="letters"><NavLink to="/letters"><Button className="actionButton" id="signupButton">Letters</Button></NavLink></li>
         </div>
@@ -41,6 +42,7 @@ class NavBar extends Component {
       return (
         <div className="navRight">
           <li id="signup"><NavLink to="/signup"><Button className="actionButton" id="signinButton">Sign Up</Button></NavLink></li>
+          <li id="signin"><NavLink to="/signin"><Button className="actionButton" id="signinButton">Sign In</Button></NavLink></li>
         </div>
       );
     }
