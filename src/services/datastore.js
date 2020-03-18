@@ -35,7 +35,10 @@ export function addLetter(letter, title) {
 
 // adds a like to the letter
 export function increaseLetterScore(letterID, callback) {
+  console.log('letterID');
+  console.log(letterID);
   database.ref(`Letters/${letterID}`).once('value').then((snapshot) => {
+    console.log('HERRRRRRE');
     const newState = snapshot.val().score + 1;
     const updates = { score: newState };
     const ref = database.ref(`Letters/${letterID}`);
