@@ -3,6 +3,11 @@ import * as db from '../services/datastore';
 
 
 class Letters extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   componentDidMount() {
     db.getLetters(this.recievedLetters);
     console.log('here');
