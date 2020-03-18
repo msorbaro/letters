@@ -27,32 +27,22 @@ export function getLetters(callback) {
 }
 
 // adds a letter
-export function addLetter(letter, title) {
+export function addLetter(letter, title, username) {
   const letters = firebase.database().ref('Letters/');
-  const score = 0;
-  letters.push({ letter, score, title });
+  const author = username;
+  letters.push({
+    letter, title, author,
+  });
 }
 
 // adds a like to the letter
-export function increaseLetterScore(letterID, callback) {
-  database.ref(`Letters/${letterID}`).once('value').then((snapshot) => {
-    const newState = snapshot.val().score + 1;
-    const updates = { score: newState };
-    const ref = database.ref(`Letters/${letterID}`);
-    ref.update(updates);
-    callback(newState);
-  });
+export function increaseLetterScore(letterID, userID, callback) {
+  firebase.database().ref(`Letters/${letterID}/likes/`).child(userID).set(userID);
 }
 
 // removes a like from the letter
-export function decreaseLetterScore(letterID, callback) {
-  database.ref(`Letters/${letterID}`).once('value').then((snapshot) => {
-    const newState = snapshot.val().score - 1;
-    const updates = { score: newState };
-    const ref = database.ref(`Letters/${letterID}`);
-    ref.update(updates);
-    callback(newState);
-  });
+export function decreaseLetterScore(letterID, userID, callback) {
+  firebase.database().ref(`Letters/${letterID}/likes/${userID}`).remove();
 }
 
 /** ****************************

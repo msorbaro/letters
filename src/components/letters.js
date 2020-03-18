@@ -7,19 +7,22 @@ import OneLetter from './OneLetter';
 class Letters extends Component {
   constructor(props) {
     super(props);
-    this.state = { letters: null, authenticated: false };
+    this.state = {
+      letters: null, authenticated: false, username: '', userID: '',
+    };
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ authenticated: true });
+        this.setState({ username: user.displayName });
+        this.setState({ userID: user.uid });
         db.fetchYourGroups(this.state.currUserId, this.setYourGroups);
       }
     });
 
     db.getLetters(this.recievedLetters);
-    console.log('here');
   }
 
   recievedLetters = (letter) => {
@@ -28,15 +31,15 @@ class Letters extends Component {
   }
 
   sendLetter = () => {
-    db.addLetter('Test Letter', 'TestTitle');
+    db.addLetter('Test Letter', 'TestTitle', this.state.username);
   }
 
   updateHeartsIncrease = () => {
-    db.increaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.updatedHeartCallBack);
+    db.increaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
   }
 
   updateHeartsDecrease = () => {
-    db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.updatedHeartCallBack);
+    db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
   }
 
 
