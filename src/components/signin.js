@@ -4,13 +4,12 @@ import { Button } from 'react-bootstrap';
 import { Input } from 'reactstrap';
 import firebase from 'firebase';
 
-class SignUp extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: '',
-      username: '',
       password: '',
     };
   }
@@ -23,26 +22,9 @@ class SignUp extends Component {
     this.setState({ password: event.target.value });
   }
 
-  onUsernameChange= (event) => {
-    this.setState({ username: event.target.value });
-  }
-
-
-  handleSignupButtonClick = (event) => {
-    firebase.auth().createUserWithEmailAndPassword(`${this.state.email}@dartmouth.edu`, this.state.password).catch((error) => {
+  handleSigninButtonClick = (event) => {
+    firebase.auth().signInWithEmailAndPassword(`${this.state.email}@dartmouth.edu`, this.state.password).catch((error) => {
       alert(error);
-    });
-
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        firebase.database().ref(`users/${user.uid}`).set({
-          email: this.state.email,
-          username: this.state.username,
-        });
-        user.updateProfile({
-          displayName: this.state.username,
-        });
-      }
     });
   }
 
@@ -53,15 +35,14 @@ class SignUp extends Component {
   render() {
     return (
       <div className="displaySignInInfo">
-        <h1>Sign Up </h1>
+        <h1>Sign In</h1>
         <div id="dartmouthEmailInputBar">
           <Input className="inputBar" id="emailInputBar" placeholder="Dartmouth Email" onChange={this.onEmailChange} value={this.state.email} />
           <Input type="text" id="dartmouthEdu" value="@dartmouth.edu" readOnly />
         </div>
-        <Input className="inputBar" id="usernameInput" placeholder="Username" onChange={this.onUsernameChange} value={this.state.username} />
         <Input type="password" className="inputBar" id="passwordInput" placeholder="Password" onChange={this.onPasswordChange} value={this.state.password} />
         <div className="updateSignInButtons">
-          <Button className="actionButton" id="createButton" onClick={this.handleSignupButtonClick}>Create</Button>
+          <Button className="actionButton" id="createButton" onClick={this.handleSigninButtonClick}>Create</Button>
           <Button className="actionButton" id="cancelButton" onClick={this.handleCancelButtonClick}>Cancel</Button>
         </div>
       </div>
@@ -70,4 +51,4 @@ class SignUp extends Component {
 }
 
 // export default NewPost;
-export default withRouter((SignUp));
+export default withRouter((SignIn));
