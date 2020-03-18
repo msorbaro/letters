@@ -6,6 +6,7 @@ import NavBar from './components/navbar';
 import Letters from './components/letters';
 import Thoughts from './components/thoughts';
 import Signup from './components/signup';
+import SignIn from './components/signin';
 import Homepage from './components/homepage';
 import Questions from './components/questions';
 // import requireAuth from '../components/requireAuth';
@@ -23,6 +24,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/signin" component={SignIn} />
           <Route exact path="/letters" component={Letters} />
           <Route path="/thoughts" component={Thoughts} />
           <Route path="/questions" component={Questions} />
