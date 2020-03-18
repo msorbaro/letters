@@ -1,15 +1,7 @@
-body, html {
+html {
   font-family: "Roboto", sans-serif;
-  background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#5e80bb 100%);
+  background-image: url("./assets/background.png");
   height: 100%;
-}
-
-.logo {
-  background-image: url('img/tim.png');
-  width: 100px;
-  height: 100px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 ::placeholder {
