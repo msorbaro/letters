@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import { withRouter } from 'react-router-dom';
 import * as db from '../services/datastore';
 
 
 class Letters extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       authenticated: false,
     };
@@ -75,4 +75,4 @@ class Letters extends Component {
   }
 }
 
-export default Letters;
+export default withRouter((Letters));

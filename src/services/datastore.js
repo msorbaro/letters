@@ -14,6 +14,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+/** ****************************
+ALL LETTER RELATED BE CALLS
+**************************** */
 
 // returns all the letters
 export function getLetters(callback) {
@@ -47,6 +50,97 @@ export function decreaseLetterScore(letterID, callback) {
     const newState = snapshot.val().score - 1;
     const updates = { score: newState };
     const ref = database.ref(`Letters/${letterID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}
+
+/** ****************************
+ALL QUESTION RELATED BE CALLS
+**************************** */
+
+// Adds a quesiton
+export function addQuestion(question) {
+  const questions = firebase.database().ref('Questions/');
+  const agrees = 0;
+  const disagrees = 0;
+  const comments = [];
+  questions.push({
+    question, agrees, disagrees, comments,
+  });
+}
+
+
+// if someone clicks agree for a question
+export function increaseQuestionYes(questionID, callback) {
+  database.ref(`Questions/${questionID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().agrees + 1;
+    const updates = { agrees: newState };
+    const ref = database.ref(`Questions/${questionID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}
+
+// if someone removes agree for a question
+export function decreaseQuestionYes(questionID, callback) {
+  database.ref(`Questions/${questionID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().agrees - 1;
+    const updates = { agrees: newState };
+    const ref = database.ref(`Questions/${questionID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}
+
+// adds a down vote
+export function increaseQuestionNo(questionID, callback) {
+  database.ref(`Questions/${questionID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().disagrees + 1;
+    const updates = { disagrees: newState };
+    const ref = database.ref(`Questions/${questionID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}
+
+// removes a disagree vote
+export function decreaseQuestionNo(questionID, callback) {
+  database.ref(`Questions/${questionID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().disagrees - 1;
+    const updates = { disagrees: newState };
+    const ref = database.ref(`Questions/${questionID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}
+
+/** ****************************
+ALL COMMENT ON QUESTION RELATED BE CALLS
+**************************** */
+export function addComment(comment, questionID) {
+  const questionComments = firebase.database().ref(`Questions/${questionID}/Comments`);
+  const likes = 0;
+  questionComments.push({
+    comment, likes,
+  });
+}
+
+export function likeComment(commentID, questionID, callback) {
+  database.ref(`Questions/${questionID}/Comments/${commentID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().likes + 1;
+    const updates = { likes: newState };
+    const ref = database.ref(`Questions/${questionID}/Comments/${commentID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}
+
+export function dislikeComment(commentID, questionID, callback) {
+  database.ref(`Questions/${questionID}/Comments/${commentID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().likes - 1;
+    const updates = { likes: newState };
+    const ref = database.ref(`Questions/${questionID}/Comments/${commentID}`);
     ref.update(updates);
     callback(newState);
   });
