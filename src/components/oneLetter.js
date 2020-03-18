@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import * as db from '../services/datastore';
+import * as db from '../services/datastore';
 
 
 class OneLetter extends Component {
@@ -7,10 +7,23 @@ class OneLetter extends Component {
     super(props);
 
     // assuming gets props ID, letter, amount of likes, title
-    this.state = {};
+    this.state = { title: this.props.title, letter: this.props.letter, likes: this.props.likes };
   }
 
   componentDidMount() {
+  }
+
+  updateHeartsIncrease = () => {
+    db.increaseLetterScore(this.props.id, this.updatedHeartCallBack);
+  }
+
+  updateHeartsDecrease = () => {
+    db.decreaseLetterScore(this.props.id, this.updatedHeartCallBack);
+  }
+
+  updatedHeartCallBack = (newState) => {
+    console.log(newState);
+    this.setState({ likes: newState });
   }
 
 
@@ -19,18 +32,18 @@ class OneLetter extends Component {
       <div>
         <h1>
           {' '}
-          {this.props.title}
+          {this.state.title}
           {' '}
         </h1>
         <p>
           {' '}
-          {this.props.letter}
+          {this.state.letter}
           {' '}
         </p>
         <p>
           {' '}
 likes:
-          {this.props.likes}
+          {this.state.likes}
           {' '}
 
         </p>
@@ -39,6 +52,17 @@ likes:
 ID:
           {this.props.id}
         </p>
+
+        <button onClick={this.updateHeartsIncrease}
+          type="button"
+        >
+        Update Letter Hearts Increase
+        </button>
+        <button onClick={this.updateHeartsDecrease}
+          type="button"
+        >
+        Update Letter Hearts Decrease
+        </button>
       </div>
     );
   }

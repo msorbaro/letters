@@ -8,7 +8,7 @@ class Letters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      letters: null, authenticated: false, username: '', userID: '',
+      letters: null, authenticated: false, username: '', userID: '', showCreateLetterInfo: false, title: '', text: ' ',
     };
   }
 
@@ -40,11 +40,24 @@ class Letters extends Component {
 
   updateHeartsDecrease = () => {
     db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
+    db.addLetter(this.state.text, this.state.title);
+    this.setState({ showCreateLetterInfo: false });
   }
 
+  createLetter = () => {
+    this.setState({ showCreateLetterInfo: true });
+  }
 
   updatedHeartCallBack = () => {
     console.log('updated');
+  }
+
+  handleTitleChange = (event) => {
+    this.setState({ title: event.target.value });
+  }
+
+  handleTextChange = (event) => {
+    this.setState({ text: event.target.value });
   }
 
   render() {
@@ -69,6 +82,21 @@ class Letters extends Component {
         );
       });
     }
+
+    const createLetter = this.state.showCreateLetterInfo ? (
+      <div>
+        <p>Title:</p>
+        <input type="text" value={this.state.title} onChange={this.handleTitleChange} />
+        <p>Text</p>
+        <input type="text" value={this.state.text} onChange={this.handleTextChange} />
+        <button onClick={this.sendLetter}
+          type="button"
+        >
+        Send Letter
+        </button>
+      </div>
+    ) : null;
+
     if (this.state.authenticated) {
       return (
         <div style={{
@@ -77,21 +105,12 @@ class Letters extends Component {
         >
           {letterObject}
 
-          <button onClick={this.sendLetter}
+          <button onClick={this.createLetter}
             type="button"
           >
-          Send Test Letter
+          Create Letter
           </button>
-          <button onClick={this.updateHeartsIncrease}
-            type="button"
-          >
-          Update Letter Hearts Increase
-          </button>
-          <button onClick={this.updateHeartsDecrease}
-            type="button"
-          >
-          Update Letter Hearts Decrease
-          </button>
+          {createLetter}
         </div>
       );
     } else {
