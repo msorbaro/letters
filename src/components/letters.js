@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import * as db from '../services/datastore';
 import OneLetter from './OneLetter';
@@ -6,10 +7,17 @@ import OneLetter from './OneLetter';
 class Letters extends Component {
   constructor(props) {
     super(props);
-    this.state = { letters: null };
+    this.state = { letters: null, authenticated: false };
   }
 
   componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ authenticated: true });
+        db.fetchYourGroups(this.state.currUserId, this.setYourGroups);
+      }
+    });
+
     db.getLetters(this.recievedLetters);
     console.log('here');
   }
@@ -58,30 +66,34 @@ class Letters extends Component {
         );
       });
     }
-    return (
-      <div style={{
-        marginTop: 100, width: '100%', height: '100%',
-      }}
-      >
-        {letterObject}
+    if (this.state.authenticated) {
+      return (
+        <div style={{
+          marginTop: 100, width: '100%', height: '100%',
+        }}
+        >
+          {letterObject}
 
-        <button onClick={this.sendLetter}
-          type="button"
-        >
+          <button onClick={this.sendLetter}
+            type="button"
+          >
           Send Test Letter
-        </button>
-        <button onClick={this.updateHeartsIncrease}
-          type="button"
-        >
+          </button>
+          <button onClick={this.updateHeartsIncrease}
+            type="button"
+          >
           Update Letter Hearts Increase
-        </button>
-        <button onClick={this.updateHeartsDecrease}
-          type="button"
-        >
+          </button>
+          <button onClick={this.updateHeartsDecrease}
+            type="button"
+          >
           Update Letter Hearts Decrease
-        </button>
-      </div>
-    );
+          </button>
+        </div>
+      );
+    } else {
+      return (<div> no </div>);
+    }
   }
 }
 
