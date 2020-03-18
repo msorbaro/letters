@@ -14,7 +14,7 @@ class Letters extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ authenticated: true });
-        db.fetchYourGroups(this.state.currUserId, this.setYourGroups);
+      //  db.fetchYourGroups(this.state.currUserId, this.setYourGroups);
       }
     });
 
@@ -30,15 +30,6 @@ class Letters extends Component {
   sendLetter = () => {
     db.addLetter('Test Letter', 'TestTitle');
   }
-
-  updateHeartsIncrease = () => {
-    db.increaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.updatedHeartCallBack);
-  }
-
-  updateHeartsDecrease = () => {
-    db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.updatedHeartCallBack);
-  }
-
 
   updatedHeartCallBack = () => {
     console.log('updated');
@@ -78,16 +69,6 @@ class Letters extends Component {
             type="button"
           >
           Send Test Letter
-          </button>
-          <button onClick={this.updateHeartsIncrease}
-            type="button"
-          >
-          Update Letter Hearts Increase
-          </button>
-          <button onClick={this.updateHeartsDecrease}
-            type="button"
-          >
-          Update Letter Hearts Decrease
           </button>
         </div>
       );
