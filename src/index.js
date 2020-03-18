@@ -6,6 +6,7 @@ import NavBar from './components/navbar';
 import Letters from './components/letters';
 import Thoughts from './components/thoughts';
 import Login from './components/login';
+import Questions from './components/questions';
 // import requireAuth from '../components/requireAuth';
 import './style.scss';
 
@@ -22,6 +23,7 @@ const App = () => {
           <Route exact path="/" component={Login} />
           <Route exact path="/letters" component={Letters} />
           <Route path="/thoughts" component={Thoughts} />
+          <Route path="/questions" component={Questions} />
 
           <Route component={FallBack} />
         </Switch>

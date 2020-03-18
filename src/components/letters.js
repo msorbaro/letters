@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import * as db from '../services/datastore';
 
 
 class Letters extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   componentDidMount() {
     db.getLetters(this.recievedLetters);
     console.log('here');
@@ -55,4 +61,4 @@ class Letters extends Component {
   }
 }
 
-export default Letters;
+export default withRouter((Letters));
