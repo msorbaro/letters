@@ -114,3 +114,14 @@ export function decreaseQuestionNo(questionID, callback) {
     callback(newState);
   });
 }
+
+/** ****************************
+ALL COMMENT ON QUESTION RELATED BE CALLS
+**************************** */
+export function addComment(comment, questionID) {
+  const questionComments = firebase.database().ref(`Questions/${questionID}/Comments`);
+  const likes = 0;
+  questionComments.push({
+    comment, likes,
+  });
+}

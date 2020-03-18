@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import * as db from '../services/datastore';
 
 
@@ -39,6 +40,10 @@ class Questions extends Component {
     db.decreaseQuestionNo('-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
   }
 
+  addAComment = () => {
+    db.addComment('I am a comment', '-M2jQxka2erZ58z2Yo1M');
+  }
+
   render() {
     return (
       <div style={{
@@ -73,9 +78,15 @@ class Questions extends Component {
         >
           Decrease Dislikes
         </button>
+
+        <button onClick={this.addAComment}
+          type="button"
+        >
+          Add A comment
+        </button>
       </div>
     );
   }
 }
 
-export default Questions;
+export default withRouter((Questions));

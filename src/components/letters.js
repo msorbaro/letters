@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import * as db from '../services/datastore';
 
 
@@ -60,4 +61,4 @@ class Letters extends Component {
   }
 }
 
-export default Letters;
+export default withRouter((Letters));
