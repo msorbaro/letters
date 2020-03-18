@@ -5,7 +5,9 @@ import { Switch } from 'react-router';
 import NavBar from './components/navbar';
 import Letters from './components/letters';
 import Thoughts from './components/thoughts';
-import Login from './components/login';
+import Signup from './components/signup';
+import Homepage from './components/homepage';
+
 // import requireAuth from '../components/requireAuth';
 import './style.scss';
 
@@ -19,10 +21,10 @@ const App = () => {
       <div>
         <NavBar />
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={Homepage} />
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/letters" component={Letters} />
           <Route path="/thoughts" component={Thoughts} />
-
           <Route component={FallBack} />
         </Switch>
       </div>
