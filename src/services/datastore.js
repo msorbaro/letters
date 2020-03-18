@@ -125,3 +125,23 @@ export function addComment(comment, questionID) {
     comment, likes,
   });
 }
+
+export function likeComment(commentID, questionID, callback) {
+  database.ref(`Questions/${questionID}/Comments/${commentID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().likes + 1;
+    const updates = { likes: newState };
+    const ref = database.ref(`Questions/${questionID}/Comments/${commentID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}
+
+export function dislikeComment(commentID, questionID, callback) {
+  database.ref(`Questions/${questionID}/Comments/${commentID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().likes - 1;
+    const updates = { likes: newState };
+    const ref = database.ref(`Questions/${questionID}/Comments/${commentID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}

@@ -44,45 +44,66 @@ class Questions extends Component {
     db.addComment('I am a comment', '-M2jQxka2erZ58z2Yo1M');
   }
 
+  likeComment = () => {
+    db.likeComment('-M2j_Fs_4RnF_lG50kYV', '-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
+  }
+
+  dislikeComment = () => {
+    db.dislikeComment('-M2j_Fs_4RnF_lG50kYV', '-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
+  }
+
   render() {
     return (
       <div style={{
         marginTop: 100, width: '100%', height: '100%',
       }}
       >
-        <input type="text" value={this.state.question} onChange={this.handleQuestionChange} />
-        <button onClick={this.submitQuestion}
-          type="button"
-        >
+        <div>
+          <input type="text" value={this.state.question} onChange={this.handleQuestionChange} />
+          <button onClick={this.submitQuestion}
+            type="button"
+          >
           Send Test Letter
-        </button>
+          </button>
 
-        <button onClick={this.increaseQuestionLike}
-          type="button"
-        >
+          <button onClick={this.increaseQuestionLike}
+            type="button"
+          >
           Increase Likes
-        </button>
-        <button onClick={this.increaseQuestionDislike}
-          type="button"
-        >
+          </button>
+          <button onClick={this.increaseQuestionDislike}
+            type="button"
+          >
           Increase Dislikes
-        </button>
+          </button>
 
-        <button onClick={this.decreaseQuestionLike}
-          type="button"
-        >
+          <button onClick={this.decreaseQuestionLike}
+            type="button"
+          >
           Decrease Likes
-        </button>
-        <button onClick={this.decreaseQuestionDislike}
-          type="button"
-        >
+          </button>
+          <button onClick={this.decreaseQuestionDislike}
+            type="button"
+          >
           Decrease Dislikes
-        </button>
+          </button>
+        </div>
 
         <button onClick={this.addAComment}
           type="button"
         >
           Add A comment
+        </button>
+
+        <button onClick={this.likeComment}
+          type="button"
+        >
+          Like comment
+        </button>
+        <button onClick={this.dislikeComment}
+          type="button"
+        >
+          Dislike comment
         </button>
       </div>
     );
