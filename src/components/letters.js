@@ -16,6 +16,19 @@ class Letters extends Component {
     db.addLetter('Test Letter');
   }
 
+  updateHeartsIncrease = () => {
+    db.increaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.updatedHeartCallBack);
+  }
+
+  updateHeartsDecrease = () => {
+    db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.updatedHeartCallBack);
+  }
+
+
+  updatedHeartCallBack = () => {
+    console.log('updated');
+  }
+
   render() {
     return (
       <div style={{
@@ -26,6 +39,16 @@ class Letters extends Component {
           type="button"
         >
           Send Test Letter
+        </button>
+        <button onClick={this.updateHeartsIncrease}
+          type="button"
+        >
+          Update Letter Hearts Increase
+        </button>
+        <button onClick={this.updateHeartsDecrease}
+          type="button"
+        >
+          Update Letter Hearts Decrease
         </button>
       </div>
     );
