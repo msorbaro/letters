@@ -8,7 +8,7 @@ class Letters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      letters: null, authenticated: false, showCreateLetterInfo: false, title: '', text: ' ',
+      letters: null, authenticated: false, username: '', userID: '', showCreateLetterInfo: false, title: '', text: ' ',
     };
   }
 
@@ -16,12 +16,13 @@ class Letters extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ authenticated: true });
-      //  db.fetchYourGroups(this.state.currUserId, this.setYourGroups);
+        this.setState({ username: user.displayName });
+        this.setState({ userID: user.uid });
+        db.fetchYourGroups(this.state.currUserId, this.setYourGroups);
       }
     });
 
     db.getLetters(this.recievedLetters);
-    console.log('here');
   }
 
   recievedLetters = (letter) => {
@@ -30,6 +31,15 @@ class Letters extends Component {
   }
 
   sendLetter = () => {
+    db.addLetter('Test Letter', 'TestTitle', this.state.username);
+  }
+
+  updateHeartsIncrease = () => {
+    db.increaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
+  }
+
+  updateHeartsDecrease = () => {
+    db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
     db.addLetter(this.state.text, this.state.title);
     this.setState({ showCreateLetterInfo: false });
   }
