@@ -12,11 +12,10 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
-// Get a reference to the database service
 const database = firebase.database();
 
 
+// returns all the letters
 export function getLetters(callback) {
   database.ref('Letters').on('value', (snapshot) => {
     const newLettersState = snapshot.val();
@@ -24,8 +23,31 @@ export function getLetters(callback) {
   });
 }
 
+// adds a letter
 export function addLetter(letter) {
   const letters = firebase.database().ref('Letters/');
+  const score = 0;
+  letters.push({ letter, score });
+}
 
-  letters.push({ letter });
+// adds a like to the letter
+export function increaseLetterScore(letterID, callback) {
+  database.ref(`Letters/${letterID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().score + 1;
+    const updates = { score: newState };
+    const ref = database.ref(`Letters/${letterID}`);
+    ref.update(updates);
+    callback(newState);
+  });
+}
+
+// removes a like from the letter
+export function decreaseLetterScore(letterID, callback) {
+  database.ref(`Letters/${letterID}`).once('value').then((snapshot) => {
+    const newState = snapshot.val().score - 1;
+    const updates = { score: newState };
+    const ref = database.ref(`Letters/${letterID}`);
+    ref.update(updates);
+    callback(newState);
+  });
 }
