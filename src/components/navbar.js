@@ -32,7 +32,11 @@ class NavBar extends Component {
   renderNav() {
     if (this.state.authenticated) {
       return (
-        <div className="navRight">
+        <div className="navRight"
+          style={{
+            'list-style-type': 'none', display: 'flex', 'flex-direction': 'row', marginTop: '10%',
+          }}
+        >
           <li id="logout"><NavLink to="/"><Button className="actionButton" id="signoutButton" onClick={this.signout}>Sign Out</Button></NavLink></li>
           <li id="thoughts"><NavLink to="/thoughts"><Button className="actionButton" id="signinButton">Thoughts</Button></NavLink></li>
           <li id="letters"><NavLink to="/letters"><Button className="actionButton" id="signupButton">Letters</Button></NavLink></li>
@@ -42,7 +46,11 @@ class NavBar extends Component {
       );
     } else {
       return (
-        <div className="navRight">
+        <div className="navRight"
+          style={{
+            'list-style-type': 'none', display: 'flex', 'flex-direction': 'row', marginTop: '10%',
+          }}
+        >
           <li id="signup"><NavLink to="/signup"><Button className="actionButton" id="signinButton">Sign Up</Button></NavLink></li>
           <li id="signin"><NavLink to="/signin"><Button className="actionButton" id="signinButton">Sign In</Button></NavLink></li>
         </div>
