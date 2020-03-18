@@ -1,25 +1,8 @@
-// const $ = require('jquery');
-//
-// $('#main').html('Here we go! Wheee');
-//
-
-// // change require to es6 import style
-import $ from 'jquery';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Letters from '../components/letters';
 import './style.scss';
-//
-// // this is a generator function.
-// // note the *
-function* simpleCounter() {
-  let count = 0;
-  while (true) {
-    yield count += 1;
-  }
-}
 
-// instantiate generator
-const counter = simpleCounter();
+const App = () => <Letters />;
 
-setInterval(
-  () => { $('#main').html(`You have been on this page for ${counter.next().value} seconds.`); },
-  1000,
-);
+ReactDOM.render(<App />, document.getElementById('main'));
