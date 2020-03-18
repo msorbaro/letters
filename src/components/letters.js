@@ -7,7 +7,9 @@ import OneLetter from './OneLetter';
 class Letters extends Component {
   constructor(props) {
     super(props);
-    this.state = { letters: null, authenticated: false };
+    this.state = {
+      letters: null, authenticated: false, showCreateLetterInfo: false, title: '', text: ' ',
+    };
   }
 
   componentDidMount() {
@@ -28,11 +30,24 @@ class Letters extends Component {
   }
 
   sendLetter = () => {
-    db.addLetter('Test Letter', 'TestTitle');
+    db.addLetter(this.state.text, this.state.title);
+    this.setState({ showCreateLetterInfo: false });
+  }
+
+  createLetter = () => {
+    this.setState({ showCreateLetterInfo: true });
   }
 
   updatedHeartCallBack = () => {
     console.log('updated');
+  }
+
+  handleTitleChange = (event) => {
+    this.setState({ title: event.target.value });
+  }
+
+  handleTextChange = (event) => {
+    this.setState({ text: event.target.value });
   }
 
   render() {
@@ -57,6 +72,21 @@ class Letters extends Component {
         );
       });
     }
+
+    const createLetter = this.state.showCreateLetterInfo ? (
+      <div>
+        <p>Title:</p>
+        <input type="text" value={this.state.title} onChange={this.handleTitleChange} />
+        <p>Text</p>
+        <input type="text" value={this.state.text} onChange={this.handleTextChange} />
+        <button onClick={this.sendLetter}
+          type="button"
+        >
+        Send Letter
+        </button>
+      </div>
+    ) : null;
+
     if (this.state.authenticated) {
       return (
         <div style={{
@@ -65,11 +95,12 @@ class Letters extends Component {
         >
           {letterObject}
 
-          <button onClick={this.sendLetter}
+          <button onClick={this.createLetter}
             type="button"
           >
-          Send Test Letter
+          Create Letter
           </button>
+          {createLetter}
         </div>
       );
     } else {
