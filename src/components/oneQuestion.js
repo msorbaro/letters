@@ -79,17 +79,13 @@ class OneQuestion extends Component {
       });
     }
     return (
-      <div style={{
-        backgroundColor: 'white', width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
-      }}
-      >
-        <div className="mainQuestion">
-          <div className="heartAndCount">
-            <div className="unlikedCount">
-              {this.state.likes}
-            </div>
-          </div>
-          <div style={{ marginLeft: 10, marginRight: 10 }}>
+      <div>
+        <div style={{
+          backgroundColor: 'white', width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
+        }}
+        >
+          <div className="smallDiv" />
+          <div style={{ marginLeft: 10, marginRight: 10 }} className="mainQuestion">
             <h1 className="h1Question">
               {' '}
               {this.state.question}
@@ -114,40 +110,43 @@ Written by:
               {this.state.disagrees}
               {' '}
             </p>
-            <p> comments </p>
-            {commentObject}
-
-            <div>
-              <button onClick={this.increaseQuestionLike}
-                type="button"
-              >
-              Increase Likes
-              </button>
-              <button onClick={this.increaseQuestionDislike}
-                type="button"
-              >
-              Increase Dislikes
-              </button>
-
-              <button onClick={this.decreaseQuestionLike}
-                type="button"
-              >
-              Decrease Likes
-              </button>
-              <button onClick={this.decreaseQuestionDislike}
-                type="button"
-              >
-              Decrease Dislikes
-              </button>
-            </div>
-
-            <button onClick={this.addAComment}
+          </div>
+          <div>
+            <button onClick={this.increaseQuestionLike}
               type="button"
             >
-              Add A comment
+                Increase Likes
+            </button>
+            <button onClick={this.increaseQuestionDislike}
+              type="button"
+            >
+                Increase Dislikes
+            </button>
+
+            <button onClick={this.decreaseQuestionLike}
+              type="button"
+            >
+                Decrease Likes
+            </button>
+            <button onClick={this.decreaseQuestionDislike}
+              type="button"
+            >
+                Decrease Dislikes
             </button>
           </div>
+
+          <button onClick={this.addAComment}
+            type="button"
+          >
+                Add A comment
+          </button>
         </div>
+
+        <div style={{ marginLeft: 30, marginTop: -20 }}>
+          {commentObject}
+        </div>
+
+
       </div>
     );
   }

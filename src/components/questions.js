@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import * as db from '../services/datastore';
 import OneQuestion from './OneQuestion';
-
+import NewQuestionModal from './newQuestionModal';
+import '../style.scss';
 
 class Questions extends Component {
   constructor(props) {
     super(props);
-    this.state = { questions: {} };
+    this.state = { questions: {}, showCreateLetterInfo: false };
   }
 
   componentDidMount() {
@@ -19,12 +20,13 @@ class Questions extends Component {
     this.setState({ questions });
   }
 
-  handleQuestionChange = (event) => {
-    this.setState({ question: event.target.value });
+  sendQuestion = (question) => {
+    db.addQuestion(question);
+    this.setState({ showCreateLetterInfo: false });
   }
 
-  submitQuestion = () => {
-    db.addQuestion(this.state.question);
+  createQuestion = () => {
+    this.setState(prevState => ({ showCreateLetterInfo: !prevState.showCreateLetterInfo }));
   }
 
   render() {
@@ -48,21 +50,28 @@ class Questions extends Component {
       });
     }
 
+
+    const createButton = (
+      <div className="createLetterButtonContainer">
+        <button onClick={this.createQuestion}
+          type="button"
+        >
+          <div className="penIcon" />
+            Add a Poll
+        </button>
+      </div>
+    );
     return (
       <div style={{
-        marginTop: 100, width: '100%', height: '100%',
+        displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
       }}
+        className="tryingToCenter"
       >
-        {questionObject}
-        <div>
-          <input type="text" value={this.state.question} onChange={this.handleQuestionChange} />
-          <button onClick={this.submitQuestion}
-            type="button"
-          >
-          Send Test Question
-          </button>
+        <NewQuestionModal onCloseAndSubmit={this.sendQuestion} onClose={this.createQuestion} show={this.state.showCreateLetterInfo} />
 
-        </div>
+        {questionObject}
+
+        {createButton}
       </div>
     );
   }

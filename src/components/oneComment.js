@@ -49,7 +49,7 @@ class OneComment extends Component {
     console.log(this.state.userID);
     return (
       <div style={{
-        backgroundColor: 'white', width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
+        backgroundColor: 'white', width: '60vw', marginBottom: 10, borderRadius: '1em',
       }}
       >
         <div>
