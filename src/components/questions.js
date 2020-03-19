@@ -50,8 +50,9 @@ class Questions extends Component {
 
     return (
       <div style={{
-        marginTop: 100, width: '100%', height: '100%',
+        displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
       }}
+        className="tryingToCenter"
       >
         {questionObject}
         <div>
