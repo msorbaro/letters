@@ -58,7 +58,7 @@ class OneQuestion extends Component {
 
   decreaseQuestionLike = () => {
     db.decreaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
-    this.setState({ haveDisagreed: false });
+    this.setState({ haveAgreed: false });
   }
 
   decreaseQuestionDislike = () => {
@@ -68,7 +68,7 @@ class OneQuestion extends Component {
 
   addAComment = () => {
     const date = this.getCurrentDate();
-    db.addComment('I am a test Commetn', this.props.id, date);
+    db.addComment('I am a test Commetn', this.state.username, this.props.id, date);
   }
 
   updatedAgreeCallback = (agreeNum) => {
