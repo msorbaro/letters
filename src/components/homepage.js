@@ -39,7 +39,7 @@ class homepage extends Component {
           <div className="homepageText">
             You are now logged in! As a reminder please
             be respectful in your submissions. This site is here to
-            give the TaskForce(tm) an idea of what the student
+            give the TaskForce™ an idea of what the student
             body as a whole is thinking. If your actions are deemed
             inappropriate you will be removed.
           </div>
