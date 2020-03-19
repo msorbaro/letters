@@ -35,6 +35,17 @@ class OneQuestion extends Component {
     });
   }
 
+  getCurrentDate = (separator = '/') => {
+    const newDate = new Date();
+    const date = newDate.getDate();
+    const month = newDate.getMonth() + 1;
+    const year = newDate.getFullYear();
+    const hours = newDate.getHours();
+    const minute = newDate.getMinutes();
+
+    return `${month < 10 ? `0${month}` : `${month}`}${separator}${date}${separator}${year}${' '}${hours}${':'}${minute}`;
+  }
+
   increaseQuestionLike = () => {
     db.increaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
     this.setState({ haveAgreed: true });
@@ -56,7 +67,8 @@ class OneQuestion extends Component {
   }
 
   addAComment = () => {
-    db.addComment('I am a test Commetn', this.state.username, this.props.id);
+    const date = this.getCurrentDate();
+    db.addComment('I am a test Commetn', this.props.id, date);
   }
 
   updatedAgreeCallback = (agreeNum) => {
@@ -118,16 +130,24 @@ class OneQuestion extends Component {
   render() {
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
+      let zIndex = 0;
       commentObject = Object.keys(this.state.comments).map((id) => {
         const info = this.state.comments[id];
+        zIndex -= 5;
+        //  const newZ = String(zIndex);
+
         return (
           // assuming gets props ID, comment, likes, author
-          <OneComment
-            id={id}
-            author={info.author}
-            comment={info.comment}
-            questionID={this.props.id}
-          />
+          <div>
+            <OneComment
+              zIndex={zIndex}
+              id={id}
+              author={info.author}
+              comment={info.comment}
+              questionID={this.props.id}
+              date={info.date}
+            />
+          </div>
         );
       });
     }
@@ -174,7 +194,10 @@ class OneQuestion extends Component {
           </button>
         </div>
 
-        <div style={{ marginLeft: 30, marginTop: -20 }}>
+        <div style={{
+          marginLeft: 30, marginTop: -20, position: 'relative', zIndex: 1,
+        }}
+        >
           {commentObject}
         </div>
 

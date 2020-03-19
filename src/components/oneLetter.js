@@ -16,6 +16,7 @@ class OneLetter extends Component {
       title: this.props.title,
       letter: this.props.letter,
       author: this.props.author,
+      date: this.props.date,
       likes: 0,
       haveLiked: false,
     };
@@ -100,6 +101,13 @@ class OneLetter extends Component {
 Written by:
               {' '}
               {this.state.author}
+              {' '}
+            </p>
+            <p>
+              {' '}
+Date:
+              {' '}
+              {this.state.date}
               {' '}
             </p>
             <p className="bodyLetter">

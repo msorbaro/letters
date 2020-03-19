@@ -183,11 +183,13 @@ body {
   flex-direction: row;
   width: 100%;
   margin-top: 5%;
-  align-items: center;
-  align-self: center;
-  justify-content: center;
-  font-size: 1.5em;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 15%;
+  font-size: 24px;
   font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
 }
 
 .fullNav{
@@ -399,7 +401,8 @@ body {
   width: 60vw;
   margin-bottom: 10;
   border-radius: 1em;
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position:relative;
 }
 
 .contentMainh1{
@@ -459,10 +462,42 @@ body {
   width: 85%;
 }
 
-.alignLikeswithArrows{
+.alignLikeswithArro
+ws{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   width:15%;
+}
+
+.mailbutton {
+  background-image: url("./assets/mail.png");
+  background-repeat: no-repeat;
+   width: 34px;
+  height: 34px;
+  margin-right: 4px;
+
+}
+
+.pollbutton {
+  background-image: url("./assets/poll.png");
+  background-repeat: no-repeat;
+   width: 34px;
+  height: 34px;
+  margin-right: 2px;
+}
+.actionButton {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  align-items: center;
+}
+
+a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none;
+}
+
+.actionButton:hover {
+  text-decoration: underline;
 }

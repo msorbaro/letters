@@ -18,6 +18,7 @@ class OneComment extends Component {
       questionID: this.props.questionID,
       likes: 0,
       haveLiked: false,
+      date: this.props.date,
     };
   }
 
@@ -70,8 +71,13 @@ class OneComment extends Component {
   }
 
   render() {
+    console.log(this.state.questionID);
+    console.log(this.state.userID);
+    const { zIndex } = this.props;
+    console.log(zIndex);
+    console.log('ABOVE IS Z INDEX');
     return (
-      <div style={{ }}>
+      <div style={{ zIndex: 1 * zIndex, position: 'relative' }}>
         <div className="contentMain">
           <div className="getLikesAlignedWithText">
             <div className="contantContainerTakeTwo">
@@ -83,6 +89,10 @@ class OneComment extends Component {
               <p className="author">
             Written by:
                 {this.state.author}
+              </p>
+              <p className="author">
+            Date:
+                {this.state.date}
               </p>
             </div>
             <div className="heartAndCount">

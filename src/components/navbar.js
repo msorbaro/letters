@@ -36,11 +36,29 @@ class NavBar extends Component {
       return (
         <div className="fullNav">
           <div className="logoutHolder">
-            <li><NavLink to="/"><Button className="actionButton" id="signoutButton" onClick={this.signout}>Sign Out</Button></NavLink></li>
+            <li>
+              <NavLink to="/">
+                <Button className="actionButton" id="signoutButton" onClick={this.signout}>Sign Out</Button>
+              </NavLink>
+            </li>
           </div>
           <div className="navRight">
-            <li id="letters"><NavLink to="/letters"><Button className="actionButton" id="signupButton">Letters</Button></NavLink></li>
-            <li id="questions"><NavLink to="/questions"><Button className="actionButton" id="signoutButton">Questions</Button></NavLink></li>
+            <li id="letters">
+              <NavLink to="/letters">
+                <Button className="actionButton" id="signupButton">
+                  <div className="mailbutton" />
+                  Letters
+                </Button>
+              </NavLink>
+            </li>
+            <li id="questions">
+              <NavLink to="/questions">
+                <Button className="actionButton" id="signoutButton">
+                  <div className="pollbutton" />
+                Questions
+                </Button>
+              </NavLink>
+            </li>
           </div>
         </div>
       );
