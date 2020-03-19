@@ -47,7 +47,11 @@ export function increaseLetterScore(letterID, userID, callback) {
 
 // removes a like from the letter
 export function decreaseLetterScore(letterID, userID, callback) {
-  firebase.database().ref(`Letters/${letterID}/likes/${userID}`).remove();
+  firebase.database().ref(`Letters/${letterID}/likes/`).child(userID).remove();
+
+  database.ref(`Letters/${letterID}/`).child('likes').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
 }
 
 /** ****************************

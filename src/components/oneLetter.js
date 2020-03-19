@@ -37,8 +37,8 @@ class OneLetter extends Component {
     db.decreaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
   }
 
-  updatedHeartCallBack = (newState) => {
-    this.setState({ likes: newState });
+  updatedHeartCallBack = (likeNum) => {
+    this.setState({ likes: likeNum });
   }
 
 
@@ -50,29 +50,29 @@ class OneLetter extends Component {
       >
         <div className="smallDiv" />
         <div className="mainLetter">
-          <div className="unliked" />
+          <div className="heartAndCount">
+            <div className="unliked" />
+            <div className="unlikedCount">
+              {this.state.likes}
+            </div>
+          </div>
           <div style={{ marginLeft: 10, marginRight: 10 }}>
             <h1 className="h1Letter">
               {' '}
               {this.state.title}
               {' '}
             </h1>
+            <p>
+              {' '}
+Written by:
+              {' '}
+              {this.state.author}
+              {' '}
+            </p>
             <p className="bodyLetter">
               {' '}
               {this.state.letter}
               {' '}
-            </p>
-            <p>
-              {' '}
-likes:
-              {this.state.likes}
-              {' '}
-
-            </p>
-            <p>
-              {' '}
-ID:
-              {this.props.id}
             </p>
           </div>
         </div>
