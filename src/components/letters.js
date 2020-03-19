@@ -31,7 +31,8 @@ class Letters extends Component {
   }
 
   sendLetter = () => {
-    db.addLetter('Test Letter', 'TestTitle', this.state.username);
+    db.addLetter(this.state.text, this.state.title, this.state.username);
+    this.setState({ showCreateLetterInfo: false });
   }
 
   updateHeartsIncrease = () => {
@@ -40,8 +41,6 @@ class Letters extends Component {
 
   updateHeartsDecrease = () => {
     db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
-    db.addLetter(this.state.text, this.state.title);
-    this.setState({ showCreateLetterInfo: false });
   }
 
   createLetter = () => {
