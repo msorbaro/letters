@@ -119,16 +119,23 @@ class OneQuestion extends Component {
   render() {
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
+      let zIndex = 0;
       commentObject = Object.keys(this.state.comments).map((id) => {
         const info = this.state.comments[id];
+        zIndex -= 5;
+        const newZ = String(zIndex);
+
         return (
           // assuming gets props ID, comment, likes, author
-          <OneComment
-            id={id}
-            author={info.author}
-            comment={info.comment}
-            questionID={this.props.id}
-          />
+          <div style={{ zIndex: newZ }}>
+            <OneComment
+              zIndex={zIndex}
+              id={id}
+              author={info.author}
+              comment={info.comment}
+              questionID={this.props.id}
+            />
+          </div>
         );
       });
     }
