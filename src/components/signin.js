@@ -24,10 +24,14 @@ class SignIn extends Component {
   }
 
   handleSigninButtonClick = (event) => {
-    firebase.auth().signInWithEmailAndPassword(`${this.state.email}@dartmouth.edu`, this.state.password).catch((error) => {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
       alert(error);
     });
-    this.props.history.push('/');
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.props.history.push('/');
+      }
+    });
   }
 
   handleCancelButtonClick = (event) => {
