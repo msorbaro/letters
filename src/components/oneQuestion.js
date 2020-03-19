@@ -32,10 +32,36 @@ class OneQuestion extends Component {
     });
   }
 
+  rogueCallBack = () => {
+    console.log('callback');
+  }
+
+  increaseQuestionLike = () => {
+    db.increaseQuestionYes(this.props.id, this.rogueCallBack);
+    this.setState(prevState => ({ agrees: prevState.agrees + 1 }));
+  }
+
+  increaseQuestionDislike = () => {
+    db.increaseQuestionNo(this.props.id, this.rogueCallBack);
+    this.setState(prevState => ({ disagrees: prevState.disagrees + 1 }));
+  }
+
+  decreaseQuestionLike = () => {
+    db.decreaseQuestionYes(this.props.id, this.rogueCallBack);
+    this.setState(prevState => ({ agrees: prevState.agrees - 1 }));
+  }
+
+  decreaseQuestionDislike = () => {
+    db.decreaseQuestionNo(this.props.id, this.rogueCallBack);
+    this.setState(prevState => ({ disagrees: prevState.disagrees - 1 }));
+  }
+
+  addAComment = () => {
+    db.addComment('I am a test Commetn', this.props.id);
+  }
+
 
   render() {
-    console.log('*************');
-    console.log(this.state.comments);
     console.log(this.state.userID);
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
@@ -50,6 +76,7 @@ class OneQuestion extends Component {
             author={info.author}
             comment={info.comment}
             likes={info.likes}
+            questionID={this.props.id}
           />
         );
       });
@@ -92,6 +119,36 @@ Written by:
             </p>
             <p> comments </p>
             {commentObject}
+
+            <div>
+              <button onClick={this.increaseQuestionLike}
+                type="button"
+              >
+              Increase Likes
+              </button>
+              <button onClick={this.increaseQuestionDislike}
+                type="button"
+              >
+              Increase Dislikes
+              </button>
+
+              <button onClick={this.decreaseQuestionLike}
+                type="button"
+              >
+              Decrease Likes
+              </button>
+              <button onClick={this.decreaseQuestionDislike}
+                type="button"
+              >
+              Decrease Dislikes
+              </button>
+            </div>
+
+            <button onClick={this.addAComment}
+              type="button"
+            >
+              Add A comment
+            </button>
           </div>
         </div>
       </div>

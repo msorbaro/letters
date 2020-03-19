@@ -27,38 +27,6 @@ class Questions extends Component {
     db.addQuestion(this.state.question);
   }
 
-  rogueCallBack = () => {
-    console.log('callback');
-  }
-
-  increaseQuestionLike = () => {
-    db.increaseQuestionYes('-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
-  }
-
-  increaseQuestionDislike = () => {
-    db.increaseQuestionNo('-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
-  }
-
-  decreaseQuestionLike = () => {
-    db.decreaseQuestionYes('-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
-  }
-
-  decreaseQuestionDislike = () => {
-    db.decreaseQuestionNo('-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
-  }
-
-  addAComment = () => {
-    db.addComment('I am a comment', '-M2jQxka2erZ58z2Yo1M');
-  }
-
-  likeComment = () => {
-    db.likeComment('-M2j_Fs_4RnF_lG50kYV', '-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
-  }
-
-  dislikeComment = () => {
-    db.dislikeComment('-M2j_Fs_4RnF_lG50kYV', '-M2jQxka2erZ58z2Yo1M', this.rogueCallBack);
-  }
-
   render() {
     let questionObject = null;
     if (this.state.questions != null) {
@@ -91,48 +59,10 @@ class Questions extends Component {
           <button onClick={this.submitQuestion}
             type="button"
           >
-          Send Test Letter
+          Send Test Question
           </button>
 
-          <button onClick={this.increaseQuestionLike}
-            type="button"
-          >
-          Increase Likes
-          </button>
-          <button onClick={this.increaseQuestionDislike}
-            type="button"
-          >
-          Increase Dislikes
-          </button>
-
-          <button onClick={this.decreaseQuestionLike}
-            type="button"
-          >
-          Decrease Likes
-          </button>
-          <button onClick={this.decreaseQuestionDislike}
-            type="button"
-          >
-          Decrease Dislikes
-          </button>
         </div>
-
-        <button onClick={this.addAComment}
-          type="button"
-        >
-          Add A comment
-        </button>
-
-        <button onClick={this.likeComment}
-          type="button"
-        >
-          Like comment
-        </button>
-        <button onClick={this.dislikeComment}
-          type="button"
-        >
-          Dislike comment
-        </button>
       </div>
     );
   }

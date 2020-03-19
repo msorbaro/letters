@@ -16,6 +16,7 @@ class OneComment extends Component {
       comment: this.props.comment,
       likes: this.props.likes,
       author: this.props.author,
+      questionID: this.props.questionID,
     };
   }
 
@@ -30,8 +31,23 @@ class OneComment extends Component {
     });
   }
 
+  rogueCallBack = () => {
+    console.log('callback');
+  }
+
+  likeComment = () => {
+    // comment ID question ID
+    db.likeComment(this.props.id, this.state.questionID, this.rogueCallBack);
+    this.setState(prevState => ({ likes: prevState.likes + 1 }));
+  }
+
+  dislikeComment = () => {
+    db.dislikeComment(this.props.id, this.state.questionID, this.rogueCallBack);
+    this.setState(prevState => ({ likes: prevState.likes - 1 }));
+  }
 
   render() {
+    console.log(this.state.questionID);
     console.log(this.state.userID);
     return (
       <div style={{
@@ -58,6 +74,18 @@ Written by:
               {this.state.likes}
               {' '}
             </p>
+            <div>
+              <button onClick={this.likeComment}
+                type="button"
+              >
+              Like comment
+              </button>
+              <button onClick={this.dislikeComment}
+                type="button"
+              >
+              Dislike comment
+              </button>
+            </div>
           </div>
         </div>
       </div>
