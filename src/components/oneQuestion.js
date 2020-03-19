@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import '../style.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import OneComment from './oneComment';
 import * as db from '../services/datastore';
 
@@ -19,6 +21,7 @@ class OneQuestion extends Component {
       comments: this.props.comments,
       haveAgreed: false,
       haveDisagreed: false,
+      createNewComment: false,
     };
   }
 
@@ -65,9 +68,10 @@ class OneQuestion extends Component {
     this.setState({ haveDisagreed: false });
   }
 
-  addAComment = () => {
-    const date = this.getCurrentDate();
-    db.addComment('I am a test Commetn', this.props.id, date);
+  createNewComment = () => {
+    // const date = this.getCurrentDate();
+    // db.addComment('I am a test Commetn', this.props.id, date);
+    this.setState({ createNewComment: true });
   }
 
   updatedAgreeCallback = (agreeNum) => {
@@ -151,6 +155,22 @@ class OneQuestion extends Component {
       });
     }
 
+    const underCommentPromptToAdd = (
+      <div className="contentMainTakeTwo">
+        <div style={{
+          marginTop: 15,
+        }}
+        >
+          <div className="addCommentPus" onClick={this.createNewComment} role="button" tabIndex={0}>
+            <FontAwesomeIcon className="testtest" icon={faPlus} />
+            <p className="colorGray">
+            Add a Comment!
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+
     return (
       <div>
         <div className="backgroundcoloroffwhite"
@@ -197,10 +217,17 @@ class OneQuestion extends Component {
           marginLeft: 30, marginTop: -20, position: 'relative', zIndex: 1,
         }}
         >
-          {commentObject}
+          <div style={{ position: 'relative', zIndex: 3 }}>
+            {commentObject}
+          </div>
+          { underCommentPromptToAdd}
+          {/* <div className="contentMainTakeTwo">
+            <p> enter your comment </p>
+            <input />
+          </div> */
+        }
+
         </div>
-
-
       </div>
     );
   }
