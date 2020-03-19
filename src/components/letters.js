@@ -10,7 +10,7 @@ class Letters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      letters: null, authenticated: false, username: '', userID: '', showCreateLetterInfo: false, title: '', text: ' ',
+      letters: null, authenticated: false, username: '', showCreateLetterInfo: false, title: '', text: ' ',
     };
   }
 
@@ -19,8 +19,6 @@ class Letters extends Component {
       if (user) {
         this.setState({ authenticated: true });
         this.setState({ username: user.displayName });
-        this.setState({ userID: user.uid });
-        db.fetchYourGroups(this.state.currUserId, this.setYourGroups);
       }
     });
 
@@ -37,21 +35,21 @@ class Letters extends Component {
     this.setState({ showCreateLetterInfo: false });
   }
 
-  updateHeartsIncrease = () => {
-    db.increaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
-  }
-
-  updateHeartsDecrease = () => {
-    db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
-  }
+  // updateHeartsIncrease = () => {
+  //   db.increaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
+  // }
+  //
+  // updateHeartsDecrease = () => {
+  //   db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
+  // }
 
   createLetter = () => {
     this.setState({ showCreateLetterInfo: true });
   }
-
-  updatedHeartCallBack = () => {
-    console.log('updated');
-  }
+  //
+  // updatedHeartCallBack = () => {
+  //   console.log('updated');
+  // }
 
   handleTitleChange = (event) => {
     this.setState({ title: event.target.value });
