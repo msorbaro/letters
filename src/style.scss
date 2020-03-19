@@ -64,6 +64,13 @@ body {
   margin-bottom: 8px;
 }
 
+.liked {
+  background-image: url("./assets/liked.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 35px;
+}
+
 .heartAndCount {
   display: flex;
   flex-direction: column;
