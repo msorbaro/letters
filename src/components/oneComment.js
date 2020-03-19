@@ -25,8 +25,8 @@ class OneComment extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ userID: user.uid });
-        db.getCommentLikes(this.props.id, this.commentNumUpdate);
-        db.getCommentStatus(this.props.id, this.state.userID, this.commentUpdateStatus);
+        db.getCommentLikes(this.state.questionID, this.props.id, this.commentNumUpdate);
+        db.getCommentStatus(this.state.questionID, this.props.id, this.state.userID, this.commentUpdateStatus);
       }
     });
   }

@@ -124,7 +124,7 @@ body {
   background-repeat: no-repeat;
   margin-top: 7px;
   width: 35px;
-  height: 35px;
+  height: 28px;
 }
 .downThumbTransparent {
   background-image: url("./assets/thumbD.png");
@@ -132,31 +132,8 @@ body {
   background-repeat: no-repeat;
   margin-top: 7px;
   width: 35px;
-  height: 35px;
+  height: 28px;
 }
-
-.agrees {
-  background-image: url("./assets/thumbU.png");
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  margin-top: 13px;
-  margin-bottom: 8px;
-  object-fit: cover;
-}
-
-
-.disagrees {
-  background-image: url("./assets/thumbD.png");
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  margin-top: 13px;
-  margin-bottom: 8px;
-
-}
-
-
 
 .heartAndCount {
   display: flex;
@@ -407,7 +384,7 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 10px;
-  height: 85%;
+  height: 80%;
 }
 
 .mainQuestion {

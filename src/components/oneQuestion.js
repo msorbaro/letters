@@ -14,7 +14,7 @@ class OneQuestion extends Component {
       userID: '',
       question: this.props.question,
       agrees: 0,
-      // author: this.props.author,
+      username: '',
       disagrees: 0,
       comments: this.props.comments,
       haveAgreed: false,
@@ -26,6 +26,7 @@ class OneQuestion extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ userID: user.uid });
+        this.setState({ username: user.displayName });
         db.getQuestionAgrees(this.props.id, this.updatedAgreeCallback);
         db.getQuestionDisagrees(this.props.id, this.updatedDisagreeCallback);
         db.getYourQuestionAgrees(this.props.id, this.state.userID, this.upThumbCallback);
@@ -55,7 +56,7 @@ class OneQuestion extends Component {
   }
 
   addAComment = () => {
-    db.addComment('I am a test Commetn', this.props.id);
+    db.addComment('I am a test Commetn', this.state.username, this.props.id);
   }
 
   updatedAgreeCallback = (agreeNum) => {

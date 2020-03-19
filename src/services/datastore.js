@@ -165,10 +165,10 @@ export function getComments(questionID, callback) {
   });
 }
 
-export function addComment(comment, questionID) {
+export function addComment(comment, author, questionID) {
   const questionComments = firebase.database().ref(`Questions/${questionID}/Comments`);
   questionComments.push({
-    comment,
+    comment, author,
   });
 }
 
