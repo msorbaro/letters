@@ -11,14 +11,14 @@ class OneQuestion extends Component {
 
     // assuming gets props ID, question, amount of agrees, amount of disagress, comments
     this.state = {
-      // authenticated: false,
-      // username: '',
       userID: '',
       question: this.props.question,
       agrees: 0,
-      //    author: this.props.author,
+      // author: this.props.author,
       disagrees: 0,
       comments: this.props.comments,
+      haveAgreed: false,
+      haveDisagreed: false,
     };
   }
 
@@ -30,24 +30,30 @@ class OneQuestion extends Component {
         this.setState({ userID: user.uid });
         db.getQuestionAgrees(this.props.id, this.updatedAgreeCallback);
         db.getQuestionDisagrees(this.props.id, this.updatedDisagreeCallback);
+        db.getYourQuestionAgrees(this.props.id, this.state.userID, this.upThumbCallback);
+        db.getYourQuestionDisagrees(this.props.id, this.state.userID, this.downThumbCallback);
       }
     });
   }
 
   increaseQuestionLike = () => {
     db.increaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
+    this.setState({ haveAgreed: true });
   }
 
   increaseQuestionDislike = () => {
     db.increaseQuestionNo(this.props.id, this.state.userID, this.updatedDisagreeCallback);
+    this.setState({ haveDisagreed: true });
   }
 
   decreaseQuestionLike = () => {
     db.decreaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
+    this.setState({ haveDisagreed: false });
   }
 
   decreaseQuestionDislike = () => {
     db.decreaseQuestionNo(this.props.id, this.state.userID, this.updatedDisagreeCallback);
+    this.setState({ haveDisagreed: false });
   }
 
   addAComment = () => {
@@ -62,6 +68,54 @@ class OneQuestion extends Component {
     this.setState({ disagrees: disagreeNum });
   }
 
+  handleUpThumbClick = () => {
+    if (this.state.haveAgreed) {
+      this.decreaseQuestionLike();
+    } else {
+      this.increaseQuestionLike();
+    }
+  }
+
+  handleDownThumbClick = () => {
+    if (this.state.haveDisagreed) {
+      this.decreaseQuestionDislike();
+    } else {
+      this.increaseQuestionDislike();
+    }
+  }
+
+  showRightUpThumb = () => {
+    if (this.state.haveAgreed) {
+      return (<div className="upThumbColor" />);
+    } else {
+      return (<div className="upThumbTransparent" />);
+    }
+  }
+
+  showRightDownThumb = () => {
+    if (this.state.haveDisagreed) {
+      return (<div className="downThumbColor" />);
+    } else {
+      return (<div className="downThumbTransparent" />);
+    }
+  }
+
+  upThumbCallback = (clicked) => {
+    if (clicked === 0) {
+      this.setState({ haveAgreed: false });
+    } else if (clicked === 1) {
+      this.setState({ haveAgreed: true });
+    }
+  }
+
+  downThumbCallback = (clicked) => {
+    if (clicked === 0) {
+      this.setState({ haveDisagreed: false });
+    } else if (clicked === 1) {
+      this.setState({ haveDisagreed: true });
+    }
+  }
+  
   render() {
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
@@ -95,45 +149,25 @@ class OneQuestion extends Component {
                 {' '}
               </h1>
               <div className="containerthumbs">
-                <div className="alignCountToThumb">
-                  <p>
+                <div className="thumbAndCount">
+                  <button type="button" className="invisibleThumbButton" onClick={this.handleUpThumbClick}>
+                    {this.showRightUpThumb()}
+                  </button>
+                  <div className="agreeCount">
                     {this.state.agrees}
-                  </p>
-                  <div className="agrees" />
+                  </div>
                 </div>
-                <div className="alignCountToThumb">
-                  <p>
+                <div className="thumbAndCount">
+                  <button type="button" className="invisibleThumbButton" onClick={this.handleDownThumbClick}>
+                    {this.showRightDownThumb()}
+                  </button>
+                  <div className="disagreeCount">
                     {this.state.disagrees}
-                  </p>
-                  <div className="disagrees" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div>
-            <button onClick={this.increaseQuestionLike}
-              type="button"
-            >
-                Increase Likes
-            </button>
-            <button onClick={this.increaseQuestionDislike}
-              type="button"
-            >
-                Increase Dislikes
-            </button>
-
-            <button onClick={this.decreaseQuestionLike}
-              type="button"
-            >
-                Decrease Likes
-            </button>
-            <button onClick={this.decreaseQuestionDislike}
-              type="button"
-            >
-                Decrease Dislikes
-            </button>
-          </div>
-
           <button onClick={this.addAComment}
             type="button"
           >
