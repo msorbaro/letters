@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import * as db from '../services/datastore';
 import '../style.scss';
 import OneComment from './oneComment';
+import * as db from '../services/datastore';
+
 
 class OneQuestion extends Component {
   constructor(props) {
@@ -114,8 +115,7 @@ class OneQuestion extends Component {
       this.setState({ haveDisagreed: true });
     }
   }
-
-
+  
   render() {
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
@@ -132,11 +132,13 @@ class OneQuestion extends Component {
         );
       });
     }
+
     return (
       <div>
-        <div style={{
-          backgroundColor: 'white', width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
-        }}
+        <div className="backgroundcoloroffwhite"
+          style={{
+            width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
+          }}
         >
           <div className="smallDiv" />
           <div style={{ marginLeft: 10, marginRight: 10 }} className="mainQuestion">
