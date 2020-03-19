@@ -101,7 +101,7 @@ class Letters extends Component {
     if (this.state.authenticated) {
       return (
         <div style={{
-          marginTop: 100, width: '100%', height: '100%',
+          marginTop: 15, width: '100%', height: '100%',
         }}
 
         >
