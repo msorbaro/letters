@@ -15,6 +15,7 @@ class OneLetter extends Component {
       userID: '',
       title: this.props.title,
       letter: this.props.letter,
+      author: this.props.author,
       likes: 0,
     };
   }
@@ -25,6 +26,7 @@ class OneLetter extends Component {
         // this.setState({ authenticated: true });
         // this.setState({ username: user.displayName });
         this.setState({ userID: user.uid });
+        db.getLikes(this.props.id, this.updatedHeartCallBack);
       }
     });
   }

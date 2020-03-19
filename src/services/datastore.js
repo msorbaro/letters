@@ -36,6 +36,14 @@ export function addLetter(letter, title, username) {
 }
 
 // adds a like to the letter
+export function getLikes(letterID, callback) {
+  database.ref(`Letters/${letterID}/`).child('likes').on('value', (snapshot) => {
+    console.log(`There are ${snapshot.numChildren()} likes`);
+    callback(snapshot.numChildren());
+  });
+}
+
+// adds a like to the letter
 export function increaseLetterScore(letterID, userID, callback) {
   firebase.database().ref(`Letters/${letterID}/likes/`).child(userID).set(userID);
 

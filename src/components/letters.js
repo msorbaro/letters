@@ -74,8 +74,8 @@ class Letters extends Component {
           // assuming gets props ID, letter, amount of likes, title
           <OneLetter
             id={id}
+            author={info.author}
             letter={info.letter}
-            likes={info.score}
             title={info.title}
           />
         );
