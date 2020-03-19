@@ -14,7 +14,7 @@ class OneComment extends Component {
       // username: '',
       userID: '',
       comment: this.props.comment,
-      likes: this.props.likes,
+      likes: 0,
       author: this.props.author,
       questionID: this.props.questionID,
     };
@@ -31,19 +31,17 @@ class OneComment extends Component {
     });
   }
 
-  rogueCallBack = () => {
-    console.log('callback');
+  commentNumUpdate = (likeNum) => {
+    this.setState({ likes: likeNum });
   }
 
   likeComment = () => {
     // comment ID question ID
-    db.likeComment(this.props.id, this.state.questionID, this.rogueCallBack);
-    this.setState(prevState => ({ likes: prevState.likes + 1 }));
+    db.likeComment(this.props.id, this.state.questionID, this.state.userID, this.commentNumUpdate);
   }
 
-  dislikeComment = () => {
-    db.dislikeComment(this.props.id, this.state.questionID, this.rogueCallBack);
-    this.setState(prevState => ({ likes: prevState.likes - 1 }));
+  unlikeComment = () => {
+    db.unlikeComment(this.props.id, this.state.questionID, this.state.userID, this.commentNumUpdate);
   }
 
   render() {
@@ -80,7 +78,7 @@ Written by:
               >
               Like comment
               </button>
-              <button onClick={this.dislikeComment}
+              <button onClick={this.unlikeComment}
                 type="button"
               >
               Dislike comment

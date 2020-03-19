@@ -14,9 +14,9 @@ class OneQuestion extends Component {
       // username: '',
       userID: '',
       question: this.props.question,
-      agrees: this.props.agrees,
+      agrees: 0,
       author: this.props.author,
-      disagrees: this.props.disagrees,
+      disagrees: 0,
       comments: this.props.comments,
     };
   }
@@ -27,55 +27,52 @@ class OneQuestion extends Component {
         // this.setState({ authenticated: true });
         // this.setState({ username: user.displayName });
         this.setState({ userID: user.uid });
-        db.getLikes(this.props.id, this.updatedHeartCallBack);
+        db.getQuestionAgrees(this.props.id, this.updatedAgreeCallback);
+        db.getQuestionDisagrees(this.props.id, this.updatedDisagreeCallback);
       }
     });
   }
 
-  rogueCallBack = () => {
-    console.log('callback');
-  }
-
   increaseQuestionLike = () => {
-    db.increaseQuestionYes(this.props.id, this.rogueCallBack);
-    this.setState(prevState => ({ agrees: prevState.agrees + 1 }));
+    db.increaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
   }
 
   increaseQuestionDislike = () => {
-    db.increaseQuestionNo(this.props.id, this.rogueCallBack);
-    this.setState(prevState => ({ disagrees: prevState.disagrees + 1 }));
+    db.increaseQuestionNo(this.props.id, this.state.userID, this.updatedDisagreeCallback);
   }
 
   decreaseQuestionLike = () => {
-    db.decreaseQuestionYes(this.props.id, this.rogueCallBack);
-    this.setState(prevState => ({ agrees: prevState.agrees - 1 }));
+    db.decreaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
   }
 
   decreaseQuestionDislike = () => {
-    db.decreaseQuestionNo(this.props.id, this.rogueCallBack);
-    this.setState(prevState => ({ disagrees: prevState.disagrees - 1 }));
+    db.decreaseQuestionNo(this.props.id, this.state.userID, this.updatedDisagreeCallback);
   }
 
   addAComment = () => {
     db.addComment('I am a test Commetn', this.props.id);
   }
 
+  updatedAgreeCallback = (agreeNum) => {
+    this.setState({ agrees: agreeNum });
+  }
+
+  updatedDisagreeCallback = (disagreeNum) => {
+    this.setState({ disagrees: disagreeNum });
+  }
+
 
   render() {
-    console.log(this.state.userID);
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
       commentObject = Object.keys(this.state.comments).map((id) => {
-        console.log(id);
         const info = this.state.comments[id];
-        console.log(info);
         return (
           // assuming gets props ID, comment, likes, author
           <OneComment
             id={id}
             author={info.author}
             comment={info.comment}
-            likes={info.likes}
             questionID={this.props.id}
           />
         );

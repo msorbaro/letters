@@ -35,10 +35,9 @@ export function addLetter(letter, title, username) {
   });
 }
 
-// adds a like to the letter
+// gets the number of likes the letter has
 export function getLikes(letterID, callback) {
   database.ref(`Letters/${letterID}/`).child('likes').on('value', (snapshot) => {
-    console.log(`There are ${snapshot.numChildren()} likes`);
     callback(snapshot.numChildren());
   });
 }
@@ -48,7 +47,6 @@ export function increaseLetterScore(letterID, userID, callback) {
   firebase.database().ref(`Letters/${letterID}/likes/`).child(userID).set(userID);
 
   database.ref(`Letters/${letterID}/`).child('likes').on('value', (snapshot) => {
-    console.log(`There are ${snapshot.numChildren()} likes`);
     callback(snapshot.numChildren());
   });
 }
@@ -75,56 +73,60 @@ export function getQuesions(callback) {
 // Adds a quesiton
 export function addQuestion(question) {
   const questions = firebase.database().ref('Questions/');
-  const agrees = 0;
-  const disagrees = 0;
   const comments = [];
   questions.push({
-    question, agrees, disagrees, comments,
+    question, comments,
   });
 }
 
 
 // if someone clicks agree for a question
-export function increaseQuestionYes(questionID, callback) {
-  database.ref(`Questions/${questionID}`).once('value').then((snapshot) => {
-    const newState = snapshot.val().agrees + 1;
-    const updates = { agrees: newState };
-    const ref = database.ref(`Questions/${questionID}`);
-    ref.update(updates);
-    callback(newState);
+export function increaseQuestionYes(questionID, userID, callback) {
+  firebase.database().ref(`Questions/${questionID}/agrees/`).child(userID).set(userID);
+
+  database.ref(`Questions/${questionID}/`).child('agrees').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
   });
 }
 
 // if someone removes agree for a question
-export function decreaseQuestionYes(questionID, callback) {
-  database.ref(`Questions/${questionID}`).once('value').then((snapshot) => {
-    const newState = snapshot.val().agrees - 1;
-    const updates = { agrees: newState };
-    const ref = database.ref(`Questions/${questionID}`);
-    ref.update(updates);
-    callback(newState);
+export function decreaseQuestionYes(questionID, userID, callback) {
+  firebase.database().ref(`Questions/${questionID}/agrees/`).child(userID).remove();
+
+  database.ref(`Questions/${questionID}/`).child('agrees').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
   });
 }
 
 // adds a down vote
-export function increaseQuestionNo(questionID, callback) {
-  database.ref(`Questions/${questionID}`).once('value').then((snapshot) => {
-    const newState = snapshot.val().disagrees + 1;
-    const updates = { disagrees: newState };
-    const ref = database.ref(`Questions/${questionID}`);
-    ref.update(updates);
-    callback(newState);
+export function increaseQuestionNo(questionID, userID, callback) {
+  firebase.database().ref(`Questions/${questionID}/disagrees/`).child(userID).set(userID);
+
+  database.ref(`Questions/${questionID}/`).child('disagrees').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
   });
 }
 
 // removes a disagree vote
-export function decreaseQuestionNo(questionID, callback) {
-  database.ref(`Questions/${questionID}`).once('value').then((snapshot) => {
-    const newState = snapshot.val().disagrees - 1;
-    const updates = { disagrees: newState };
-    const ref = database.ref(`Questions/${questionID}`);
-    ref.update(updates);
-    callback(newState);
+export function decreaseQuestionNo(questionID, userID, callback) {
+  firebase.database().ref(`Questions/${questionID}/disagrees/`).child(userID).remove();
+
+  database.ref(`Questions/${questionID}/`).child('disagrees').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}
+
+// gets the number of likes the letter has
+export function getQuestionAgrees(questionID, callback) {
+  database.ref(`Questions/${questionID}/`).child('agrees').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}
+
+// gets the number of likes the letter has
+export function getQuestionDisagrees(questionID, callback) {
+  database.ref(`Questions/${questionID}/`).child('disagrees').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
   });
 }
 
@@ -141,28 +143,23 @@ export function getComments(questionID, callback) {
 
 export function addComment(comment, questionID) {
   const questionComments = firebase.database().ref(`Questions/${questionID}/Comments`);
-  const likes = 0;
   questionComments.push({
-    comment, likes,
+    comment,
   });
 }
 
-export function likeComment(commentID, questionID, callback) {
-  database.ref(`Questions/${questionID}/Comments/${commentID}`).once('value').then((snapshot) => {
-    const newState = snapshot.val().likes + 1;
-    const updates = { likes: newState };
-    const ref = database.ref(`Questions/${questionID}/Comments/${commentID}`);
-    ref.update(updates);
-    callback(newState);
+export function likeComment(commentID, questionID, userID, callback) {
+  firebase.database().ref(`Questions/${questionID}/Comments/${commentID}/likes`).child(userID).set(userID);
+
+  database.ref(`Questions/${questionID}/Comments/${commentID}/likes`).on('value', (snapshot) => {
+    callback(snapshot.numChildren());
   });
 }
 
-export function dislikeComment(commentID, questionID, callback) {
-  database.ref(`Questions/${questionID}/Comments/${commentID}`).once('value').then((snapshot) => {
-    const newState = snapshot.val().likes - 1;
-    const updates = { likes: newState };
-    const ref = database.ref(`Questions/${questionID}/Comments/${commentID}`);
-    ref.update(updates);
-    callback(newState);
+export function unlikeComment(commentID, questionID, userID, callback) {
+  firebase.database().ref(`Questions/${questionID}/Comments/${commentID}/likes`).child(userID).remove();
+
+  database.ref(`Questions/${questionID}/Comments/${commentID}/likes`).on('value', (snapshot) => {
+    callback(snapshot.numChildren());
   });
 }
