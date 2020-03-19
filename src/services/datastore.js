@@ -35,6 +35,14 @@ export function addLetter(letter, title, username) {
   });
 }
 
+// adds a letter
+export function getLikeStatus(letterID, userID, callback) {
+  const ref = firebase.database().ref(`Letters/${letterID}/likes`);
+  ref.orderByValue().equalTo(userID).on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}
+
 // gets the number of likes the letter has
 export function getLikes(letterID, callback) {
   database.ref(`Letters/${letterID}/`).child('likes').on('value', (snapshot) => {

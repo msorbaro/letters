@@ -17,6 +17,7 @@ class OneLetter extends Component {
       letter: this.props.letter,
       author: this.props.author,
       likes: 0,
+      haveLiked: false,
     };
   }
 
@@ -27,20 +28,48 @@ class OneLetter extends Component {
         // this.setState({ username: user.displayName });
         this.setState({ userID: user.uid });
         db.getLikes(this.props.id, this.updatedHeartCallBack);
+        db.getLikeStatus(this.props.id, this.state.userID, this.likeStatusCallback);
       }
     });
   }
 
+  handleButtonClick = () => {
+    if (this.state.haveLiked) {
+      this.updateHeartsDecrease();
+    } else {
+      this.updateHeartsIncrease();
+    }
+  }
+
   updateHeartsIncrease = () => {
     db.increaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
+    this.setState({ haveLiked: true });
   }
 
   updateHeartsDecrease = () => {
     db.decreaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
+    this.setState({ haveLiked: false });
+    console.log(this.state.haveLiked);
   }
 
   updatedHeartCallBack = (likeNum) => {
     this.setState({ likes: likeNum });
+  }
+
+  likeStatusCallback = (liked) => {
+    if (liked === 0) {
+      this.setState({ haveLiked: false });
+    } else if (liked === 1) {
+      this.setState({ haveLiked: true });
+    }
+  }
+
+  showRightHeart = () => {
+    if (this.state.haveLiked) {
+      return (<div className="liked" />);
+    } else {
+      return (<div className="unliked" />);
+    }
   }
 
 
@@ -53,7 +82,9 @@ class OneLetter extends Component {
         <div className="smallDiv" />
         <div className="mainLetter">
           <div className="heartAndCount">
-            <div className="unliked" />
+            <button type="button" className="invisibleButton" onClick={this.handleButtonClick}>
+              {this.showRightHeart()}
+            </button>
             <div className="unlikedCount">
               {this.state.likes}
             </div>
@@ -78,17 +109,6 @@ Written by:
             </p>
           </div>
         </div>
-
-        <button onClick={this.updateHeartsIncrease}
-          type="button"
-        >
-        Update Letter Hearts Increase
-        </button>
-        <button onClick={this.updateHeartsDecrease}
-          type="button"
-        >
-        Update Letter Hearts Decrease
-        </button>
       </div>
     );
   }
