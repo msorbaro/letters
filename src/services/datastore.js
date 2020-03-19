@@ -65,6 +65,12 @@ export function decreaseLetterScore(letterID, userID, callback) {
 /** ****************************
 ALL QUESTION RELATED BE CALLS
 **************************** */
+export function getQuesions(callback) {
+  database.ref('Questions').on('value', (snapshot) => {
+    const newQuestionsState = snapshot.val();
+    callback(newQuestionsState);
+  });
+}
 
 // Adds a quesiton
 export function addQuestion(question) {
@@ -125,6 +131,14 @@ export function decreaseQuestionNo(questionID, callback) {
 /** ****************************
 ALL COMMENT ON QUESTION RELATED BE CALLS
 **************************** */
+
+export function getComments(questionID, callback) {
+  database.ref(`Questions/${questionID}/Comments/`).on('value', (snapshot) => {
+    const newCommentState = snapshot.val();
+    callback(newCommentState);
+  });
+}
+
 export function addComment(comment, questionID) {
   const questionComments = firebase.database().ref(`Questions/${questionID}/Comments`);
   const likes = 0;
