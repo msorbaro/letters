@@ -85,6 +85,33 @@ body {
   height: 35px;
 }
 
+.upThumbColor {
+  background-image: url("./assets/thumbUFull.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 35px;
+}
+.upThumbTransparent {
+  background-image: url("./assets/thumbU.png");
+  background-repeat: no-repeat;
+  width: 35px;
+  height: 35px;
+}
+.downThumbColor {
+  background-image: url("./assets/thumbDFull.png");
+  background-repeat: no-repeat;
+  margin-top: 7px;
+  width: 35px;
+  height: 35px;
+}
+.downThumbTransparent {
+  background-image: url("./assets/thumbD.png");
+  background-repeat: no-repeat;
+  margin-top: 7px;
+  width: 35px;
+  height: 35px;
+}
+
 
 .agrees {
   background-image: url("./assets/thumbU.png");
@@ -341,25 +368,24 @@ body {
   display: flex;
   flex-direction: row;
   align-items:flex-end;
+  justify-content: space-between;
   width: 95%;
 }
 
 .containerthumbs{
   display: flex;
   flex-direction: row;
-  width:20%;
+  width:15%;
   justify-content: space-between;
-  align-content: center;
-  align-items: center;
   height: 100%;
 }
-
-.alignCountToThumb {
+.thumbAndCount{
   display: flex;
-  flex-direction: row;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+  height: 85%;
 }
 
 .mainQuestion {
@@ -367,12 +393,6 @@ body {
   flex-direction: row;
   justify-content: center;
   height: 100%;
-}
-
-.alignCountToThumb p {
-  margin-right: 5px;
-  font-size: 1em;
-  font-family: 'Roboto', sans-serif;
 }
 
 .contentMain{
@@ -401,4 +421,12 @@ body {
   cursor:pointer;
   overflow: hidden;
   background-color: Transparent;
+}
+
+.invisibleThumbButton{
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  background-color: Transparent;
+  padding: 0;
 }
