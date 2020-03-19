@@ -48,42 +48,37 @@ class OneComment extends Component {
     console.log(this.state.questionID);
     console.log(this.state.userID);
     return (
-      <div style={{
-        backgroundColor: 'white', width: '60vw', marginBottom: 10, borderRadius: '1em',
-      }}
-      >
-        <div>
-          <div style={{ marginLeft: 10, marginRight: 10 }}>
-            <h1>
-              {' '}
+      <div style={{ }}>
+        <div className="contentMain">
+          <div>
+            <p className="contentMainh1">
               {this.state.comment}
-              {' '}
-            </h1>
-            <p>
-              {' '}
+            </p>
+          </div>
+          <p>
+            {' '}
 Written by:
-              {' '}
-              {this.state.author}
-              {' '}
-            </p>
-            <p>
-              {' '}
+            {' '}
+            {this.state.author}
+            {' '}
+          </p>
+          <p>
+            {' '}
               likes
-              {this.state.likes}
-              {' '}
-            </p>
-            <div>
-              <button onClick={this.likeComment}
-                type="button"
-              >
+            {this.state.likes}
+            {' '}
+          </p>
+          <div>
+            <button onClick={this.likeComment}
+              type="button"
+            >
               Like comment
-              </button>
-              <button onClick={this.unlikeComment}
-                type="button"
-              >
+            </button>
+            <button onClick={this.unlikeComment}
+              type="button"
+            >
               Dislike comment
-              </button>
-            </div>
+            </button>
           </div>
         </div>
       </div>

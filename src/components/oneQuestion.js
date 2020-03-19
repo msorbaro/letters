@@ -15,7 +15,7 @@ class OneQuestion extends Component {
       userID: '',
       question: this.props.question,
       agrees: 0,
-      author: this.props.author,
+      //    author: this.props.author,
       disagrees: 0,
       comments: this.props.comments,
     };
@@ -86,30 +86,27 @@ class OneQuestion extends Component {
         >
           <div className="smallDiv" />
           <div style={{ marginLeft: 10, marginRight: 10 }} className="mainQuestion">
-            <h1 className="h1Question">
-              {' '}
-              {this.state.question}
-              {' '}
-            </h1>
-            <p>
-              {' '}
-Written by:
-              {' '}
-              {this.state.author}
-              {' '}
-            </p>
-            <p className="bodyLikes">
-              {' '}
-              agrees
-              {this.state.agrees}
-              {' '}
-            </p>
-            <p className="boddyDislikes">
-              {' '}
-              disagrees
-              {this.state.disagrees}
-              {' '}
-            </p>
+            <div className="alignthumbs">
+              <h1 className="h1Question">
+                {' '}
+                {this.state.question}
+                {' '}
+              </h1>
+              <div className="containerthumbs">
+                <div className="alignCountToThumb">
+                  <p>
+                    {this.state.agrees}
+                  </p>
+                  <div className="agrees" />
+                </div>
+                <div className="alignCountToThumb">
+                  <p>
+                    {this.state.disagrees}
+                  </p>
+                  <div className="disagrees" />
+                </div>
+              </div>
+            </div>
           </div>
           <div>
             <button onClick={this.increaseQuestionLike}
