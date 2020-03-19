@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
-import * as db from '../services/datastore';
-import OneLetter from './OneLetter';
 import '../style.scss';
-
+import OneLetter from './OneLetter';
+import * as db from '../services/datastore';
 
 class Letters extends Component {
   constructor(props) {
@@ -111,11 +110,15 @@ class Letters extends Component {
             {letterObject}
           </div>
 
-          <button onClick={this.createLetter}
-            type="button"
-          >
-          Create Letter
-          </button>
+          <div className="createLetterButtonContainer">
+            <button onClick={this.createLetter}
+              type="button"
+            >
+              <div className="penIcon" />
+          Write A Letter
+            </button>
+          </div>
+
           {createLetter}
         </div>
       );

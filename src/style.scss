@@ -25,6 +25,7 @@ body {
   border-top-right-radius: 2em;
 }
 
+
 .h1Letter {
   font-family: 'Roboto', sans-serif;
   font-size: 1.25em;
@@ -43,7 +44,13 @@ body {
   width: 30px;
   height: 20px;
 }
+.penIcon{
+  background-image: url("./assets/pen.png");
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 20px;
 
+}
 .mainLetter {
   display: flex;
   flex-direction: row;
@@ -69,4 +76,30 @@ body {
   margin-top: 10%;
   align-items: center;
   justify-content: center;
+}
+
+.createLetterButtonContainer{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width:97.5%;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+
+.createLetterButtonContainer button{
+  background-color: white;
+  height: 6vh;
+  background-repeat:no-repeat;
+  border-style: solid;
+  border-color: #00693E;
+  border-width: 3px;
+  border-radius: 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  color:#00693E;
+  font-size: 1em;
 }
