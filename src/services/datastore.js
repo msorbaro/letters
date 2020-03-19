@@ -138,6 +138,22 @@ export function getQuestionDisagrees(questionID, callback) {
   });
 }
 
+// gets the number of likes the letter has
+export function getYourQuestionAgrees(questionID, userID, callback) {
+  const ref = firebase.database().ref(`Questions/${questionID}/agrees`);
+  ref.orderByValue().equalTo(userID).on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}
+
+// gets the number of likes the letter has
+export function getYourQuestionDisagrees(questionID, userID, callback) {
+  const ref = firebase.database().ref(`Questions/${questionID}/disagrees`);
+  ref.orderByValue().equalTo(userID).on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}
+
 /** ****************************
 ALL COMMENT ON QUESTION RELATED BE CALLS
 **************************** */
