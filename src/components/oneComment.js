@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import * as db from '../services/datastore';
 import '../style.scss';
 
@@ -50,24 +53,28 @@ class OneComment extends Component {
     return (
       <div style={{ }}>
         <div className="contentMain">
-          <div>
-            <p className="contentMainh1">
-              {this.state.comment}
-            </p>
+          <div className="getLikesAlignedWithText">
+            <div className="contantContainerTakeTwo">
+              <div className="h1ContainerConent">
+                <p className="contentMainh1">
+                  {this.state.comment}
+                </p>
+              </div>
+              <p className="author">
+            Written by:
+                {this.state.author}
+              </p>
+            </div>
+            <div className="alignLikeswithArrows">
+              <div className="UpdownIcons">
+                <FontAwesomeIcon icon={faChevronUp} />
+                <FontAwesomeIcon icon={faChevronDown} />
+              </div>
+              <p>
+                {this.state.likes}
+              </p>
+            </div>
           </div>
-          <p>
-            {' '}
-Written by:
-            {' '}
-            {this.state.author}
-            {' '}
-          </p>
-          <p>
-            {' '}
-              likes
-            {this.state.likes}
-            {' '}
-          </p>
           <div>
             <button onClick={this.likeComment}
               type="button"

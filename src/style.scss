@@ -387,13 +387,7 @@ body {
   font-size: .75em;
   font-family: 'Roboto', sans-serif;
   width: 85%;
-  background-color: green;
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  margin-left: 10px;
 }
 
 .invisibleButton{
@@ -401,4 +395,47 @@ body {
   cursor:pointer;
   overflow: hidden;
   background-color: Transparent;
+}
+
+.h1ContainerConent{
+  padding-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width:100%;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: -5px;
+}
+
+.backgroundcoloroffwhite {
+  background-color: #F7F7F7;
+}
+
+.author {
+  font-size: .5em;
+  margin-left: 10px;
+}
+
+.UpdownIcons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.getLikesAlignedWithText {
+  display: flex;
+  flex-direction: row;
+}
+
+.contantContainerTakeTwo{
+  width: 85%;
+}
+
+.alignLikeswithArrows{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width:15%;
 }
