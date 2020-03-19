@@ -33,6 +33,14 @@ class OneLetter extends Component {
     });
   }
 
+  handleButtonClick = () => {
+    if (this.state.haveLiked) {
+      this.updateHeartsDecrease();
+    } else {
+      this.updateHeartsIncrease();
+    }
+  }
+
   updateHeartsIncrease = () => {
     db.increaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
     this.setState({ haveLiked: true });
@@ -74,7 +82,9 @@ class OneLetter extends Component {
         <div className="smallDiv" />
         <div className="mainLetter">
           <div className="heartAndCount">
-            {this.showRightHeart()}
+            <button type="button" className="invisibleButton" onClick={this.handleButtonClick}>
+              {this.showRightHeart()}
+            </button>
             <div className="unlikedCount">
               {this.state.likes}
             </div>
@@ -99,17 +109,6 @@ Written by:
             </p>
           </div>
         </div>
-
-        <button onClick={this.updateHeartsIncrease}
-          type="button"
-        >
-        Update Letter Hearts Increase
-        </button>
-        <button onClick={this.updateHeartsDecrease}
-          type="button"
-        >
-        Update Letter Hearts Decrease
-        </button>
       </div>
     );
   }

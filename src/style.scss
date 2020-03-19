@@ -58,6 +58,7 @@ body {
 .bodyLetter {
   font-family: 'Roboto', sans-serif;
   font-size: .75em;
+  margin-bottom: 40px;
 }
 
 .mainQuestion p {
@@ -68,10 +69,12 @@ body {
 .unliked {
   background-image: url("./assets/unliked.png");
   background-repeat: no-repeat;
-  width: 22px;
+
+  width: 30px;
   height: 20px;
-  margin-top: 13px;
-  margin-bottom: 8px;
+  margin-left: 8px;
+  margin-top: 12px;
+  margin-bottom: 2px;
 }
 
 .liked {
@@ -307,4 +310,11 @@ body {
   color:black;
   font-size: 1em;
   font-family: 'Roboto', sans-serif;
+}
+
+.invisibleButton{
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  background-color: Transparent;
 }
