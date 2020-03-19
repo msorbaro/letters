@@ -1,3 +1,4 @@
+/* eslint no-alert: 0 */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -29,21 +30,26 @@ class SignUp extends Component {
 
 
   handleSignupButtonClick = (event) => {
-    firebase.auth().createUserWithEmailAndPassword(`${this.state.email}@dartmouth.edu`, this.state.password).catch((error) => {
-      alert(error);
-    });
+    if (this.state.email.endsWith('@dartmouth.edu')) {
+      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
+        alert(error);
+      });
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        firebase.database().ref(`users/${user.uid}`).set({
-          email: this.state.email,
-          username: this.state.username,
-        });
-        user.updateProfile({
-          displayName: this.state.username,
-        });
-      }
-    });
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          firebase.database().ref(`users/${user.uid}`).set({
+            email: this.state.email,
+            username: this.state.username,
+          });
+          user.updateProfile({
+            displayName: this.state.username,
+          });
+          this.props.history.push('/');
+        }
+      });
+    } else {
+      alert('Please enter a dartmouth.edu email');
+    }
   }
 
   handleCancelButtonClick = (event) => {
@@ -52,17 +58,20 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="displaySignInInfo">
-        <h1>Sign Up </h1>
-        <div id="dartmouthEmailInputBar">
-          <Input className="inputBar" id="emailInputBar" placeholder="Dartmouth Email" onChange={this.onEmailChange} value={this.state.email} />
-          <Input type="text" id="dartmouthEdu" value="@dartmouth.edu" readOnly />
-        </div>
-        <Input className="inputBar" id="usernameInput" placeholder="Username" onChange={this.onUsernameChange} value={this.state.username} />
-        <Input type="password" className="inputBar" id="passwordInput" placeholder="Password" onChange={this.onPasswordChange} value={this.state.password} />
-        <div className="updateSignInButtons">
-          <Button className="actionButton" id="createButton" onClick={this.handleSignupButtonClick}>Create</Button>
-          <Button className="actionButton" id="cancelButton" onClick={this.handleCancelButtonClick}>Cancel</Button>
+      <div className="displaySignInInfoContainer">
+        <div className="displaySignInInfo">
+          <div className="leftJustify">
+            <div className="prompt"> Enter a dartmouth.edu email: </div>
+            <Input className="response" placeholder="Dartmouth Email" onChange={this.onEmailChange} value={this.state.email} />
+            <div className="prompt"> Enter your full name: </div>
+            <Input className="response" placeholder="Username" onChange={this.onUsernameChange} value={this.state.username} />
+            <div className="prompt"> Enter a password: </div>
+            <Input type="password" className="response" id="passwordInput" placeholder="Password" onChange={this.onPasswordChange} value={this.state.password} />
+          </div>
+          <div>
+            <Button className="signupButtons" id="createButton" onClick={this.handleSignupButtonClick}>Sign Up</Button>
+            <Button className="signupButtons" id="cancelButton" onClick={this.handleCancelButtonClick}>Cancel</Button>
+          </div>
         </div>
       </div>
     );
