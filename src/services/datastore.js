@@ -187,3 +187,15 @@ export function unlikeComment(commentID, questionID, userID, callback) {
     callback(snapshot.numChildren());
   });
 }
+export function getCommentLikes(questionID, commentID, callback) {
+  database.ref(`Questions/${questionID}/Comments/${commentID}`).child('likes').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}
+
+export function getCommentStatus(questionID, commentID, userID, callback) {
+  const ref = firebase.database().ref(`Questions/${questionID}/Comments/${commentID}/likes`);
+  ref.orderByValue().equalTo(userID).on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}

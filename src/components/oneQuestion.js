@@ -25,8 +25,6 @@ class OneQuestion extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // this.setState({ authenticated: true });
-        // this.setState({ username: user.displayName });
         this.setState({ userID: user.uid });
         db.getQuestionAgrees(this.props.id, this.updatedAgreeCallback);
         db.getQuestionDisagrees(this.props.id, this.updatedDisagreeCallback);
