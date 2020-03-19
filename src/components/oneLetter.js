@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import * as db from '../services/datastore';
 import '../style.scss';
 
@@ -8,22 +9,35 @@ class OneLetter extends Component {
     super(props);
 
     // assuming gets props ID, letter, amount of likes, title
-    this.state = { title: this.props.title, letter: this.props.letter, likes: this.props.likes };
+    this.state = {
+      // authenticated: false,
+      // username: '',
+      userID: '',
+      title: this.props.title,
+      letter: this.props.letter,
+      likes: 0,
+    };
   }
 
   componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // this.setState({ authenticated: true });
+        // this.setState({ username: user.displayName });
+        this.setState({ userID: user.uid });
+      }
+    });
   }
 
   updateHeartsIncrease = () => {
-    db.increaseLetterScore(this.props.id, this.updatedHeartCallBack);
+    db.increaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
   }
 
   updateHeartsDecrease = () => {
-    db.decreaseLetterScore(this.props.id, this.updatedHeartCallBack);
+    db.decreaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
   }
 
   updatedHeartCallBack = (newState) => {
-    console.log(newState);
     this.setState({ likes: newState });
   }
 
