@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as db from '../services/datastore';
+import '../style.scss';
 
 
 class OneLetter extends Component {
@@ -29,29 +30,38 @@ class OneLetter extends Component {
 
   render() {
     return (
-      <div>
-        <h1>
-          {' '}
-          {this.state.title}
-          {' '}
-        </h1>
-        <p>
-          {' '}
-          {this.state.letter}
-          {' '}
-        </p>
-        <p>
-          {' '}
+      <div style={{
+        backgroundColor: 'white', width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
+      }}
+      >
+        <div className="smallDiv" />
+        <div className="mainLetter">
+          <div className="unliked" />
+          <div style={{ marginLeft: 10, marginRight: 10 }}>
+            <h1 className="h1Letter">
+              {' '}
+              {this.state.title}
+              {' '}
+            </h1>
+            <p className="bodyLetter">
+              {' '}
+              {this.state.letter}
+              {' '}
+            </p>
+            <p>
+              {' '}
 likes:
-          {this.state.likes}
-          {' '}
+              {this.state.likes}
+              {' '}
 
-        </p>
-        <p>
-          {' '}
+            </p>
+            <p>
+              {' '}
 ID:
-          {this.props.id}
-        </p>
+              {this.props.id}
+            </p>
+          </div>
+        </div>
 
         <button onClick={this.updateHeartsIncrease}
           type="button"

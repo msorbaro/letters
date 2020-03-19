@@ -3,6 +3,8 @@ import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import * as db from '../services/datastore';
 import OneLetter from './OneLetter';
+import '../style.scss';
+
 
 class Letters extends Component {
   constructor(props) {
@@ -99,10 +101,17 @@ class Letters extends Component {
     if (this.state.authenticated) {
       return (
         <div style={{
-          marginTop: 100, width: '100%', height: '100%',
+          marginTop: 15, width: '100%', height: '100%',
         }}
+
         >
-          {letterObject}
+          <div style={{
+            displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
+          }}
+            className="tryingToCenter"
+          >
+            {letterObject}
+          </div>
 
           <button onClick={this.createLetter}
             type="button"

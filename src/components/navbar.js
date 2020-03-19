@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import firebase from 'firebase';
+import '../style.scss';
+
 
 class NavBar extends Component {
   constructor(props) {
@@ -32,11 +34,7 @@ class NavBar extends Component {
   renderNav() {
     if (this.state.authenticated) {
       return (
-        <div className="navRight"
-          style={{
-            'list-style-type': 'none', display: 'flex', 'flex-direction': 'row', marginTop: '10%',
-          }}
-        >
+        <div className="navRight">
           <li id="logout"><NavLink to="/"><Button className="actionButton" id="signoutButton" onClick={this.signout}>Sign Out</Button></NavLink></li>
           <li id="thoughts"><NavLink to="/thoughts"><Button className="actionButton" id="signinButton">Thoughts</Button></NavLink></li>
           <li id="letters"><NavLink to="/letters"><Button className="actionButton" id="signupButton">Letters</Button></NavLink></li>

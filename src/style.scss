@@ -1,9 +1,72 @@
-html {
+body {
   font-family: "Roboto", sans-serif;
   background-image: url("./assets/background.png");
   height: 100%;
+  background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
 }
 
 ::placeholder {
   color: gray;
+}
+
+.tryingToCenter{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.smallDiv{
+  background: linear-gradient(90deg, #006136 0%, #12312B 100%);
+  width: 100%;
+  height: 2vh;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+}
+
+.h1Letter {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25em;
+}
+
+.bodyLetter {
+  font-family: 'Roboto', sans-serif;
+  font-size: .75em;
+}
+
+.unliked {
+  margin-left: 5%;
+  margin-top: 3%;
+  background-image: url("./assets/unliked.png");
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 20px;
+}
+
+.mainLetter {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5%;
+}
+
+.navRight button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  color:white;
+  font-size: 1em;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navRight{
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 10%;
+  align-items: center;
+  justify-content: center;
 }
