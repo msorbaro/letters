@@ -115,7 +115,7 @@ class OneQuestion extends Component {
       this.setState({ haveDisagreed: true });
     }
   }
-  
+
   render() {
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
