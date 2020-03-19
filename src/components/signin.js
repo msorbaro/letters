@@ -1,3 +1,4 @@
+/* eslint no-alert: 0 */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -26,6 +27,7 @@ class SignIn extends Component {
     firebase.auth().signInWithEmailAndPassword(`${this.state.email}@dartmouth.edu`, this.state.password).catch((error) => {
       alert(error);
     });
+    this.props.history.push('/');
   }
 
   handleCancelButtonClick = (event) => {
@@ -34,16 +36,18 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div className="displaySignInInfo">
-        <h1>Sign In</h1>
-        <div id="dartmouthEmailInputBar">
-          <Input className="inputBar" id="emailInputBar" placeholder="Dartmouth Email" onChange={this.onEmailChange} value={this.state.email} />
-          <Input type="text" id="dartmouthEdu" value="@dartmouth.edu" readOnly />
-        </div>
-        <Input type="password" className="inputBar" id="passwordInput" placeholder="Password" onChange={this.onPasswordChange} value={this.state.password} />
-        <div className="updateSignInButtons">
-          <Button className="actionButton" id="createButton" onClick={this.handleSigninButtonClick}>Create</Button>
-          <Button className="actionButton" id="cancelButton" onClick={this.handleCancelButtonClick}>Cancel</Button>
+      <div className="displaySignInInfoContainer">
+        <div className="displaySignInInfo">
+          <div className="leftJustify">
+            <div className="prompt"> Email: </div>
+            <Input className="response" id="emailInputBar" placeholder="Dartmouth Email" onChange={this.onEmailChange} value={this.state.email} />
+            <div className="prompt"> Password: </div>
+            <Input type="password" className="response" id="passwordInput" placeholder="Password" onChange={this.onPasswordChange} value={this.state.password} />
+          </div>
+          <div>
+            <Button className="signupButtons" id="createButton" onClick={this.handleSigninButtonClick}>Log In</Button>
+            <Button className="signupButtons" id="cancelButton" onClick={this.handleCancelButtonClick}>Cancel</Button>
+          </div>
         </div>
       </div>
     );

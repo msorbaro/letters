@@ -38,7 +38,6 @@ class NavBar extends Component {
           <li id="logout"><NavLink to="/"><Button className="actionButton" id="signoutButton" onClick={this.signout}>Sign Out</Button></NavLink></li>
           <li id="letters"><NavLink to="/letters"><Button className="actionButton" id="signupButton">Letters</Button></NavLink></li>
           <li id="questions"><NavLink to="/questions"><Button className="actionButton" id="signoutButton">Questions</Button></NavLink></li>
-
         </div>
       );
     } else {
