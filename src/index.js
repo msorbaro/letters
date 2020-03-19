@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import NavBar from './components/navbar';
 import Letters from './components/letters';
-import Thoughts from './components/thoughts';
 import Signup from './components/signup';
 import SignIn from './components/signin';
 import Homepage from './components/homepage';
@@ -26,7 +25,6 @@ const App = () => {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/letters" component={Letters} />
-          <Route path="/thoughts" component={Thoughts} />
           <Route path="/questions" component={Questions} />
           <Route component={FallBack} />
         </Switch>
