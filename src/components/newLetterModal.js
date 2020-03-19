@@ -37,7 +37,7 @@ export default class NewLetterModal extends React.Component {
         <div className="content">
           <h1>Enter the Following Fields </h1>
           <p> Title </p>
-          <input style={{ width: '50%' }} type="text" value={this.state.title} onChange={this.handleTitleChange} />
+          <input style={{ width: '50%', height: 20 }} type="text" value={this.state.title} onChange={this.handleTitleChange} />
           <p> Text </p>
           <textarea style={{ width: '90%', height: 100 }} type="text" value={this.state.text} onChange={this.handleTextChange} />
         </div>
