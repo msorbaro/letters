@@ -69,36 +69,58 @@ body {
 
 .unliked {
   background-image: url("./assets/unliked.png");
+  background-size: 100%;
   background-repeat: no-repeat;
-
-  width: 30px;
-  height: 20px;
-  margin-left: 8px;
+  width: 22px;
+  height: 22px;
   margin-top: 12px;
   margin-bottom: 2px;
 }
 
 .liked {
   background-image: url("./assets/liked.png");
+  background-size: 100%;
   background-repeat: no-repeat;
+  width: 45px;
+  height: 35px;
+}
+
+.smallerUnliked {
+  background-image: url("./assets/unliked.png");
+  background-size: 90%;
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 22px;
+  margin-left: 2px;
+  margin-top: 12px;
+}
+
+.smallerLiked {
+  background-image: url("./assets/liked.png");
+  background-size: 90%;
+  background-repeat: no-repeat;
+  margin-left: 4px;
   width: 45px;
   height: 35px;
 }
 
 .upThumbColor {
   background-image: url("./assets/thumbUFull.png");
+  background-size: 75%;
   background-repeat: no-repeat;
-  width: 45px;
+  width: 35px;
   height: 35px;
 }
 .upThumbTransparent {
   background-image: url("./assets/thumbU.png");
+  background-size: 75%;
   background-repeat: no-repeat;
   width: 35px;
   height: 35px;
 }
 .downThumbColor {
   background-image: url("./assets/thumbDFull.png");
+  background-size: 75%;
   background-repeat: no-repeat;
   margin-top: 7px;
   width: 35px;
@@ -106,12 +128,12 @@ body {
 }
 .downThumbTransparent {
   background-image: url("./assets/thumbD.png");
+  background-size: 75%;
   background-repeat: no-repeat;
   margin-top: 7px;
   width: 35px;
   height: 35px;
 }
-
 
 .agrees {
   background-image: url("./assets/thumbU.png");
@@ -427,6 +449,7 @@ body {
   background-color: Transparent;
   padding: 0;
 }
+
 .h1ContainerConent{
   padding-top: 10px;
   display: flex;

@@ -25,8 +25,6 @@ class OneQuestion extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // this.setState({ authenticated: true });
-        // this.setState({ username: user.displayName });
         this.setState({ userID: user.uid });
         db.getQuestionAgrees(this.props.id, this.updatedAgreeCallback);
         db.getQuestionDisagrees(this.props.id, this.updatedDisagreeCallback);
@@ -34,6 +32,17 @@ class OneQuestion extends Component {
         db.getYourQuestionDisagrees(this.props.id, this.state.userID, this.downThumbCallback);
       }
     });
+  }
+
+  getCurrentDate = (separator = '/') => {
+    const newDate = new Date();
+    const date = newDate.getDate();
+    const month = newDate.getMonth() + 1;
+    const year = newDate.getFullYear();
+    const hours = newDate.getHours();
+    const minute = newDate.getMinutes();
+
+    return `${month < 10 ? `0${month}` : `${month}`}${separator}${date}${separator}${year}${' '}${hours}${':'}${minute}`;
   }
 
   increaseQuestionLike = () => {
@@ -57,7 +66,8 @@ class OneQuestion extends Component {
   }
 
   addAComment = () => {
-    db.addComment('I am a test Commetn', this.props.id);
+    const date = this.getCurrentDate();
+    db.addComment('I am a test Commetn', this.props.id, date);
   }
 
   updatedAgreeCallback = (agreeNum) => {
@@ -134,6 +144,7 @@ class OneQuestion extends Component {
               author={info.author}
               comment={info.comment}
               questionID={this.props.id}
+              date={info.date}
             />
           </div>
         );

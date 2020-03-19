@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import * as db from '../services/datastore';
 import '../style.scss';
 
@@ -16,19 +14,20 @@ class OneComment extends Component {
       // username: '',
       userID: '',
       comment: this.props.comment,
-      likes: 0,
       author: this.props.author,
       questionID: this.props.questionID,
+      likes: 0,
+      haveLiked: false,
+      date: this.props.date,
     };
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // this.setState({ authenticated: true });
-        // this.setState({ username: user.displayName });
         this.setState({ userID: user.uid });
-        db.getLikes(this.props.id, this.updatedHeartCallBack);
+        db.getCommentLikes(this.props.id, this.commentNumUpdate);
+        db.getCommentStatus(this.props.id, this.state.userID, this.commentUpdateStatus);
       }
     });
   }
@@ -37,13 +36,38 @@ class OneComment extends Component {
     this.setState({ likes: likeNum });
   }
 
+  commentUpdateStatus = (likeNum) => {
+    if (likeNum === 1) {
+      this.setState({ haveLiked: true });
+    } else if (likeNum === 0) {
+      this.setState({ haveLiked: false });
+    }
+  }
+
   likeComment = () => {
-    // comment ID question ID
     db.likeComment(this.props.id, this.state.questionID, this.state.userID, this.commentNumUpdate);
+    this.setState({ haveLiked: true });
   }
 
   unlikeComment = () => {
     db.unlikeComment(this.props.id, this.state.questionID, this.state.userID, this.commentNumUpdate);
+    this.setState({ haveLiked: false });
+  }
+
+  handleButtonClick = () => {
+    if (this.state.haveLiked) {
+      this.unlikeComment();
+    } else {
+      this.likeComment();
+    }
+  }
+
+  showRightHeart = () => {
+    if (this.state.haveLiked) {
+      return (<div className="smallerLiked" />);
+    } else {
+      return (<div className="smallerUnliked" />);
+    }
   }
 
   render() {
@@ -66,28 +90,19 @@ class OneComment extends Component {
             Written by:
                 {this.state.author}
               </p>
-            </div>
-            <div className="alignLikeswithArrows">
-              <div className="UpdownIcons">
-                <FontAwesomeIcon icon={faChevronUp} />
-                <FontAwesomeIcon icon={faChevronDown} />
-              </div>
-              <p>
-                {this.state.likes}
+              <p className="author">
+            Date:
+                {this.state.date}
               </p>
             </div>
-          </div>
-          <div>
-            <button onClick={this.likeComment}
-              type="button"
-            >
-              Like comment
-            </button>
-            <button onClick={this.unlikeComment}
-              type="button"
-            >
-              Dislike comment
-            </button>
+            <div className="heartAndCount">
+              <button type="button" className="invisibleButton" onClick={this.handleButtonClick}>
+                {this.showRightHeart()}
+              </button>
+              <div className="unlikedCount">
+                {this.state.likes}
+              </div>
+            </div>
           </div>
         </div>
       </div>

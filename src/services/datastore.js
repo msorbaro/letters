@@ -27,11 +27,11 @@ export function getLetters(callback) {
 }
 
 // adds a letter
-export function addLetter(letter, title, username) {
+export function addLetter(letter, title, username, date) {
   const letters = firebase.database().ref('Letters/');
   const author = username;
   letters.push({
-    letter, title, author,
+    letter, title, author, date,
   });
 }
 
@@ -165,10 +165,10 @@ export function getComments(questionID, callback) {
   });
 }
 
-export function addComment(comment, questionID) {
+export function addComment(comment, questionID, date) {
   const questionComments = firebase.database().ref(`Questions/${questionID}/Comments`);
   questionComments.push({
-    comment,
+    comment, date,
   });
 }
 
@@ -184,6 +184,18 @@ export function unlikeComment(commentID, questionID, userID, callback) {
   firebase.database().ref(`Questions/${questionID}/Comments/${commentID}/likes`).child(userID).remove();
 
   database.ref(`Questions/${questionID}/Comments/${commentID}/likes`).on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}
+export function getCommentLikes(questionID, commentID, callback) {
+  database.ref(`Questions/${questionID}/Comments/${commentID}`).child('likes').on('value', (snapshot) => {
+    callback(snapshot.numChildren());
+  });
+}
+
+export function getCommentStatus(questionID, commentID, userID, callback) {
+  const ref = firebase.database().ref(`Questions/${questionID}/Comments/${commentID}/likes`);
+  ref.orderByValue().equalTo(userID).on('value', (snapshot) => {
     callback(snapshot.numChildren());
   });
 }

@@ -31,94 +31,88 @@ class Letters extends Component {
   }
 
   sendLetter = (title, text) => {
-    db.addLetter(text, title, this.state.username);
+    const date = this.getCurrentDate();
+
+    db.addLetter(text, title, this.state.username, date);
     this.setState({ showCreateLetterInfo: false });
   }
 
-  // updateHeartsIncrease = () => {
-  //   db.increaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
-  // }
-  //
-  // updateHeartsDecrease = () => {
-  //   db.decreaseLetterScore('-M2jK_4ww8e4MbgB2ofI', this.state.userID, this.updatedHeartCallBack);
-  // }
 
   createLetter = () => {
     console.log('Here');
     console.log(this.state.showCreateLetterInfo);
     this.setState(prevState => ({ showCreateLetterInfo: !prevState.showCreateLetterInfo }));
   }
-  //
-  // updatedHeartCallBack = () => {
-  //   console.log('updated');
-  // }
 
-  // handleTitleChange = (event) => {
-  //   this.setState({ title: event.target.value });
-  // }
-  //
-  // handleTextChange = (event) => {
-  //   this.setState({ text: event.target.value });
-  // }
+    getCurrentDate = (separator = '/') => {
+      const newDate = new Date();
+      const date = newDate.getDate();
+      const month = newDate.getMonth() + 1;
+      const year = newDate.getFullYear();
+      const hours = newDate.getHours();
+      const minute = newDate.getMinutes();
 
-  render() {
-    console.log(this.state.letters);
+      return `${month < 10 ? `0${month}` : `${month}`}${separator}${date}${separator}${year}${' '}${hours}${':'}${minute}`;
+    }
 
-    let letterObject = null;
-    if (this.state.letters != null) {
-      letterObject = Object.keys(this.state.letters).map((id) => {
-      //  console.log(`I am id: ${id}`);
+    render() {
+      //      console.log('HERE IS THE DATE YAY');
+
+      let letterObject = null;
+      if (this.state.letters != null) {
+        letterObject = Object.keys(this.state.letters).map((id) => {
+          //  console.log(`I am id: ${id}`);
         // console.log('other stuff bellow');
         // console.log(id);
-        const info = this.state.letters[id];
-        //  console.log(info);
-        return (
+          const info = this.state.letters[id];
+          //  console.log(info);
+          return (
           // assuming gets props ID, letter, amount of likes, title
-          <OneLetter
-            id={id}
-            author={info.author}
-            letter={info.letter}
-            title={info.title}
-          />
-        );
-      });
-    }
+            <OneLetter
+              id={id}
+              author={info.author}
+              letter={info.letter}
+              title={info.title}
+              date={info.date}
+            />
+          );
+        });
+      }
 
-    const createButton = this.state.showCreateLetterInfo ? null : (
-      <div className="createLetterButtonContainer">
-        <button onClick={this.createLetter}
-          type="button"
-        >
-          <div className="penIcon" />
-            Write A Letter
-        </button>
-      </div>
-    );
-
-
-    if (this.state.authenticated) {
-      return (
-        <div style={{
-          marginTop: 15, width: '100%', height: '100%',
-        }}
-
-        >
-          <NewLetterModal onCloseAndSubmit={this.sendLetter} onClose={this.createLetter} show={this.state.showCreateLetterInfo} />
-          <div style={{
-            displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
-          }}
-            className="tryingToCenter"
+      const createButton = this.state.showCreateLetterInfo ? null : (
+        <div className="createLetterButtonContainer">
+          <button onClick={this.createLetter}
+            type="button"
           >
-            {letterObject}
-          </div>
-          {createButton}
-
+            <div className="penIcon" />
+            Write A Letter
+          </button>
         </div>
       );
-    } else {
-      return (<div> no </div>);
+
+
+      if (this.state.authenticated) {
+        return (
+          <div style={{
+            marginTop: 15, width: '100%', height: '100%',
+          }}
+          >
+            <NewLetterModal onCloseAndSubmit={this.sendLetter} onClose={this.createLetter} show={this.state.showCreateLetterInfo} />
+            <div style={{
+              displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
+            }}
+              className="tryingToCenter"
+            >
+              {letterObject}
+            </div>
+            {createButton}
+
+          </div>
+        );
+      } else {
+        return (<div> no </div>);
+      }
     }
-  }
 }
 
 export default withRouter((Letters));
