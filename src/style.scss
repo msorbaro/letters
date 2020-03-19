@@ -52,7 +52,8 @@ body {
 
 .h1Question {
   font-family: 'Roboto', sans-serif;
-  font-size: 1.25em;
+  font-size: 1.15em;
+  width: 80%;
 }
 
 .bodyLetter {
@@ -73,6 +74,30 @@ body {
   margin-top: 13px;
   margin-bottom: 8px;
 }
+
+
+.agrees {
+  background-image: url("./assets/thumbU.png");
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  margin-top: 13px;
+  margin-bottom: 8px;
+  object-fit: cover;
+}
+
+
+.disagrees {
+  background-image: url("./assets/thumbD.png");
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  margin-top: 13px;
+  margin-bottom: 8px;
+
+}
+
+
 
 .heartAndCount {
   display: flex;
@@ -300,4 +325,63 @@ body {
   color:black;
   font-size: 1em;
   font-family: 'Roboto', sans-serif;
+}
+
+.alignthumbs {
+  display: flex;
+  flex-direction: row;
+  align-items:flex-end;
+  width: 95%;
+}
+
+.containerthumbs{
+  display: flex;
+  flex-direction: row;
+  width:20%;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.alignCountToThumb {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainQuestion {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+}
+
+.alignCountToThumb p {
+  margin-right: 5px;
+  font-size: 1em;
+  font-family: 'Roboto', sans-serif;
+}
+
+.contentMain{
+  background-color: white;
+  width: 60vw;
+  margin-bottom: 10;
+  border-radius: 1em;
+
+}
+
+.contentMainh1{
+  font-size: .75em;
+  font-family: 'Roboto', sans-serif;
+  width: 85%;
+  background-color: green;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
