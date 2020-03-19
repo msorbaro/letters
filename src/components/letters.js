@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
-import * as db from '../services/datastore';
-import OneLetter from './OneLetter';
 import '../style.scss';
-
+import OneLetter from './OneLetter';
+import NewLetterModal from './newLetterModal';
+import * as db from '../services/datastore';
 
 class Letters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      letters: null, authenticated: false, username: '', showCreateLetterInfo: false, title: '', text: ' ',
+      letters: null, authenticated: false, username: '', showCreateLetterInfo: false,
     };
   }
 
@@ -30,8 +30,8 @@ class Letters extends Component {
     this.setState({ letters: letter });
   }
 
-  sendLetter = () => {
-    db.addLetter(this.state.text, this.state.title, this.state.username);
+  sendLetter = (title, text) => {
+    db.addLetter(text, title, this.state.username);
     this.setState({ showCreateLetterInfo: false });
   }
 
@@ -44,20 +44,22 @@ class Letters extends Component {
   // }
 
   createLetter = () => {
-    this.setState({ showCreateLetterInfo: true });
+    console.log('Here');
+    console.log(this.state.showCreateLetterInfo);
+    this.setState(prevState => ({ showCreateLetterInfo: !prevState.showCreateLetterInfo }));
   }
   //
   // updatedHeartCallBack = () => {
   //   console.log('updated');
   // }
 
-  handleTitleChange = (event) => {
-    this.setState({ title: event.target.value });
-  }
-
-  handleTextChange = (event) => {
-    this.setState({ text: event.target.value });
-  }
+  // handleTitleChange = (event) => {
+  //   this.setState({ title: event.target.value });
+  // }
+  //
+  // handleTextChange = (event) => {
+  //   this.setState({ text: event.target.value });
+  // }
 
   render() {
     console.log(this.state.letters);
@@ -82,19 +84,17 @@ class Letters extends Component {
       });
     }
 
-    const createLetter = this.state.showCreateLetterInfo ? (
-      <div>
-        <p>Title:</p>
-        <input type="text" value={this.state.title} onChange={this.handleTitleChange} />
-        <p>Text</p>
-        <input type="text" value={this.state.text} onChange={this.handleTextChange} />
-        <button onClick={this.sendLetter}
+    const createButton = this.state.showCreateLetterInfo ? null : (
+      <div className="createLetterButtonContainer">
+        <button onClick={this.createLetter}
           type="button"
         >
-        Send Letter
+          <div className="penIcon" />
+            Write A Letter
         </button>
       </div>
-    ) : null;
+    );
+
 
     if (this.state.authenticated) {
       return (
@@ -103,6 +103,7 @@ class Letters extends Component {
         }}
 
         >
+          <NewLetterModal onCloseAndSubmit={this.sendLetter} onClose={this.createLetter} show={this.state.showCreateLetterInfo} />
           <div style={{
             displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
           }}
@@ -110,13 +111,8 @@ class Letters extends Component {
           >
             {letterObject}
           </div>
+          {createButton}
 
-          <button onClick={this.createLetter}
-            type="button"
-          >
-          Create Letter
-          </button>
-          {createLetter}
         </div>
       );
     } else {
