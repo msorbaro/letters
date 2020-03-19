@@ -73,11 +73,11 @@ class OneComment extends Component {
   render() {
     console.log(this.state.questionID);
     console.log(this.state.userID);
-    const zIndex = String(this.props.zIndex);
+    const { zIndex } = this.props;
     console.log(zIndex);
     console.log('ABOVE IS Z INDEX');
     return (
-      <div style={{ zIndex: { zIndex }, position: 'relative' }}>
+      <div style={{ zIndex: 1 * zIndex, position: 'relative' }}>
         <div className="contentMain">
           <div className="getLikesAlignedWithText">
             <div className="contantContainerTakeTwo">

@@ -133,11 +133,11 @@ class OneQuestion extends Component {
       commentObject = Object.keys(this.state.comments).map((id) => {
         const info = this.state.comments[id];
         zIndex -= 5;
-        const newZ = String(zIndex);
+        //  const newZ = String(zIndex);
 
         return (
           // assuming gets props ID, comment, likes, author
-          <div style={{ zIndex: newZ }}>
+          <div>
             <OneComment
               zIndex={zIndex}
               id={id}
@@ -193,7 +193,10 @@ class OneQuestion extends Component {
           </button>
         </div>
 
-        <div style={{ marginLeft: 30, marginTop: -20 }}>
+        <div style={{
+          marginLeft: 30, marginTop: -20, position: 'relative', zIndex: 1,
+        }}
+        >
           {commentObject}
         </div>
 
