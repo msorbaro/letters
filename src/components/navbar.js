@@ -16,8 +16,10 @@ class NavBar extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
+      if (user && user.emailVerified) {
         this.setState({ authenticated: true });
+      } else {
+        this.setState({ authenticated: false });
       }
     });
   }
@@ -25,10 +27,10 @@ class NavBar extends Component {
   signout = () => {
     firebase.auth().signOut().then(() => {
       console.log('logged out');
+      this.setState({ authenticated: false });
     }).catch((error) => {
       console.log('wait, could not sign out');
     });
-    this.setState({ authenticated: false });
   }
 
   renderNav() {

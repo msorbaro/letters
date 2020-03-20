@@ -31,21 +31,25 @@ class SignUp extends Component {
 
   handleSignupButtonClick = (event) => {
     if (this.state.email.endsWith('@dartmouth.edu')) {
-      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
-        alert(error);
-      });
+      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(() => {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            user.sendEmailVerification().then(() => {
+              alert('Email verification has been sent. Please check your email and log back in!');
+            });
 
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          firebase.database().ref(`users/${user.uid}`).set({
-            email: this.state.email,
-            username: this.state.username,
-          });
-          user.updateProfile({
-            displayName: this.state.username,
-          });
+            firebase.database().ref(`users/${user.uid}`).set({
+              email: this.state.email,
+              username: this.state.username,
+            });
+            user.updateProfile({
+              displayName: this.state.username,
+            });
+          }
           this.props.history.push('/');
-        }
+        });
+      }).catch((error) => {
+        alert(error);
       });
     } else {
       alert('Please enter a dartmouth.edu email');
