@@ -54,8 +54,11 @@ class Questions extends Component {
         <button onClick={this.createQuestion}
           type="button"
         >
-          <div className="penIcon" />
+          <a href="#top">
+            <div className="penIcon" />
             Add a Poll
+          </a>
+
         </button>
       </div>
     );

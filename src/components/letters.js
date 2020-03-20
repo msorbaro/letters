@@ -39,9 +39,11 @@ class Letters extends Component {
 
 
   createLetter = () => {
-    console.log('Here');
-    console.log(this.state.showCreateLetterInfo);
     this.setState(prevState => ({ showCreateLetterInfo: !prevState.showCreateLetterInfo }));
+    if (this.state.showCreateLetterInfo) {
+      console.log('SHOULD BE HERE');
+      document.body.style.overflow = 'unset';
+    }
   }
 
     getCurrentDate = (separator = '/') => {
@@ -57,7 +59,6 @@ class Letters extends Component {
 
     render() {
       //      console.log('HERE IS THE DATE YAY');
-
       let letterObject = null;
       if (this.state.letters != null) {
         letterObject = Object.keys(this.state.letters).map((id) => {
@@ -84,8 +85,11 @@ class Letters extends Component {
           <button onClick={this.createLetter}
             type="button"
           >
-            <div className="penIcon" />
+            <a href="#top">
+
+              <div className="penIcon" />
             Write A Letter
+            </a>
           </button>
         </div>
       );
@@ -93,10 +97,7 @@ class Letters extends Component {
 
       if (this.state.authenticated) {
         return (
-          <div style={{
-            marginTop: 15, width: '100%', height: '100%',
-          }}
-          >
+          <div className="lettersNormalMainStyle">
             <NewLetterModal onCloseAndSubmit={this.sendLetter} onClose={this.createLetter} show={this.state.showCreateLetterInfo} />
             <div style={{
               displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
