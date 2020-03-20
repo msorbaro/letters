@@ -22,6 +22,13 @@ ALL LETTER RELATED BE CALLS
 export function getLetters(callback) {
   database.ref('Letters').on('value', (snapshot) => {
     const newLettersState = snapshot.val();
+
+    console.log(newLettersState);
+    console.log('I am printing here');
+    console.log(Object.keys(newLettersState));
+    //    const keys = Object.keys(newLettersState);
+
+
     callback(newLettersState);
   });
 }

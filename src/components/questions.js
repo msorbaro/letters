@@ -21,6 +21,7 @@ class Questions extends Component {
   }
 
   sendQuestion = (question) => {
+    document.body.style.overflow = 'unset';
     db.addQuestion(question);
     this.setState({ showCreateLetterInfo: false });
   }

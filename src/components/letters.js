@@ -32,7 +32,7 @@ class Letters extends Component {
 
   sendLetter = (title, text) => {
     const date = this.getCurrentDate();
-
+    document.body.style.overflow = 'unset';
     db.addLetter(text, title, this.state.username, date);
     this.setState({ showCreateLetterInfo: false });
   }
