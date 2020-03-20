@@ -440,7 +440,7 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 80%;
-  width: 50%;
+  width: 40%;
   margin-left: 10px;
 }
 
@@ -675,4 +675,12 @@ a, a:hover, a:active, a:visited, a:focus {
   width: 100;
   overflow-y:hidden;
   height: 100%;
+}
+
+.selectedStyle {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.notSelected {
 }

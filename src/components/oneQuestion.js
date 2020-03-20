@@ -110,18 +110,29 @@ class OneQuestion extends Component {
   }
 
   showRightUpThumb = () => {
+    // if (this.state.haveAgreed) {
+    //   return (<div className="upThumbColor" />);
+    // } else {
+    //   return (<div className="upThumbTransparent" />);
+    // }
     if (this.state.haveAgreed) {
-      return (<div className="upThumbColor" />);
+      return (<p className="selectedStyle" style={{ color: '#00ac66', fontSize: '15px' }}> Yes! </p>);
     } else {
-      return (<div className="upThumbTransparent" />);
+      return (<p lassName="notSelected" style={{ color: '#00ac66', fontSize: '15px' }}> Yes! </p>);
     }
   }
 
   showRightDownThumb = () => {
+    // if (this.state.haveDisagreed) {
+    //   return (<div className="downThumbColor" />);
+    // } else {
+    //   return (<div className="downThumbTransparent" />);
+    // }
+
     if (this.state.haveDisagreed) {
-      return (<div className="downThumbColor" />);
+      return (<p className="selectedStyle" style={{ color: '#f51818', fontSize: '15px' }}> No! </p>);
     } else {
-      return (<div className="downThumbTransparent" />);
+      return (<p className="notSelected" style={{ color: '#f51818', fontSize: '15px' }}> No! </p>);
     }
   }
 
@@ -288,9 +299,9 @@ class OneQuestion extends Component {
               <div className="containerthumbs">
                 <div className="thumbAndCount">
                   <button type="button" className="invisibleThumbButton" onClick={this.handleUpThumbClick}>
-                    {this.showRightUpThumb()}
+                    { this.showRightUpThumb()}
                   </button>
-                  <div className="agreeCount">
+                  <div className="agreeCount" style={{ color: '#00ac66' }}>
                     {this.state.agrees}
                   </div>
                 </div>
@@ -298,7 +309,7 @@ class OneQuestion extends Component {
                   <button type="button" className="invisibleThumbButton" onClick={this.handleDownThumbClick}>
                     {this.showRightDownThumb()}
                   </button>
-                  <div className="disagreeCount">
+                  <div className="disagreeCount" style={{ color: '#f51818' }}>
                     {this.state.disagrees}
                   </div>
                 </div>
