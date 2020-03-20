@@ -42,7 +42,7 @@ class SignIn extends Component {
     return (
       <div className="displaySignInInfoContainer">
         <div className="displaySignInInfo">
-          <div className="leftJustify">
+          <div className="leftJustify" style={{ width: '100%' }}>
             <div className="prompt"> Email: </div>
             <Input className="response" id="emailInputBar" placeholder="Dartmouth Email" onChange={this.onEmailChange} value={this.state.email} />
             <div className="prompt"> Password: </div>

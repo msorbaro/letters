@@ -230,7 +230,7 @@ class OneQuestion extends Component {
 
     const commentingCurrently = (
       <div className="contentMainTakeThree">
-        <textarea style={{ width: '90%', marginTop: 15, height: '8vh' }} type="text" value={this.state.comment} onChange={this.handleCommentChange} />
+        <textarea style={{ width: '90%', marginTop: 20, height: '7.5vh' }} type="text" value={this.state.comment} onChange={this.handleCommentChange} />
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <button type="button"
             style={{

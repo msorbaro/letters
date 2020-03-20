@@ -30,12 +30,12 @@ export default class newQuestionModal extends React.Component {
     }
     return (
       <div className="modal" id="modal" style={{ left: 0 }}>
-        <div className="content">
-          <h1>Enter the Following Fields </h1>
-          <p> Question </p>
-          <input style={{ width: '50%' }} type="text" value={this.state.question} onChange={this.handleQuestionChange} />
+        <div className="contentTwo">
+          <h1>Enter the Poll You Want to Submit </h1>
+          <p> Poll </p>
+          <textarea style={{ width: '98%' }} type="text" value={this.state.question} onChange={this.handleQuestionChange} />
         </div>
-        <div className="twoButtons">
+        <div className="twoButtonsTwo">
           <button
             className="whiteButton"
             type="button"
