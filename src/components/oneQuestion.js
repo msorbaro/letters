@@ -73,7 +73,7 @@ class OneQuestion extends Component {
   createNewComment = () => {
     this.setState({ createNewComment: true });
   }
-  
+
   addAComment = () => {
     const date = this.getCurrentDate();
     db.addComment('I am a test Commetn', this.state.username, this.props.id, date);
@@ -152,7 +152,7 @@ class OneQuestion extends Component {
   render() {
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
-      let zIndex = 0;
+      let zIndex = 999;
       commentObject = Object.keys(this.state.comments).map((id) => {
         const info = this.state.comments[id];
         zIndex -= 5;
