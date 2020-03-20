@@ -116,9 +116,18 @@ class OneQuestion extends Component {
     //   return (<div className="upThumbTransparent" />);
     // }
     if (this.state.haveAgreed) {
-      return (<p className="selectedStyle" style={{ color: '#00ac66', fontSize: '15px' }}> Yes! </p>);
+      return (
+        <p className="selectedStyle"
+          style={{
+            backgroundColor: '#00ac66', borderColor: '#00ac66', color: 'white', fontSize: '15px', width: '20px',
+          }}
+        >
+Yes
+          {' '}
+        </p>
+      );
     } else {
-      return (<p lassName="notSelected" style={{ color: '#00ac66', fontSize: '15px' }}> Yes! </p>);
+      return (<p className="notSelected" style={{ color: '#00ac66', fontSize: '15px', width: '20px' }}>Yes </p>);
     }
   }
 
@@ -130,9 +139,19 @@ class OneQuestion extends Component {
     // }
 
     if (this.state.haveDisagreed) {
-      return (<p className="selectedStyle" style={{ color: '#f51818', fontSize: '15px' }}> No! </p>);
+      return (
+        <p className="selectedStyle"
+          style={{
+            backgroundColor: '#f51818', borderColor: '#f51818', color: 'white', fontSize: '15px', width: '17px',
+          }}
+        >
+          {' '}
+No
+          {' '}
+        </p>
+      );
     } else {
-      return (<p className="notSelected" style={{ color: '#f51818', fontSize: '15px' }}> No! </p>);
+      return (<p className="notSelected" style={{ color: '#f51818', fontSize: '15px', width: '17px' }}> No </p>);
     }
   }
 
@@ -276,6 +295,12 @@ class OneQuestion extends Component {
       commentToDisplay = underCommentPromptToAdd;
     }
 
+    const filledRed = this.state.haveDisagreed ? 'filledRed' : 'thumbAndCount';
+    const filledGreen = this.state.haveAgreed ? 'filledGreen' : 'thumbAndCount';
+
+    const agreeColorText = this.state.haveAgreed ? 'white' : '#00ac66';
+    const disagreeColorText = this.state.haveDisagreed ? 'white' : '#f51818';
+
     const styleChoice = this.state.comments !== undefined ? 'outerStyle' : 'outerStyleTwo';
     return (
       <div>
@@ -297,19 +322,19 @@ class OneQuestion extends Component {
                 {' '}
               </h1>
               <div className="containerthumbs">
-                <div className="thumbAndCount">
+                <div className={filledGreen} style={{ borderColor: '#00ac66' }}>
                   <button type="button" className="invisibleThumbButton" onClick={this.handleUpThumbClick}>
                     { this.showRightUpThumb()}
                   </button>
-                  <div className="agreeCount" style={{ color: '#00ac66' }}>
+                  <div className="agreeCount" style={{ color: agreeColorText, paddingRight: '8px' }}>
                     {this.state.agrees}
                   </div>
                 </div>
-                <div className="thumbAndCount">
+                <div className={filledRed} style={{ borderColor: '#f51818' }}>
                   <button type="button" className="invisibleThumbButton" onClick={this.handleDownThumbClick}>
                     {this.showRightDownThumb()}
                   </button>
-                  <div className="disagreeCount" style={{ color: '#f51818' }}>
+                  <div className="disagreeCount" style={{ color: disagreeColorText, paddingRight: '8px' }}>
                     {this.state.disagrees}
                   </div>
                 </div>
