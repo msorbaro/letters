@@ -90,26 +90,33 @@ class OneLetter extends Component {
               {this.state.likes}
             </div>
           </div>
-          <div style={{ marginLeft: 10, marginRight: 10 }}>
-            <h1 className="h1Letter">
-              {' '}
-              {this.state.title}
-              {' '}
-            </h1>
-            <p>
-              {' '}
+          <div style={{ marginLeft: 10, marginRight: 10, width: '100%' }}>
+            <div style={{
+              display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: '100%', justifyContent: 'space-between',
+            }}
+            >
+              <h1 className="h1Letter">
+                {' '}
+                {this.state.title}
+                {' '}
+              </h1>
+              <div style={{ marginRight: '10px', display: 'flex', flexDirection: 'column' }}>
+                <p style={{ fontSize: '.5em' }}>
+                  {' '}
 Written by:
-              {' '}
-              {this.state.author}
-              {' '}
-            </p>
-            <p>
-              {' '}
+                  {' '}
+                  {this.state.author}
+                  {' '}
+                </p>
+                <p style={{ fontSize: '.5em' }}>
+                  {' '}
 Date:
-              {' '}
-              {this.state.date}
-              {' '}
-            </p>
+                  {' '}
+                  {this.state.date}
+                  {' '}
+                </p>
+              </div>
+            </div>
             <p className="bodyLetter">
               {' '}
               {this.state.letter}
