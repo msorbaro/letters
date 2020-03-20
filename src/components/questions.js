@@ -58,6 +58,7 @@ class Questions extends Component {
       <div className="createLetterButtonContainer">
         <button onClick={this.createQuestion}
           type="button"
+          className="pollButton"
         >
           <a href="#top">
             <div className="penIcon" />

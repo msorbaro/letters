@@ -77,11 +77,8 @@ class Letters extends Component {
 
       const createButton = this.state.showCreateLetterInfo ? null : (
         <div className="createLetterButtonContainer">
-          <button onClick={this.createLetter}
-            type="button"
-          >
+          <button onClick={this.createLetter} className="createButton" type="button">
             <a href="#top">
-
               <div className="penIcon" />
               Write A Letter
             </a>
@@ -102,7 +99,6 @@ class Letters extends Component {
               {letterObject}
             </div>
             {createButton}
-
           </div>
         );
       } else {

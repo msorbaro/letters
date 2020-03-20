@@ -59,9 +59,10 @@ class homepage extends Component {
             {' '}
             <br />
             As a reminder please be respectful. This is not Librex, this is
-            an opportunity for student opinions to actually be shared with
-            the administration. If your actions are deemed inappropriate
-            you will be removed.
+            not anonymous. Every comment and post is attached to your name
+            and email address. This is an opportunity for student opinions
+            to be shared with the administration. If your actions are deemed
+            inappropriate you will be removed and we will not feel bad.
           </div>
         </div>
       );
