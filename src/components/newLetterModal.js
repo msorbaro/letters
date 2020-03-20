@@ -54,7 +54,7 @@ export default class NewLetterModal extends React.Component {
               this.onClose(e);
             }}
           >
-                    Cancel
+            Cancel
           </button>
           <button
             className="greenButton"
@@ -63,7 +63,7 @@ export default class NewLetterModal extends React.Component {
               this.onCloseAndSubmit(e);
             }}
           >
-                    Share
+            Share
           </button>
         </div>
       </div>

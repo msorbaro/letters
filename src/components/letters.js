@@ -84,7 +84,7 @@ class Letters extends Component {
             <a href="#top">
 
               <div className="penIcon" />
-            Write A Letter
+              Write A Letter
             </a>
           </button>
         </div>

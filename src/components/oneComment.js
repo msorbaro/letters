@@ -83,13 +83,13 @@ class OneComment extends Component {
                 </p>
               </div>
               <p className="author">
-            Written by:
+                Written by:
                 {' '}
                 {' '}
                 {this.state.author}
               </p>
               <p className="author">
-            Date:
+                Date:
                 {' '}
                 {' '}
                 {this.state.date}

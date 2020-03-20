@@ -55,7 +55,7 @@ class NavBar extends Component {
               <NavLink to="/questions" activeClassName="navbar__link--active">
                 <Button className="actionButton" id="signoutButton">
                   <div className="pollbutton" />
-                Polls
+                  Polls
                 </Button>
               </NavLink>
             </li>
