@@ -13,9 +13,9 @@ class homepage extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // this.setState({ authenticated: true });
-        // this.setState({ username: user.displayName });
         this.setState({ authenticated: true });
+      } else {
+        this.setState({ authenticated: false });
       }
     });
   }

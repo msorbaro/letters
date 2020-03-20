@@ -24,7 +24,7 @@ class NavBar extends Component {
 
   signout = () => {
     firebase.auth().signOut().then(() => {
-      console.log('signed out');
+      console.log('logged out');
     }).catch((error) => {
       console.log('wait, could not sign out');
     });
