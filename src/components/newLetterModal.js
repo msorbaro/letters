@@ -35,7 +35,7 @@ export default class NewLetterModal extends React.Component {
     return (
       <div className="modal" id="modal">
         <div className="content">
-          <h1>Enter the Following Fields </h1>
+          <h1>Create your letter </h1>
           <p> Title </p>
           <input style={{ width: '50%', height: 20 }} type="text" value={this.state.title} onChange={this.handleTitleChange} />
           <p> Text </p>
