@@ -58,19 +58,14 @@ class Letters extends Component {
     }
 
     render() {
-      //      console.log('HERE IS THE DATE YAY');
       let letterObject = null;
       if (this.state.letters != null) {
         letterObject = Object.keys(this.state.letters).map((id) => {
-          //  console.log(`I am id: ${id}`);
-        // console.log('other stuff bellow');
-        // console.log(id);
           const info = this.state.letters[id];
-          //  console.log(info);
           return (
           // assuming gets props ID, letter, amount of likes, title
             <OneLetter
-              key={id}
+              key={info.date}
               id={id}
               author={info.author}
               letter={info.letter}
@@ -89,7 +84,7 @@ class Letters extends Component {
             <a href="#top">
 
               <div className="penIcon" />
-            Write A Letter
+              Write A Letter
             </a>
           </button>
         </div>
@@ -101,7 +96,7 @@ class Letters extends Component {
           <div className="lettersNormalMainStyle">
             <NewLetterModal onCloseAndSubmit={this.sendLetter} onClose={this.createLetter} show={this.state.showCreateLetterInfo} />
             <div style={{
-              displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
+              alignContent: 'center', justifyContent: 'center',
             }}
               className="tryingToCenter"
             >

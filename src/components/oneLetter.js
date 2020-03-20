@@ -50,7 +50,6 @@ class OneLetter extends Component {
   updateHeartsDecrease = () => {
     db.decreaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
     this.setState({ haveLiked: false });
-    console.log(this.state.haveLiked);
   }
 
   updatedHeartCallBack = (likeNum) => {
@@ -78,7 +77,7 @@ class OneLetter extends Component {
     const letterSnippits = this.state.letter.split('\n');
     const finalLetter = letterSnippits.map((id) => {
       return (
-        <p key={id} className="bodyLetter">
+        <p className="bodyLetter">
           {' '}
           {id}
           {' '}
@@ -118,14 +117,14 @@ class OneLetter extends Component {
               >
                 <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
                   {' '}
-Written by:
+                  Written by:
                   {' '}
                   {this.state.author}
                   {' '}
                 </p>
                 <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
                   {' '}
-Date:
+                  Date:
                   {' '}
                   {this.state.date}
                   {' '}

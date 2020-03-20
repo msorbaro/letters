@@ -174,7 +174,6 @@ class OneQuestion extends Component {
           // assuming gets props ID, comment, likes, author
             <div>
               <OneComment
-                key={id}
                 zIndex={zIndex}
                 id={id}
                 author={info.author}
@@ -218,7 +217,7 @@ class OneQuestion extends Component {
             >
               <FontAwesomeIcon className="testtestTwo" icon={faPlus} style={{ color: '#6F6F6F' }} />
               <p className="colorGray">
-            Add a Comment
+                Add a Comment
               </p>
             </div>
           </div>
@@ -240,7 +239,7 @@ class OneQuestion extends Component {
             onClick={this.cancel}
           >
             {' '}
-      Cancel
+            Cancel
             {' '}
           </button>
           <button type="button"
@@ -251,7 +250,7 @@ class OneQuestion extends Component {
             onClick={this.sendComment}
           >
             {' '}
-      Submit
+            Submit
             {' '}
           </button>
         </div>

@@ -13,9 +13,9 @@ class homepage extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // this.setState({ authenticated: true });
-        // this.setState({ username: user.displayName });
         this.setState({ authenticated: true });
+      } else {
+        this.setState({ authenticated: false });
       }
     });
   }
@@ -25,11 +25,28 @@ class homepage extends Component {
       return (
         <div className="homepageContainer">
           <div className="homepageText">
-            Welcome to Vox Clamantis, a platform to make your voice
-            heard throughout the next several weeks as Dartmouth makes
+            Welcome to Dear Hanlon, a platform to share your opinion
+            throughout the next several weeks as Dartmouth makes
             administrative decisions regarding the coming terms.
-            We believe there is strength in both numbers and honesty,
-            so log in to add your voice.
+            <br />
+            {' '}
+            <br />
+            By logging in you gain access to letters different students
+            have sent to President Hanlon or the COVID-19 Task Force and can
+            like the messages you agree with. Furthermore, you can create, vote
+            and comment on current questions the student body has regarding the
+            coming months at Dartmouth.
+            <br />
+            {' '}
+            <br />
+            Our hope is that this site serves to aggregate data on student
+            viewpoints and arguments that the Task Force and President Hanlon
+            can then take into consideration throughout their deliberation
+            process.
+            <br />
+            {' '}
+            <br />
+            Sign up now to add your perspective.
           </div>
         </div>
       );
@@ -37,11 +54,14 @@ class homepage extends Component {
       return (
         <div className="homepageContainer">
           <div className="homepageText">
-            You are now logged in! As a reminder please
-            be respectful in your submissions. This site is here to
-            give the TaskForce™ an idea of what the student
-            body as a whole is thinking. If your actions are deemed
-            inappropriate you will be removed.
+            You are now logged in!
+            <br />
+            {' '}
+            <br />
+            As a reminder please be respectful. This is not Librex, this is
+            an opportunity for student opinions to actually be shared with
+            the administration. If your actions are deemed inappropriate
+            you will be removed.
           </div>
         </div>
       );

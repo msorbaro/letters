@@ -24,7 +24,7 @@ class NavBar extends Component {
 
   signout = () => {
     firebase.auth().signOut().then(() => {
-      console.log('signed out');
+      console.log('logged out');
     }).catch((error) => {
       console.log('wait, could not sign out');
     });
@@ -55,7 +55,7 @@ class NavBar extends Component {
               <NavLink to="/questions" activeClassName="navbar__link--active">
                 <Button className="actionButton" id="signoutButton">
                   <div className="pollbutton" />
-                Polls
+                  Polls
                 </Button>
               </NavLink>
             </li>
