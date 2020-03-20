@@ -59,6 +59,10 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1.15em;
   width: 80%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .bodyLetter {
@@ -343,6 +347,9 @@ body {
   background-color: white;
   border-radius: 2em;
   padding: 40px;
+  border-style: solid;
+  border-color: #00693E;
+  border-width: 2px;
 }
 
 .displaySignInInfo{
@@ -367,7 +374,7 @@ body {
 
 .signupButtons{
   border: none;
-  background: #80A46C;
+  background: #00693E;
   border-radius: 1em;
   margin-top: 40px;
   margin-left: 20px;
@@ -375,7 +382,7 @@ body {
   padding: 15px;
   cursor:pointer;
   overflow: hidden;
-  color:black;
+  color:white;
   font-size: 1em;
   font-family: 'Roboto', sans-serif;
 }
@@ -383,31 +390,36 @@ body {
 .alignthumbs {
   display: flex;
   flex-direction: row;
-  align-items:flex-end;
+  align-items:center;
   justify-content: space-between;
   width: 95%;
+
 }
 
 .containerthumbs{
   display: flex;
   flex-direction: row;
-  width:15%;
+  width:20%;
   justify-content: space-between;
   height: 100%;
+  align-items: center;
 }
 .thumbAndCount{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 10px;
+  align-items: center;
   height: 80%;
+  width: 50%;
+  margin-left: 10px;
 }
 
 .mainQuestion {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+  align-content: center;
   height: 100%;
 }
 
@@ -422,8 +434,9 @@ body {
 .contentMainh1{
   font-size: .75em;
   font-family: 'Roboto', sans-serif;
-  width: 85%;
+  width: 95%;
   margin-left: 10px;
+  text-align: justify;
 }
 
 .invisibleButton{
@@ -452,7 +465,7 @@ body {
 }
 
 .backgroundcoloroffwhite {
-  background-color: #F7F7F7;
+  background-color: #F0F0F0;
 }
 
 .author {
@@ -470,6 +483,7 @@ body {
 .getLikesAlignedWithText {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .contantContainerTakeTwo{

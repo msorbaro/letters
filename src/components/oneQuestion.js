@@ -269,7 +269,7 @@ class OneQuestion extends Component {
         >
           <div className="smallDiv" />
           <div style={{
-            marginLeft: 10, marginRight: 10,
+            marginLeft: 10, marginRight: 10, height: '100%',
           }}
             className="mainQuestion"
           >
