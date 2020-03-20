@@ -13,6 +13,7 @@ class SignUp extends Component {
       email: '',
       username: '',
       password: '',
+      passwordTwo: '',
     };
   }
 
@@ -24,13 +25,17 @@ class SignUp extends Component {
     this.setState({ password: event.target.value });
   }
 
+  onPasswordTwoChange= (event) => {
+    this.setState({ passwordTwo: event.target.value });
+  }
+
   onUsernameChange= (event) => {
     this.setState({ username: event.target.value });
   }
 
 
   handleSignupButtonClick = (event) => {
-    if (this.state.email.endsWith('@dartmouth.edu')) {
+    if (this.state.email.endsWith('@dartmouth.edu') && this.state.password === this.state.passwordTwo) {
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
         alert(error);
       });
@@ -47,8 +52,10 @@ class SignUp extends Component {
           this.props.history.push('/');
         }
       });
-    } else {
+    } else if (!this.state.email.endsWith('@dartmouth.edu')) {
       alert('Please enter a dartmouth.edu email');
+    } else {
+      alert('Make sure passwords match');
     }
   }
 
@@ -67,6 +74,9 @@ class SignUp extends Component {
             <Input className="response" placeholder="Username" onChange={this.onUsernameChange} value={this.state.username} />
             <div className="prompt"> Enter a password: </div>
             <Input type="password" className="response" id="passwordInput" placeholder="Password" onChange={this.onPasswordChange} value={this.state.password} />
+            <div className="prompt"> Confirm password: </div>
+            <Input type="password" className="response" id="passwordInput" placeholder="Password" onChange={this.onPasswordTwoChange} value={this.state.passwordTwo} />
+
           </div>
           <div>
             <Button className="signupButtons" id="createButton" onClick={this.handleSignupButtonClick}>Sign Up</Button>
