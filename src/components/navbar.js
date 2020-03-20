@@ -44,7 +44,7 @@ class NavBar extends Component {
           </div>
           <div className="navRight">
             <li id="letters">
-              <NavLink to="/letters">
+              <NavLink to="/letters" activeClassName="navbar__link--active">
                 <Button className="actionButton" id="signupButton">
                   <div className="mailbutton" />
                   Letters
@@ -52,10 +52,10 @@ class NavBar extends Component {
               </NavLink>
             </li>
             <li id="questions">
-              <NavLink to="/questions">
+              <NavLink to="/questions" activeClassName="navbar__link--active">
                 <Button className="actionButton" id="signoutButton">
                   <div className="pollbutton" />
-                Questions
+                Polls
                 </Button>
               </NavLink>
             </li>
@@ -64,13 +64,9 @@ class NavBar extends Component {
       );
     } else {
       return (
-        <div className="navRight"
-          style={{
-            'list-style-type': 'none', display: 'flex', 'flex-direction': 'row', marginTop: '10%',
-          }}
-        >
-          <li id="signup"><NavLink to="/signup"><Button className="actionButton" id="signinButton">Sign Up</Button></NavLink></li>
-          <li id="signin"><NavLink to="/signin"><Button className="actionButton" id="signinButton">Sign In</Button></NavLink></li>
+        <div className="navRight">
+          <li id="signup"><NavLink to="/signup" activeClassName="navbar__link--active"><Button className="actionButton" id="signinButton">Sign Up</Button></NavLink></li>
+          <li id="signin"><NavLink to="/signin" activeClassName="navbar__link--active"><Button className="actionButton" id="signinButton">Sign In</Button></NavLink></li>
         </div>
       );
     }

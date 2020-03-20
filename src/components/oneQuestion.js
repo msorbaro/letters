@@ -54,11 +54,17 @@ class OneQuestion extends Component {
   increaseQuestionLike = () => {
     db.increaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
     this.setState({ haveAgreed: true });
+    if (this.state.haveDisagreed) {
+      this.decreaseQuestionDislike();
+    }
   }
 
   increaseQuestionDislike = () => {
     db.increaseQuestionNo(this.props.id, this.state.userID, this.updatedDisagreeCallback);
     this.setState({ haveDisagreed: true });
+    if (this.state.haveAgreed) {
+      this.decreaseQuestionLike();
+    }
   }
 
   decreaseQuestionLike = () => {
@@ -168,6 +174,7 @@ class OneQuestion extends Component {
           // assuming gets props ID, comment, likes, author
             <div>
               <OneComment
+                key={id}
                 zIndex={zIndex}
                 id={id}
                 author={info.author}

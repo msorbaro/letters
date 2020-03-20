@@ -78,7 +78,7 @@ class OneLetter extends Component {
     const letterSnippits = this.state.letter.split('\n');
     const finalLetter = letterSnippits.map((id) => {
       return (
-        <p className="bodyLetter">
+        <p key={id} className="bodyLetter">
           {' '}
           {id}
           {' '}
