@@ -23,6 +23,7 @@ class OneQuestion extends Component {
       haveDisagreed: false,
       comment: '',
       createNewComment: false,
+      numberToView: 3,
     };
   }
 
@@ -148,41 +149,57 @@ class OneQuestion extends Component {
     this.setState({ comment: '', createNewComment: false });
   }
 
+  viewMore = () => {
+    this.setState(prevState => ({ numberToView: prevState.numberToView + 3 }));
+    console.log('Here i a, this is happening not conrused');
+  }
+
   render() {
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
       let zIndex = 999;
+      let count = 0;
       commentObject = Object.keys(this.state.comments).map((id) => {
         const info = this.state.comments[id];
         zIndex -= 5;
         //  const newZ = String(zIndex);
-
-        return (
+        count += 1;
+        if (count <= this.state.numberToView) {
+          return (
           // assuming gets props ID, comment, likes, author
-          <div>
-            <OneComment
-              zIndex={zIndex}
-              id={id}
-              author={info.author}
-              comment={info.comment}
-              questionID={this.props.id}
-              date={info.date}
-            />
-          </div>
-        );
+            <div>
+              <OneComment
+                zIndex={zIndex}
+                id={id}
+                author={info.author}
+                comment={info.comment}
+                questionID={this.props.id}
+                date={info.date}
+              />
+            </div>
+          );
+        }
+        return null;
       });
     }
 
     const underCommentPromptToAdd = (
       <div className="contentMainTakeTwo">
         <div style={{
-          marginTop: 15,
+          marginTop: 15, display: 'flex', flexDirection: 'row',
         }}
         >
           <div className="addCommentPus" onClick={this.createNewComment} role="button" tabIndex={0}>
             <FontAwesomeIcon className="testtestTwo" icon={faPlus} />
             <p className="colorGray">
             Add a Comment!
+            </p>
+          </div>
+
+          <div className="addCommentPus" onClick={this.viewMore} role="button" tabIndex={0}>
+            <FontAwesomeIcon className="testtestTwo" icon={faPlus} />
+            <p className="colorGray">
+            View More!
             </p>
           </div>
         </div>
