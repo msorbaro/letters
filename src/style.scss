@@ -511,6 +511,7 @@ a, a:hover, a:active, a:visited, a:focus {
 .colorGray {
   color: #6F6F6F;
   margin-left: 5px;
+  font-size: .6em;
 }
 
 .contentMainTakeTwo{
@@ -544,6 +545,11 @@ a, a:hover, a:active, a:visited, a:focus {
 }
 
 .addCommentPus p:hover{
+  color:#80A46C;
+  cursor:pointer;
+}
+
+.testtestTwo:hover{
   color:#80A46C;
   cursor:pointer;
 }
@@ -583,10 +589,25 @@ a, a:hover, a:active, a:visited, a:focus {
 .outerStyleTwo {
     margin-top: -30px;
     position: relative;
-    z-index: 2;
+    z-index: 0;
 }
 
 .innerStyle {
   position: relative;
   z-index: 2;
+}
+
+.moreToShow{
+    width: 53%;
+    display: flex;
+   flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: -10px;
+
+}
+
+.noMoreToShow {
+  margin-top: 10px;
+  height:'100%'
+
 }
