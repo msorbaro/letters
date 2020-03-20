@@ -15,12 +15,24 @@ export default class newQuestionModal extends React.Component {
   };
 
   onCloseAndSubmit = (e) => {
-    this.props.onCloseAndSubmit(this.state.question);
-    this.setState({ question: '' });
+    if (this.state.title !== '' && this.state.text !== '') {
+      this.props.onCloseAndSubmit(this.state.question);
+      this.setState({ question: '' });
+    } else {
+      this.setState({ unfilledBoxes: true });
+    }
   };
 
   handleQuestionChange = (event) => {
     this.setState({ question: event.target.value });
+  }
+
+  showErrorMessage = () => {
+    if (this.state.unfilledBoxes) {
+      return (<p className="errorMessage"> * Please fill out all fields </p>);
+    } else {
+      return (<p />);
+    }
   }
 
 
@@ -37,6 +49,7 @@ export default class newQuestionModal extends React.Component {
       <div className="modal" id="modal" style={{ left: 0 }}>
         <div className="contentTwo">
           <h1>Enter the Poll You Want to Submit </h1>
+          {this.showErrorMessage()}
           <p> Poll </p>
           <textarea style={{ width: '98%' }} type="text" value={this.state.question} onChange={this.handleQuestionChange} />
         </div>
