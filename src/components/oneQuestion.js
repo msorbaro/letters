@@ -183,12 +183,25 @@ class OneQuestion extends Component {
       });
     }
 
+    const size = this.state.comments !== undefined ? Object.keys(this.state.comments).length : 0;
+    const showMore = size < 3 || this.state.numberToView >= size ? null
+      : (
+        <div className="addCommentPus" onClick={this.viewMore} role="button" tabIndex={0}>
+          <FontAwesomeIcon className="testtestTwo" icon={faPlus} />
+          <p className="colorGray">
+      View More!
+          </p>
+        </div>
+      );
+
+
     const underCommentPromptToAdd = (
       <div className="contentMainTakeTwo">
         <div style={{
           marginTop: 15, display: 'flex', flexDirection: 'row',
         }}
         >
+          {showMore}
           <div className="addCommentPus" onClick={this.createNewComment} role="button" tabIndex={0}>
             <FontAwesomeIcon className="testtestTwo" icon={faPlus} />
             <p className="colorGray">
@@ -196,12 +209,6 @@ class OneQuestion extends Component {
             </p>
           </div>
 
-          <div className="addCommentPus" onClick={this.viewMore} role="button" tabIndex={0}>
-            <FontAwesomeIcon className="testtestTwo" icon={faPlus} />
-            <p className="colorGray">
-            View More!
-            </p>
-          </div>
         </div>
       </div>
     );
