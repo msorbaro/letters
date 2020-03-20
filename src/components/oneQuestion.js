@@ -74,11 +74,6 @@ class OneQuestion extends Component {
     this.setState({ createNewComment: true });
   }
 
-  addAComment = () => {
-    const date = this.getCurrentDate();
-    db.addComment('I am a test Commetn', this.state.username, this.props.id, date);
-  }
-
   updatedAgreeCallback = (agreeNum) => {
     this.setState({ agrees: agreeNum });
   }
@@ -139,9 +134,13 @@ class OneQuestion extends Component {
     }
   }
 
+  refreshComments = (updatedComments) => {
+    this.setState({ comments: updatedComments });
+  }
+
   sendComment = () => {
     const date = this.getCurrentDate();
-    db.addComment(this.state.comment, this.props.id, date);
+    db.addComment(this.state.comment, this.state.username, this.props.id, date, this.refreshComments);
     this.setState({ comment: '', createNewComment: false });
   }
 

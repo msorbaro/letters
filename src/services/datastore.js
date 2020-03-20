@@ -166,10 +166,15 @@ export function getComments(questionID, callback) {
 }
 
 
-export function addComment(comment, author, questionID, date) {
+export function addComment(comment, author, questionID, date, callback) {
   const questionComments = firebase.database().ref(`Questions/${questionID}/Comments`);
   questionComments.push({
     comment, date, author,
+  });
+
+  database.ref(`Questions/${questionID}/Comments/`).on('value', (snapshot) => {
+    const newCommentState = snapshot.val();
+    callback(newCommentState);
   });
 }
 
