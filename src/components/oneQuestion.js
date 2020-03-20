@@ -54,11 +54,17 @@ class OneQuestion extends Component {
   increaseQuestionLike = () => {
     db.increaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
     this.setState({ haveAgreed: true });
+    if (this.state.haveDisagreed) {
+      this.decreaseQuestionDislike();
+    }
   }
 
   increaseQuestionDislike = () => {
     db.increaseQuestionNo(this.props.id, this.state.userID, this.updatedDisagreeCallback);
     this.setState({ haveDisagreed: true });
+    if (this.state.haveAgreed) {
+      this.decreaseQuestionLike();
+    }
   }
 
   decreaseQuestionLike = () => {
