@@ -7,7 +7,7 @@
     "test": "eslint src/**.js",
     "build": "yarn clean; NODE_ENV=production webpack --colors",
     "clean": "rimraf dist",
-    "deploy": "yarn build; surge -p dist -d dearHanlon.surge.sh; yarn clean"
+    "deploy": "yarn build; surge -p dist -d dear-Hanlon.surge.sh; yarn clean"
   },
   "repository": "git@github.com:dartmouth-cs52/starterpack-reference.git",
   "author": "Tim Tregubov <tim@zingweb.com>",

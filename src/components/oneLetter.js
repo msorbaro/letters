@@ -117,14 +117,14 @@ class OneLetter extends Component {
               >
                 <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
                   {' '}
-Written by:
+                  Written by:
                   {' '}
                   {this.state.author}
                   {' '}
                 </p>
                 <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
                   {' '}
-Date:
+                  Date:
                   {' '}
                   {this.state.date}
                   {' '}
