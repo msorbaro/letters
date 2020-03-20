@@ -37,7 +37,7 @@ class Questions extends Component {
         return (
           // assuming gets props ID, question, amount of agrees, amount of disagress, comments
           <OneQuestion
-            key={id}
+            key={info.question}
             id={id}
             author={info.author}
             question={info.question}
@@ -65,7 +65,7 @@ class Questions extends Component {
     );
     return (
       <div style={{
-        displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
+        alignContent: 'center', justifyContent: 'center',
       }}
         className="tryingToCenter"
       >
