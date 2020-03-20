@@ -29,7 +29,7 @@ export default class newQuestionModal extends React.Component {
       return null;
     }
     return (
-      <div className="modal" id="modal">
+      <div className="modal" id="modal" style={{ left: 0 }}>
         <div className="content">
           <h1>Enter the Following Fields </h1>
           <p> Question </p>

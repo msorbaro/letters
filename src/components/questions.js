@@ -67,8 +67,9 @@ class Questions extends Component {
       }}
         className="tryingToCenter"
       >
-        <NewQuestionModal onCloseAndSubmit={this.sendQuestion} onClose={this.createQuestion} show={this.state.showCreateLetterInfo} />
-
+        <div style={{ zIndex: 5 }}>
+          <NewQuestionModal onCloseAndSubmit={this.sendQuestion} onClose={this.createQuestion} show={this.state.showCreateLetterInfo} />
+        </div>
         {questionObject}
 
         {createButton}

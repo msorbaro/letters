@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import '../style.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import OneComment from './oneComment';
 import * as db from '../services/datastore';
 
@@ -19,6 +21,8 @@ class OneQuestion extends Component {
       comments: this.props.comments,
       haveAgreed: false,
       haveDisagreed: false,
+      comment: '',
+      createNewComment: false,
     };
   }
 
@@ -66,6 +70,10 @@ class OneQuestion extends Component {
     this.setState({ haveDisagreed: false });
   }
 
+  createNewComment = () => {
+    this.setState({ createNewComment: true });
+  }
+  
   addAComment = () => {
     const date = this.getCurrentDate();
     db.addComment('I am a test Commetn', this.state.username, this.props.id, date);
@@ -73,6 +81,10 @@ class OneQuestion extends Component {
 
   updatedAgreeCallback = (agreeNum) => {
     this.setState({ agrees: agreeNum });
+  }
+
+  handleCommentChange = (event) => {
+    this.setState({ comment: event.target.value });
   }
 
   updatedDisagreeCallback = (disagreeNum) => {
@@ -127,6 +139,16 @@ class OneQuestion extends Component {
     }
   }
 
+  sendComment = () => {
+    const date = this.getCurrentDate();
+    db.addComment(this.state.comment, this.props.id, date);
+    this.setState({ comment: '', createNewComment: false });
+  }
+
+  cancel = () => {
+    this.setState({ comment: '', createNewComment: false });
+  }
+
   render() {
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
@@ -152,6 +174,62 @@ class OneQuestion extends Component {
       });
     }
 
+    const underCommentPromptToAdd = (
+      <div className="contentMainTakeTwo">
+        <div style={{
+          marginTop: 15,
+        }}
+        >
+          <div className="addCommentPus" onClick={this.createNewComment} role="button" tabIndex={0}>
+            <FontAwesomeIcon className="testtestTwo" icon={faPlus} />
+            <p className="colorGray">
+            Add a Comment!
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+
+
+    const commentingCurrently = (
+      <div className="contentMainTakeThree">
+        <textarea style={{ width: '90%', marginTop: 15, height: '8vh' }} type="text" value={this.state.comment} onChange={this.handleCommentChange} />
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <button type="button"
+            style={{
+              height: '3vh', width: '6vw', fontSize: '.75em', borderWidth: '1px', marginTop: '2px',
+            }}
+            className="whiteButton"
+            onClick={this.cancel}
+          >
+            {' '}
+      Cancel
+            {' '}
+          </button>
+          <button type="button"
+            style={{
+              height: '3vh', width: '6vw', fontSize: '.75em', borderWidth: '1px', borderColor: '#F7F7F7', marginTop: '2px',
+            }}
+            className="greenButton"
+            onClick={this.sendComment}
+          >
+            {' '}
+      Submit
+            {' '}
+          </button>
+        </div>
+      </div>
+    );
+
+
+    let commentToDisplay = null;
+    if (this.state.createNewComment) {
+      commentToDisplay = commentingCurrently;
+    } else {
+      commentToDisplay = underCommentPromptToAdd;
+    }
+
+    const styleChoice = this.state.comments !== undefined ? 'outerStyle' : 'outerStyleTwo';
     return (
       <div>
         <div className="backgroundcoloroffwhite"
@@ -187,21 +265,14 @@ class OneQuestion extends Component {
               </div>
             </div>
           </div>
-          <button onClick={this.addAComment}
-            type="button"
-          >
-                Add A comment
-          </button>
         </div>
 
-        <div style={{
-          marginLeft: 30, marginTop: -20, position: 'relative', zIndex: 1,
-        }}
-        >
-          {commentObject}
+        <div className={styleChoice}>
+          <div className="innerStyle">
+            {commentObject}
+          </div>
+          {commentToDisplay}
         </div>
-
-
       </div>
     );
   }
