@@ -41,7 +41,6 @@ class Letters extends Component {
   createLetter = () => {
     this.setState(prevState => ({ showCreateLetterInfo: !prevState.showCreateLetterInfo }));
     if (this.state.showCreateLetterInfo) {
-      console.log('SHOULD BE HERE');
       document.body.style.overflow = 'unset';
     }
   }

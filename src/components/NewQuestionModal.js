@@ -28,6 +28,11 @@ export default class newQuestionModal extends React.Component {
     if (!this.props.show) {
       return null;
     }
+    if (this.props.show) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
     return (
       <div className="modal" id="modal" style={{ left: 0 }}>
         <div className="contentTwo">

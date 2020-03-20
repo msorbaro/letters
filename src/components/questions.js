@@ -27,6 +27,9 @@ class Questions extends Component {
 
   createQuestion = () => {
     this.setState(prevState => ({ showCreateLetterInfo: !prevState.showCreateLetterInfo }));
+    if (this.state.showCreateLetterInfo) {
+      document.body.style.overflow = 'unset';
+    }
   }
 
   render() {
