@@ -174,6 +174,7 @@ class OneQuestion extends Component {
           // assuming gets props ID, comment, likes, author
             <div>
               <OneComment
+                key={id}
                 zIndex={zIndex}
                 id={id}
                 author={info.author}

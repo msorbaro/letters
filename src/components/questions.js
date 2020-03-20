@@ -37,6 +37,7 @@ class Questions extends Component {
         return (
           // assuming gets props ID, question, amount of agrees, amount of disagress, comments
           <OneQuestion
+            key={id}
             id={id}
             author={info.author}
             question={info.question}
