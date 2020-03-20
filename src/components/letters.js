@@ -16,7 +16,7 @@ class Letters extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
+      if (user && user.emailVerified) {
         this.setState({ authenticated: true });
         this.setState({ username: user.displayName });
       }

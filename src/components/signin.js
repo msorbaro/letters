@@ -24,13 +24,16 @@ class SignIn extends Component {
   }
 
   handleSigninButtonClick = (event) => {
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(() => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user && user.emailVerified) {
+          this.props.history.push('/');
+        } else {
+          alert('Please verify your email before logging in');
+        }
+      });
+    }).catch((error) => {
       alert(error);
-    });
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.props.history.push('/');
-      }
     });
   }
 
