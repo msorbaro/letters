@@ -166,6 +166,21 @@ body {
   height: 20px;
 
 }
+.createButton{
+  width: 175px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.pollButton{
+  width: 145px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .mainLetter {
   display: flex;
   margin-top: 5%;
