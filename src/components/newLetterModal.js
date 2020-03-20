@@ -8,6 +8,7 @@ export default class NewLetterModal extends React.Component {
     this.state = {
       title: '',
       text: '',
+      unfilledBoxes: false,
     };
   }
 
@@ -16,8 +17,12 @@ export default class NewLetterModal extends React.Component {
   };
 
   onCloseAndSubmit = (e) => {
-    this.props.onCloseAndSubmit(this.state.title, this.state.text);
-    this.setState({ title: '', text: '' });
+    if (this.state.title !== '' && this.state.text !== '') {
+      this.props.onCloseAndSubmit(this.state.title, this.state.text);
+      this.setState({ title: '', text: '' });
+    } else {
+      this.setState({ unfilledBoxes: true });
+    }
   };
 
   handleTitleChange = (event) => {
@@ -26,6 +31,14 @@ export default class NewLetterModal extends React.Component {
 
   handleTextChange = (event) => {
     this.setState({ text: event.target.value });
+  }
+
+  showErrorMessage = () => {
+    if (this.state.unfilledBoxes) {
+      return (<p className="errorMessage"> * Please fill out all fields </p>);
+    } else {
+      return (<p />);
+    }
   }
 
   render() {
@@ -41,6 +54,7 @@ export default class NewLetterModal extends React.Component {
       <div className="modal" id="modal">
         <div className="content">
           <h1>Create your letter </h1>
+          {this.showErrorMessage()}
           <p> Subject </p>
           <input style={{ width: '50%', height: 20 }} type="text" value={this.state.title} onChange={this.handleTitleChange} />
           <p> Text </p>

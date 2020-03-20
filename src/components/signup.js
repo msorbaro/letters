@@ -68,7 +68,7 @@ class SignUp extends Component {
       <div className="displaySignInInfoContainer">
         <div className="displaySignInInfo">
           <div className="leftJustify">
-            <div className="prompt"> Enter a dartmouth.edu email: </div>
+            <div className="prompt"> Enter your Dartmouth email: </div>
             <Input className="response" placeholder="Dartmouth Email" onChange={this.onEmailChange} value={this.state.email} />
             <div className="prompt"> Enter your full name: </div>
             <Input className="response" placeholder="Username" onChange={this.onUsernameChange} value={this.state.username} />
