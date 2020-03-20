@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import '../style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import OneComment from './oneComment';
 import * as db from '../services/datastore';
 
@@ -184,29 +184,37 @@ class OneQuestion extends Component {
     }
 
     const size = this.state.comments !== undefined ? Object.keys(this.state.comments).length : 0;
-    const showMore = size < 3 || this.state.numberToView >= size ? null
+    const showMoreOrNah = size < 3 || this.state.numberToView >= size;
+    const showMore = showMoreOrNah ? null
       : (
         <div className="addCommentPus" onClick={this.viewMore} role="button" tabIndex={0}>
-          <FontAwesomeIcon className="testtestTwo" icon={faPlus} />
-          <p className="colorGray">
-      View More!
-          </p>
+          <FontAwesomeIcon className="testtestTwo" icon={faChevronDown} style={{ color: '#6F6F6F' }} />
         </div>
       );
 
+    const classNamee = showMoreOrNah ? 'noMoreToShow' : 'moreToShow';
 
     const underCommentPromptToAdd = (
       <div className="contentMainTakeTwo">
         <div style={{
-          marginTop: 15, display: 'flex', flexDirection: 'row',
+          marginTop: 15, display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'flex-end',
         }}
         >
-          {showMore}
-          <div className="addCommentPus" onClick={this.createNewComment} role="button" tabIndex={0}>
-            <FontAwesomeIcon className="testtestTwo" icon={faPlus} />
-            <p className="colorGray">
-            Add a Comment!
-            </p>
+          <div className={classNamee}>
+            {showMore}
+            <div className="addCommentPus"
+              onClick={this.createNewComment}
+              role="button"
+              tabIndex={0}
+              style={{
+                marginRight: '10px', display: 'flex', justifyContent: 'center',
+              }}
+            >
+              <FontAwesomeIcon className="testtestTwo" icon={faPlus} style={{ color: '#6F6F6F' }} />
+              <p className="colorGray">
+            Add a Comment
+              </p>
+            </div>
           </div>
 
         </div>
@@ -257,11 +265,15 @@ class OneQuestion extends Component {
       <div>
         <div className="backgroundcoloroffwhite"
           style={{
-            width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
+            width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em', zIndex: 1, position: 'relative',
           }}
         >
           <div className="smallDiv" />
-          <div style={{ marginLeft: 10, marginRight: 10 }} className="mainQuestion">
+          <div style={{
+            marginLeft: 10, marginRight: 10,
+          }}
+            className="mainQuestion"
+          >
             <div className="alignthumbs">
               <h1 className="h1Question">
                 {' '}
