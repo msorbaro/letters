@@ -44,7 +44,7 @@ class NavBar extends Component {
           </div>
           <div className="navRight">
             <li id="letters">
-              <NavLink to="/letters">
+              <NavLink to="/letters" activeClassName="navbar__link--active">
                 <Button className="actionButton" id="signupButton">
                   <div className="mailbutton" />
                   Letters
@@ -52,10 +52,10 @@ class NavBar extends Component {
               </NavLink>
             </li>
             <li id="questions">
-              <NavLink to="/questions">
+              <NavLink to="/questions" activeClassName="navbar__link--active">
                 <Button className="actionButton" id="signoutButton">
                   <div className="pollbutton" />
-                Questions
+                Polls
                 </Button>
               </NavLink>
             </li>

@@ -40,10 +40,6 @@ class Letters extends Component {
 
   createLetter = () => {
     this.setState(prevState => ({ showCreateLetterInfo: !prevState.showCreateLetterInfo }));
-    if (this.state.showCreateLetterInfo) {
-      console.log('SHOULD BE HERE');
-      document.body.style.overflow = 'unset';
-    }
   }
 
     getCurrentDate = (separator = '/') => {
@@ -58,15 +54,10 @@ class Letters extends Component {
     }
 
     render() {
-      //      console.log('HERE IS THE DATE YAY');
       let letterObject = null;
       if (this.state.letters != null) {
         letterObject = Object.keys(this.state.letters).map((id) => {
-          //  console.log(`I am id: ${id}`);
-        // console.log('other stuff bellow');
-        // console.log(id);
           const info = this.state.letters[id];
-          //  console.log(info);
           return (
           // assuming gets props ID, letter, amount of likes, title
             <OneLetter
@@ -85,11 +76,8 @@ class Letters extends Component {
           <button onClick={this.createLetter}
             type="button"
           >
-            <a href="#top">
-
-              <div className="penIcon" />
+            <div className="penIcon" />
             Write A Letter
-            </a>
           </button>
         </div>
       );
@@ -97,7 +85,10 @@ class Letters extends Component {
 
       if (this.state.authenticated) {
         return (
-          <div className="lettersNormalMainStyle">
+          <div style={{
+            marginTop: 15, width: '100%', height: '100%',
+          }}
+          >
             <NewLetterModal onCloseAndSubmit={this.sendLetter} onClose={this.createLetter} show={this.state.showCreateLetterInfo} />
             <div style={{
               displey: 'flex', 'align-content': 'center', justifyContent: 'center', 'justify-content': 'center',
