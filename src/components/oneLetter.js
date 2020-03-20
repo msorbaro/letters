@@ -75,6 +75,17 @@ class OneLetter extends Component {
 
 
   render() {
+    const letterSnippits = this.state.letter.split('\n');
+    const finalLetter = letterSnippits.map((id) => {
+      return (
+        <p className="bodyLetter">
+          {' '}
+          {id}
+          {' '}
+        </p>
+      );
+    });
+
     return (
       <div style={{
         backgroundColor: 'white', width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
@@ -92,23 +103,27 @@ class OneLetter extends Component {
           </div>
           <div style={{ marginLeft: 10, marginRight: 10, width: '100%' }}>
             <div style={{
-              display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: '100%', justifyContent: 'space-between',
+              display: 'flex', flexDirection: 'row', alignContent: 'flex-start', alignItems: 'flex-start', width: '100%', justifyContent: 'space-between',
             }}
             >
+
               <h1 className="h1Letter">
                 {' '}
                 {this.state.title}
                 {' '}
               </h1>
-              <div style={{ marginRight: '10px', display: 'flex', flexDirection: 'column' }}>
-                <p style={{ fontSize: '.5em' }}>
+              <div style={{
+                marginRight: '20px', display: 'flex', flexDirection: 'column', height: '100%',
+              }}
+              >
+                <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
                   {' '}
 Written by:
                   {' '}
                   {this.state.author}
                   {' '}
                 </p>
-                <p style={{ fontSize: '.5em' }}>
+                <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
                   {' '}
 Date:
                   {' '}
@@ -117,11 +132,7 @@ Date:
                 </p>
               </div>
             </div>
-            <p className="bodyLetter">
-              {' '}
-              {this.state.letter}
-              {' '}
-            </p>
+            {finalLetter}
           </div>
         </div>
       </div>

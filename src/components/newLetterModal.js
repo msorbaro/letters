@@ -32,11 +32,16 @@ export default class NewLetterModal extends React.Component {
     if (!this.props.show) {
       return null;
     }
+    if (this.props.show) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
     return (
       <div className="modal" id="modal">
         <div className="content">
           <h1>Create your letter </h1>
-          <p> Title </p>
+          <p> Subject </p>
           <input style={{ width: '50%', height: 20 }} type="text" value={this.state.title} onChange={this.handleTitleChange} />
           <p> Text </p>
           <textarea style={{ width: '90%', height: 100 }} type="text" value={this.state.text} onChange={this.handleTextChange} />
