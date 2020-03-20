@@ -151,7 +151,6 @@ class OneQuestion extends Component {
 
   viewMore = () => {
     this.setState(prevState => ({ numberToView: prevState.numberToView + 3 }));
-    console.log('Here i a, this is happening not conrused');
   }
 
   render() {

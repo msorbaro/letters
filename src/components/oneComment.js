@@ -71,11 +71,7 @@ class OneComment extends Component {
   }
 
   render() {
-    console.log(this.state.questionID);
-    console.log(this.state.userID);
     const { zIndex } = this.props;
-    console.log(zIndex);
-    console.log('ABOVE IS Z INDEX');
     return (
       <div style={{ zIndex: 1 * zIndex, position: 'relative' }}>
         <div className="contentMain">
