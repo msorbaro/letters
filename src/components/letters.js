@@ -70,6 +70,7 @@ class Letters extends Component {
           return (
           // assuming gets props ID, letter, amount of likes, title
             <OneLetter
+              key={id}
               id={id}
               author={info.author}
               letter={info.letter}
