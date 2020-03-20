@@ -33,9 +33,7 @@ class Questions extends Component {
     let questionObject = null;
     if (this.state.questions != null) {
       questionObject = Object.keys(this.state.questions).map((id) => {
-        console.log(id);
         const info = this.state.questions[id];
-        console.log(info);
         return (
           // assuming gets props ID, question, amount of agrees, amount of disagress, comments
           <OneQuestion
