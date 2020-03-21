@@ -34,11 +34,12 @@ export function getLetters(callback) {
 }
 
 // adds a letter
-export function addLetter(letter, title, username, date) {
+export function addLetter(letter, title, username, date, userID) {
   const letters = firebase.database().ref('Letters/');
   const author = username;
+  const authorID = userID;
   letters.push({
-    letter, title, author, date,
+    letter, title, author, date, authorID,
   });
 }
 
@@ -75,6 +76,12 @@ export function decreaseLetterScore(letterID, userID, callback) {
   });
 }
 
+// removes a like from the letter
+export function deleteLetter(letterID) {
+  firebase.database().ref('Letters/').child(letterID).remove();
+}
+
+
 /** ****************************
 ALL QUESTION RELATED BE CALLS
 **************************** */
@@ -86,11 +93,12 @@ export function getQuesions(callback) {
 }
 
 // Adds a quesiton
-export function addQuestion(question) {
+export function addQuestion(question, userID) {
   const questions = firebase.database().ref('Questions/');
   const comments = [];
+  const authorID = userID;
   questions.push({
-    question, comments,
+    question, comments, authorID,
   });
 }
 
@@ -161,6 +169,11 @@ export function getYourQuestionDisagrees(questionID, userID, callback) {
   });
 }
 
+// if someone removes agree for a question
+export function deleteQuestion(questionID) {
+  firebase.database().ref('Questions/').child(questionID).remove();
+}
+
 /** ****************************
 ALL COMMENT ON QUESTION RELATED BE CALLS
 **************************** */
@@ -173,10 +186,10 @@ export function getComments(questionID, callback) {
 }
 
 
-export function addComment(comment, author, questionID, date, callback) {
+export function addComment(comment, author, authorID, questionID, date, callback) {
   const questionComments = firebase.database().ref(`Questions/${questionID}/Comments`);
   questionComments.push({
-    comment, date, author,
+    comment, date, author, authorID,
   });
 
   database.ref(`Questions/${questionID}/Comments/`).on('value', (snapshot) => {
@@ -211,4 +224,8 @@ export function getCommentStatus(questionID, commentID, userID, callback) {
   ref.orderByValue().equalTo(userID).on('value', (snapshot) => {
     callback(snapshot.numChildren());
   });
+}
+
+export function deleteComment(questionID, commentID) {
+  firebase.database().ref(`Questions/${questionID}/Comments/`).child(commentID).remove();
 }

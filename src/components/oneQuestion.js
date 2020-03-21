@@ -15,6 +15,7 @@ class OneQuestion extends Component {
     this.state = {
       userID: '',
       question: this.props.question,
+      authorID: this.props.authorID,
       agrees: 0,
       username: '',
       disagrees: 0,
@@ -110,11 +111,6 @@ class OneQuestion extends Component {
   }
 
   showRightUpThumb = () => {
-    // if (this.state.haveAgreed) {
-    //   return (<div className="upThumbColor" />);
-    // } else {
-    //   return (<div className="upThumbTransparent" />);
-    // }
     if (this.state.haveAgreed) {
       return (
         <p className="selectedStyle"
@@ -122,7 +118,7 @@ class OneQuestion extends Component {
             backgroundColor: '#00ac66', borderColor: '#00ac66', color: 'white', fontSize: '15px', width: '20px',
           }}
         >
-Yes
+          Yes
           {' '}
         </p>
       );
@@ -132,12 +128,6 @@ Yes
   }
 
   showRightDownThumb = () => {
-    // if (this.state.haveDisagreed) {
-    //   return (<div className="downThumbColor" />);
-    // } else {
-    //   return (<div className="downThumbTransparent" />);
-    // }
-
     if (this.state.haveDisagreed) {
       return (
         <p className="selectedStyle"
@@ -146,7 +136,7 @@ Yes
           }}
         >
           {' '}
-No
+          No
           {' '}
         </p>
       );
@@ -177,7 +167,7 @@ No
 
   sendComment = () => {
     const date = this.getCurrentDate();
-    db.addComment(this.state.comment, this.state.username, this.props.id, date, this.refreshComments);
+    db.addComment(this.state.comment, this.state.username, this.state.userID, this.props.id, date, this.refreshComments);
     this.setState({ comment: '', createNewComment: false });
   }
 
@@ -187,6 +177,25 @@ No
 
   viewMore = () => {
     this.setState(prevState => ({ numberToView: prevState.numberToView + 3 }));
+  }
+
+  deleteQuestion = () => {
+    db.deleteQuestion(this.props.id);
+  }
+
+  showDelete = () => {
+    if (this.state.userID === this.state.authorID) {
+      return (
+        <button type="button"
+          className="questDeletion"
+          onClick={this.deleteQuestion}
+        >
+          Delete
+        </button>
+      );
+    } else {
+      return null;
+    }
   }
 
   render() {
@@ -207,6 +216,7 @@ No
                 zIndex={zIndex}
                 id={id}
                 author={info.author}
+                authorID={info.authorID}
                 comment={info.comment}
                 questionID={this.props.id}
                 date={info.date}
@@ -321,6 +331,10 @@ No
                 {this.state.question}
                 {' '}
               </h1>
+              <div>
+                {' '}
+                {this.showDelete()}
+              </div>
               <div className="containerthumbs">
                 <div className={filledGreen} style={{ borderColor: '#00ac66' }}>
                   <button type="button" className="invisibleThumbButton" onClick={this.handleUpThumbClick}>

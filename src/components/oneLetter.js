@@ -16,6 +16,7 @@ class OneLetter extends Component {
       title: this.props.title,
       letter: this.props.letter,
       author: this.props.author,
+      authorID: this.props.authorID,
       date: this.props.date,
       likes: 0,
       haveLiked: false,
@@ -64,6 +65,26 @@ class OneLetter extends Component {
     }
   }
 
+  deleteLetter = () => {
+    console.log('deleting');
+    db.deleteLetter(this.props.id);
+  }
+
+  showDelete = () => {
+    if (this.state.userID === this.state.authorID) {
+      return (
+        <button type="button"
+          className="deletion"
+          onClick={this.deleteLetter}
+        >
+          Delete
+        </button>
+      );
+    } else {
+      return null;
+    }
+  }
+
   showRightHeart = () => {
     if (this.state.haveLiked) {
       return (<div className="liked" />);
@@ -105,7 +126,6 @@ class OneLetter extends Component {
               display: 'flex', flexDirection: 'row', alignContent: 'flex-start', alignItems: 'flex-start', width: '100%', justifyContent: 'space-between',
             }}
             >
-
               <h1 className="h1Letter">
                 {' '}
                 {this.state.title}
@@ -115,6 +135,7 @@ class OneLetter extends Component {
                 marginRight: '20px', display: 'flex', flexDirection: 'column', height: '100%',
               }}
               >
+                {this.showDelete()}
                 <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
                   {' '}
                   Written by:
@@ -122,6 +143,7 @@ class OneLetter extends Component {
                   {this.state.author}
                   {' '}
                 </p>
+
                 <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
                   {' '}
                   Date:

@@ -355,6 +355,49 @@ body {
   margin-left: 15px;
 }
 
+.deletion {
+  background-color: #00693E;
+  background-repeat:no-repeat;
+  border-style: solid;
+  border-color: white;
+  border-width: 3px;
+  border-radius: 1em;
+  font-family: 'PT Serif', serif;
+  color:white;
+  font-size: 1em;
+  justify-content: center;
+  align-items: center;
+  margin-top: -10px;
+}
+
+.questDeletion {
+  background-color: transparent;
+  border-color: #6F6F6F;;
+  color: black;
+  font-size: 15px;
+  width: 80px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: .5em;
+  padding-top: 3px;
+  padding-bottom: 4px;
+}
+
+.commentDeletion {
+  background-color: #00693E;
+  background-repeat:no-repeat;
+  border-style: solid;
+  border-color: white;
+  border-width: 3px;
+  border-radius: 1em;
+  font-family: 'PT Serif', serif;
+  color:white;
+  font-size: .7em;
+  justify-content: center;
+  align-items: center;
+  margin-left:3px;
+}
+
 .twoButtons {
   display: flex;
   flex-direction: row;
@@ -631,7 +674,7 @@ a, a:hover, a:active, a:visited, a:focus {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position:relative;
   z-index: 0;
-  height: 50px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   position: relative;

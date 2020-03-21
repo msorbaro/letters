@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import firebase from 'firebase';
 import * as db from '../services/datastore';
 import OneQuestion from './OneQuestion';
 import NewQuestionModal from './newQuestionModal';
@@ -8,10 +9,15 @@ import '../style.scss';
 class Questions extends Component {
   constructor(props) {
     super(props);
-    this.state = { questions: {}, showCreateLetterInfo: false };
+    this.state = { questions: {}, showCreateLetterInfo: false, userID: '' };
   }
 
   componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ userID: user.uid });
+      }
+    });
     db.getQuesions(this.recievedQuestions);
   }
 
@@ -22,7 +28,7 @@ class Questions extends Component {
 
   sendQuestion = (question) => {
     document.body.style.overflow = 'unset';
-    db.addQuestion(question);
+    db.addQuestion(question, this.state.userID);
     this.setState({ showCreateLetterInfo: false });
   }
 
@@ -41,9 +47,10 @@ class Questions extends Component {
         return (
           // assuming gets props ID, question, amount of agrees, amount of disagress, comments
           <OneQuestion
-            key={info.question}
+            key={id}
             id={id}
             author={info.author}
+            authorID={info.authorID}
             question={info.question}
             agrees={info.agrees}
             disagrees={info.disagrees}
