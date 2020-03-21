@@ -2,15 +2,28 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import '../style.scss';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import OneLetter from './OneLetter';
+import DropDown from './dropdown';
 import NewLetterModal from './newLetterModal';
+
 import * as db from '../services/datastore';
 
 class Letters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      letters: null, authenticated: false, username: '', showCreateLetterInfo: false, userID: '',
+      letters: null,
+      sortedByRecent: null,
+      sortedByOld: null,
+      sortedByHearts: null,
+      authenticated: false,
+      shopDropDown: true,
+      username: '',
+      showCreateLetterInfo: false,
+
+
     };
   }
 
@@ -26,8 +39,48 @@ class Letters extends Component {
     db.getLetters(this.recievedLetters);
   }
 
+
+  showHideDropDown = () => {
+    this.setState(prevState => ({ shopDropDown: !prevState.shopDropDown }));
+  }
+
+  choseDropDrow = (newState) => {
+    this.setState({ letters: newState });
+    console.log('why');
+  }
+
   recievedLetters = (letter) => {
-    this.setState({ letters: letter });
+    const newarrReverse = [];
+    for (let i = 0; i < Object.keys(letter).length; i += 1) {
+      const currentKey = Object.keys(letter)[i];
+      const currItem = letter[currentKey];
+      newarrReverse.unshift({ item: currItem, id: currentKey });
+    }
+
+    const newarrOldFirst = [];
+    for (let i = 0; i < Object.keys(letter).length; i += 1) {
+      const currentKey = Object.keys(letter)[i];
+      const currItem = letter[currentKey];
+      newarrOldFirst.push({ item: currItem, id: currentKey });
+    }
+
+    const hearts = [];
+    for (let i = 0; i < Object.keys(letter).length; i += 1) {
+      const currentKey = Object.keys(letter)[i];
+      const currItem = letter[currentKey];
+      hearts.unshift({ item: currItem, id: currentKey });
+    }
+
+    hearts.sort((obj1, obj2) => {
+      const obj1Likes = obj1.item.likes !== undefined ? Object.keys(obj1.item.likes).length : 0;
+      const obj2Likes = obj2.item.likes !== undefined ? Object.keys(obj2.item.likes).length : 0;
+      return obj2Likes - obj1Likes;
+    });
+
+
+    this.setState({
+      letters: newarrReverse, sortedByRecent: newarrReverse, sortedByOld: newarrOldFirst, sortedByHearts: hearts,
+    });
   }
 
   sendLetter = (title, text) => {
@@ -63,15 +116,13 @@ class Letters extends Component {
           const info = this.state.letters[id];
           console.log(id);
           return (
-          // assuming gets props ID, letter, amount of likes, title
             <OneLetter
-              key={id}
-              id={id}
-              authorID={info.authorID}
-              author={info.author}
-              letter={info.letter}
-              title={info.title}
-              date={info.date}
+              key={info.item.date}
+              id={info.id}
+              author={info.item.author}
+              letter={info.item.letter}
+              title={info.item.title}
+              date={info.item.date}
             />
           );
         });
@@ -82,7 +133,7 @@ class Letters extends Component {
           <button onClick={this.createLetter} className="createButton" type="button">
             <a href="#top">
               <div className="penIcon" />
-              Write A Letter
+        Write A Letter
             </a>
           </button>
         </div>
@@ -92,6 +143,12 @@ class Letters extends Component {
       if (this.state.authenticated) {
         return (
           <div className="lettersNormalMainStyle">
+            <DropDown shopDropDown={this.state.shopDropDown}
+              sortedByOld={this.state.sortedByOld}
+              sortedByHearts={this.state.sortedByHearts}
+              sortedByRecent={this.state.sortedByRecent}
+              calback={this.choseDropDrow}
+            />
             <NewLetterModal onCloseAndSubmit={this.sendLetter} onClose={this.createLetter} show={this.state.showCreateLetterInfo} />
             <div style={{
               alignContent: 'center', justifyContent: 'center',
