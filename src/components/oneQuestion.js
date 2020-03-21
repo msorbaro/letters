@@ -135,7 +135,6 @@ class OneQuestion extends Component {
   showRightDownThumb = () => {
     if (this.state.haveDisagreed) {
       return (<div className="downThumbColor" />);
-
     } else {
       return (<div className="downThumbTransparent" />);
     }
