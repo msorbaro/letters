@@ -80,7 +80,7 @@ class Questions extends Component {
     );
     return (
       <div style={{
-        alignContent: 'center', justifyContent: 'center',
+        alignContent: 'center', justifyContent: 'center', marginBottom: 30,
       }}
         className="tryingToCenter"
       >
