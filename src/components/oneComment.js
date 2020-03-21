@@ -73,7 +73,7 @@ class OneComment extends Component {
 
   deleteComment = () => {
     db.deleteComment(this.state.questionID, this.props.id);
-    this.setState({ authorID: 'gone' });
+    this.setState({ authorID: '' });
   }
 
   showDelete = () => {
