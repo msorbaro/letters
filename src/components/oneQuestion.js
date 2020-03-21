@@ -166,7 +166,7 @@ class OneQuestion extends Component {
   }
 
   showDelete = () => {
-    if (this.state.userID === this.state.authorID) {
+    if (this.state.userID === this.state.authorID || this.state.userID === 'AnnikaID' || this.state.userID === 'MorganID') {
       return (
         <button type="button"
           className="questDeletion"
@@ -185,7 +185,7 @@ class OneQuestion extends Component {
     if (this.state.comments != null && this.state.comments !== undefined) {
       let zIndex = 999;
       let count = 0;
-      commentObject = Object.keys(this.state.comments).map((id) => {
+      commentObject = Object.keys(this.state.comments).map((id, index) => {
         const info = this.state.comments[id];
         zIndex -= 5;
         //  const newZ = String(zIndex);
@@ -197,6 +197,7 @@ class OneQuestion extends Component {
               <OneComment
                 zIndex={zIndex}
                 id={id}
+                key={id}
                 author={info.author}
                 authorID={info.authorID}
                 comment={info.comment}
