@@ -67,7 +67,7 @@ body {
   margin-top: 0px;
   margin-bottom: 0px;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 
 .bodyLetter {
@@ -127,6 +127,8 @@ body {
   background-repeat: no-repeat;
   width: 35px;
   height: 35px;
+  margin-left: 10%;
+
 }
 .upThumbTransparent {
   background-image: url("./assets/thumbU.png");
@@ -134,22 +136,24 @@ body {
   background-repeat: no-repeat;
   width: 35px;
   height: 35px;
+  margin-left: 10%;
+
 }
 .downThumbColor {
   background-image: url("./assets/thumbDFull.png");
   background-size: 75%;
   background-repeat: no-repeat;
-  margin-top: 7px;
   width: 35px;
-  height: 28px;
+  height: 35px;
+  margin-left: 10%;
 }
 .downThumbTransparent {
   background-image: url("./assets/thumbD.png");
   background-size: 75%;
   background-repeat: no-repeat;
-  margin-top: 7px;
   width: 35px;
-  height: 28px;
+  height: 35px;
+  margin-left: 10%;
 }
 
 .heartAndCount {
@@ -446,23 +450,18 @@ body {
 .containerthumbs{
   display: flex;
   flex-direction: row;
-  width:25%;
+  width:20%;
   justify-content: space-between;
   height: 100%;
-  align-items: center;
-  margin-right: 5px;
+  align-items: flex-start;
 }
 .thumbAndCount{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 25px;
-  width: 50%;
+  height: 100%;
   margin-left: 10px;
-  border-width: 2px;
-  border-radius: 10px;
-  border-style: solid;
 }
 
 .filledRed{
@@ -529,8 +528,9 @@ body {
   border: none;
   cursor:pointer;
   overflow: hidden;
-  background-color: Transparent;
   padding: 0;
+  margin:0;
+  background-color: Transparent;
 }
 
 .h1ContainerConent{
@@ -723,7 +723,7 @@ a, a:hover, a:active, a:visited, a:focus {
 
 .lettersNormalMainStyle {
   margin-top: 15px;
-  width: 100;
+  width: 100%;
   overflow-y:hidden;
   height: 100%;
 }
@@ -738,4 +738,18 @@ a, a:hover, a:active, a:visited, a:focus {
 .notSelected {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.dropdownContainer{
+  display: flex;
+  flex-direction: row;
+  width: 60vw;
+  align-items: center;
+  justify-content: flex-end;
+}
+.dropDwon{
+  display: flex;
+  width: 60vw;
+  flex-direction: column;
+  align-items: flex-end;
 }

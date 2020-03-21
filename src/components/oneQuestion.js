@@ -110,49 +110,49 @@ class OneQuestion extends Component {
   }
 
   showRightUpThumb = () => {
-    // if (this.state.haveAgreed) {
-    //   return (<div className="upThumbColor" />);
-    // } else {
-    //   return (<div className="upThumbTransparent" />);
-    // }
     if (this.state.haveAgreed) {
-      return (
-        <p className="selectedStyle"
-          style={{
-            backgroundColor: '#00ac66', borderColor: '#00ac66', color: 'white', fontSize: '15px', width: '20px',
-          }}
-        >
-Yes
-          {' '}
-        </p>
-      );
+      return (<div className="upThumbColor" />);
     } else {
-      return (<p className="notSelected" style={{ color: '#00ac66', fontSize: '15px', width: '20px' }}>Yes </p>);
+      return (<div className="upThumbTransparent" />);
     }
+    //     if (this.state.haveAgreed) {
+    //       return (
+    //         <p className="selectedStyle"
+    //           style={{
+    //             backgroundColor: '#00ac66', borderColor: '#00ac66', color: 'white', fontSize: '15px', width: '20px',
+    //           }}
+    //         >
+    // Yes
+    //           {' '}
+    //         </p>
+    //       );
+    //     } else {
+    //       return (<p className="notSelected" style={{ color: '#00ac66', fontSize: '15px', width: '20px' }}>Yes </p>);
+    //     }
   }
 
   showRightDownThumb = () => {
-    // if (this.state.haveDisagreed) {
-    //   return (<div className="downThumbColor" />);
-    // } else {
-    //   return (<div className="downThumbTransparent" />);
-    // }
-
     if (this.state.haveDisagreed) {
-      return (
-        <p className="selectedStyle"
-          style={{
-            backgroundColor: '#f51818', borderColor: '#f51818', color: 'white', fontSize: '15px', width: '17px',
-          }}
-        >
-          {' '}
-No
-          {' '}
-        </p>
-      );
+      return (<div className="downThumbColor" />);
     } else {
-      return (<p className="notSelected" style={{ color: '#f51818', fontSize: '15px', width: '17px' }}> No </p>);
+      return (<div className="downThumbTransparent" />);
     }
+
+    //     if (this.state.haveDisagreed) {
+    //       return (
+    //         <p className="selectedStyle"
+    //           style={{
+    //             backgroundColor: '#f51818', borderColor: '#f51818', color: 'white', fontSize: '15px', width: '17px',
+    //           }}
+    //         >
+    //           {' '}
+    // No
+    //           {' '}
+    //         </p>
+    //       );
+    //     } else {
+    //       return (<p className="notSelected" style={{ color: '#f51818', fontSize: '15px', width: '17px' }}> No </p>);
+    //     }
   }
 
   upThumbCallback = (clicked) => {
@@ -295,11 +295,11 @@ No
       commentToDisplay = underCommentPromptToAdd;
     }
 
-    const filledRed = this.state.haveDisagreed ? 'filledRed' : 'thumbAndCount';
-    const filledGreen = this.state.haveAgreed ? 'filledGreen' : 'thumbAndCount';
+    // const filledRed = this.state.haveDisagreed ? 'filledRed' : 'thumbAndCount';
+    //  const filledGreen = this.state.haveAgreed ? 'filledGreen' : 'thumbAndCount';
 
-    const agreeColorText = this.state.haveAgreed ? 'white' : '#00ac66';
-    const disagreeColorText = this.state.haveDisagreed ? 'white' : '#f51818';
+    // const agreeColorText = this.state.haveAgreed ? 'white' : '#00ac66';
+    // const disagreeColorText = this.state.haveDisagreed ? 'white' : '#f51818';
 
     const styleChoice = this.state.comments !== undefined ? 'outerStyle' : 'outerStyleTwo';
     return (
@@ -322,20 +322,29 @@ No
                 {' '}
               </h1>
               <div className="containerthumbs">
-                <div className={filledGreen} style={{ borderColor: '#00ac66' }}>
+                <div className="thumbAndCount">
                   <button type="button" className="invisibleThumbButton" onClick={this.handleUpThumbClick}>
                     { this.showRightUpThumb()}
                   </button>
-                  <div className="agreeCount" style={{ color: agreeColorText, paddingRight: '8px' }}>
+                  <div className="agreeCount"
+                    style={{ color: '#00693E' }}
+                  >
+                    {' '}
+
+                  Y (
                     {this.state.agrees}
+)
                   </div>
                 </div>
-                <div className={filledRed} style={{ borderColor: '#f51818' }}>
+                <div className="thumbAndCount">
                   <button type="button" className="invisibleThumbButton" onClick={this.handleDownThumbClick}>
                     {this.showRightDownThumb()}
                   </button>
-                  <div className="disagreeCount" style={{ color: disagreeColorText, paddingRight: '8px' }}>
+                  <div className="disagreeCount" style={{ color: '#690000' }}>
+                  N (
                     {this.state.disagrees}
+                    {''}
+)
                   </div>
                 </div>
               </div>
