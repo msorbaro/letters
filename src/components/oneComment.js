@@ -77,7 +77,7 @@ class OneComment extends Component {
   }
 
   showDelete = () => {
-    if (this.state.userID === this.state.authorID) {
+    if (this.state.userID === this.state.authorID || this.state.userID === 'AnnikaID' || this.state.userID === 'MorganID') {
       return (
         <button type="button"
           className="commentDeletion"

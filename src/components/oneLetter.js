@@ -1,3 +1,4 @@
+/* eslint react/no-array-index-key: 0 */
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import * as db from '../services/datastore';
@@ -66,16 +67,11 @@ class OneLetter extends Component {
   }
 
   deleteLetter = () => {
-    console.log('deleting');
     db.deleteLetter(this.props.id);
   }
 
   showDelete = () => {
-    console.log(this.state.title);
-    console.log(this.state.userID);
-    console.log(this.state.authorID);
-    if (this.state.userID === this.state.authorID) {
-      console.log('showing delte buyton!');
+    if (this.state.userID === this.state.authorID || this.state.userID === 'AnnikaID' || this.state.userID === 'MorganID') {
       return (
         <button type="button"
           className="deletion"
@@ -85,7 +81,6 @@ class OneLetter extends Component {
         </button>
       );
     } else {
-      console.log('not the same');
       return null;
     }
   }
@@ -101,9 +96,9 @@ class OneLetter extends Component {
 
   render() {
     const letterSnippits = this.state.letter.split('\n');
-    const finalLetter = letterSnippits.map((id) => {
+    const finalLetter = letterSnippits.map((id, index) => {
       return (
-        <p className="bodyLetter">
+        <p className="bodyLetter" key={index}>
           {' '}
           {id}
           {' '}
