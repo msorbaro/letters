@@ -184,7 +184,6 @@ body {
   background-repeat: no-repeat;
   width: 30px;
   height: 20px;
-
 }
 .createButton{
   width: 175px;
@@ -268,7 +267,7 @@ body {
   width:97.5%;
   position: fixed;
   bottom: 0;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 }
 
 .createLetterButtonContainer button{
@@ -839,7 +838,6 @@ a, a:hover, a:active, a:visited, a:focus {
   width: 100vw;
   flex-direction: row;
   justify-content: center;
-
 }
 .dropDownItem{
   margin-left: 30px;
@@ -850,6 +848,7 @@ a, a:hover, a:active, a:visited, a:focus {
   padding-right: 20px;
   background-color: white;
   border-radius: 2em;
+  text-align: center;
 }
 .dropDownItem:hover{
   margin-left: 30px;
@@ -860,6 +859,7 @@ a, a:hover, a:active, a:visited, a:focus {
   padding-right: 20px;
   background-color: #00693E;
   border-radius: 2em;
+  text-align: center;
 }
 .dropDownItemActive{
   margin-left: 30px;
@@ -870,6 +870,7 @@ a, a:hover, a:active, a:visited, a:focus {
   padding-right: 20px;
   background-color: #00693E;
   border-radius: 2em;
+  text-align: center;
 }
 
 .letterStyl{
@@ -933,7 +934,7 @@ a, a:hover, a:active, a:visited, a:focus {
     margin-top: 0;
     vertical-align: text-top;
     height:100%;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
   }
 
   .addSomeMobilePadding{
