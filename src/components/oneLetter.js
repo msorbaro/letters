@@ -71,7 +71,7 @@ class OneLetter extends Component {
   }
 
   showDelete = () => {
-    if (this.state.userID === this.state.authorID || this.state.userID === 'AVlLfxZZ0eZRj6hcowxNgy0Qtir2uNzNPFZkAPbVKvYt9iI61FaXT4R2' || this.state.userID === 'uNzNPFZkAPbVKvYt9iI61FaXT4R2') {
+    if (this.state.userID === this.state.authorID || this.state.userID === 'AVlLfxZZ0eZRj6hcowxNgy0Qtir2' || this.state.userID === 'uNzNPFZkAPbVKvYt9iI61FaXT4R2') {
       return (
         <button type="button"
           className="deletion"
