@@ -497,20 +497,22 @@ body {
 .alignthumbs {
   display: flex;
   flex-direction: row;
-  align-items:center;
+  align-items:flex-start;
   justify-content: space-between;
   width: 95%;
-
 }
 
 .containerthumbs{
   display: flex;
   flex-direction: row;
-  width:20%;
+  width:23%;
   justify-content: space-between;
   height: 100%;
   align-items: flex-start;
+  margin-top: 10px;
+
 }
+
 .thumbAndCount{
   display: flex;
   flex-direction: column;
@@ -902,6 +904,7 @@ a, a:hover, a:active, a:visited, a:focus {
     flex-direction: column;
     align-items:center;
     justify-content: center;
+    background-color: red;
     width: 100%;
   }
 
