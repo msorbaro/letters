@@ -23,6 +23,7 @@ class Letters extends Component {
       username: '',
       showCreateLetterInfo: false,
 
+
     };
   }
 
@@ -31,6 +32,7 @@ class Letters extends Component {
       if (user) {
         this.setState({ authenticated: true });
         this.setState({ username: user.displayName });
+        this.setState({ userID: user.uid });
       }
     });
 
@@ -84,7 +86,7 @@ class Letters extends Component {
   sendLetter = (title, text) => {
     const date = this.getCurrentDate();
     document.body.style.overflow = 'unset';
-    db.addLetter(text, title, this.state.username, date);
+    db.addLetter(text, title, this.state.username, date, this.state.userID);
     this.setState({ showCreateLetterInfo: false });
   }
 
@@ -112,6 +114,7 @@ class Letters extends Component {
       if (this.state.letters != null) {
         letterObject = Object.keys(this.state.letters).map((id) => {
           const info = this.state.letters[id];
+          console.log(id);
           return (
             <OneLetter
               key={info.item.date}
