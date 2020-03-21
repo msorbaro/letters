@@ -48,7 +48,7 @@ export default class newQuestionModal extends React.Component {
     return (
       <div className="modal" id="modal" style={{ left: 0 }}>
         <div className="contentTwo">
-          <h1>Enter the Poll You Want to Submit </h1>
+          <h1 className="mobileFriendlyh1">Enter the Poll You Want to Submit </h1>
           {this.showErrorMessage()}
           <p> Poll </p>
           <textarea style={{ width: '98%' }} type="text" value={this.state.question} onChange={this.handleQuestionChange} />

@@ -283,10 +283,7 @@ class OneQuestion extends Component {
         <textarea style={{ width: '90%', marginTop: 20, height: '7.5vh' }} type="text" value={this.state.comment} onChange={this.handleCommentChange} />
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <button type="button"
-            style={{
-              height: '3vh', width: '6vw', fontSize: '.75em', borderWidth: '1px', marginTop: '2px',
-            }}
-            className="whiteButton"
+            className="whiteButton commentcommentbutton"
             onClick={this.cancel}
           >
             {' '}
@@ -294,10 +291,8 @@ class OneQuestion extends Component {
             {' '}
           </button>
           <button type="button"
-            style={{
-              height: '3vh', width: '6vw', fontSize: '.75em', borderWidth: '1px', borderColor: '#F7F7F7', marginTop: '2px',
-            }}
-            className="greenButton"
+            style={{ borderColor: '#F7F7F7' }}
+            className="greenButton commentcommentbutton"
             onClick={this.sendComment}
           >
             {' '}
@@ -325,11 +320,7 @@ class OneQuestion extends Component {
     const styleChoice = this.state.comments !== undefined ? 'outerStyle' : 'outerStyleTwo';
     return (
       <div>
-        <div className="backgroundcoloroffwhite"
-          style={{
-            width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em', zIndex: 1, position: 'relative',
-          }}
-        >
+        <div className="backgroundcoloroffwhite">
           <div className="smallDiv" />
           <div style={{
             marginLeft: 10, marginRight: 10, height: '100%',
@@ -381,7 +372,9 @@ class OneQuestion extends Component {
           <div className="innerStyle">
             {commentObject}
           </div>
-          {commentToDisplay}
+          <div>
+            {commentToDisplay}
+          </div>
         </div>
       </div>
     );
