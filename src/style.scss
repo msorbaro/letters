@@ -67,7 +67,7 @@ body {
   margin-top: 0px;
   margin-bottom: 0px;
   padding-top: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 .letterP {
@@ -86,6 +86,18 @@ body {
 
 .mainQuestion p {
   font-family: 'PT Serif', serif;
+  font-size: .75em;
+}
+
+.questAndAuth{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.questAndAuth div{
+  margin-bottom: 10px;
   font-size: .75em;
 }
 
@@ -1072,6 +1084,4 @@ a, a:hover, a:active, a:visited, a:focus {
      margin-top: 2px;
      margin-bottom: 3px;
    }
-
-
 }

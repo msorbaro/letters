@@ -16,6 +16,7 @@ class OneQuestion extends Component {
       userID: '',
       question: this.props.question,
       authorID: this.props.authorID,
+      author: this.props.author,
       agrees: 0,
       username: '',
       disagrees: 0,
@@ -116,20 +117,6 @@ class OneQuestion extends Component {
     } else {
       return (<div className="upThumbTransparent" />);
     }
-    //     if (this.state.haveAgreed) {
-    //       return (
-    //         <p className="selectedStyle"
-    //           style={{
-    //             backgroundColor: '#00ac66', borderColor: '#00ac66', color: 'white', fontSize: '15px', width: '20px',
-    //           }}
-    //         >
-    // Yes
-    //           {' '}
-    //         </p>
-    //       );
-    //     } else {
-    //       return (<p className="notSelected" style={{ color: '#00ac66', fontSize: '15px', width: '20px' }}>Yes </p>);
-    //     }
   }
 
   showRightDownThumb = () => {
@@ -138,22 +125,6 @@ class OneQuestion extends Component {
     } else {
       return (<div className="downThumbTransparent" />);
     }
-
-    //     if (this.state.haveDisagreed) {
-    //       return (
-    //         <p className="selectedStyle"
-    //           style={{
-    //             backgroundColor: '#f51818', borderColor: '#f51818', color: 'white', fontSize: '15px', width: '17px',
-    //           }}
-    //         >
-    //           {' '}
-    // No
-    //           {' '}
-    //         </p>
-    //       );
-    //     } else {
-    //       return (<p className="notSelected" style={{ color: '#f51818', fontSize: '15px', width: '17px' }}> No </p>);
-    //     }
   }
 
   upThumbCallback = (clicked) => {
@@ -328,14 +299,23 @@ class OneQuestion extends Component {
             className="mainQuestion"
           >
             <div className="alignthumbs">
-              <h1 className="h1Question">
-                {' '}
-                {this.state.question}
-                {' '}
-              </h1>
-              <div>
-                {' '}
-                {this.showDelete()}
+              <div className="questAndAuth">
+                <h1 className="h1Question">
+                  {' '}
+                  {this.state.question}
+                  {' '}
+                </h1>
+                <div className="questionAuth">
+                  {' '}
+                  Written by:
+                  {' '}
+                  {this.state.author}
+                  {' '}
+                </div>
+                <div>
+                  {' '}
+                  {this.showDelete()}
+                </div>
               </div>
               <div className="containerthumbs">
                 <div className="thumbAndCount">
