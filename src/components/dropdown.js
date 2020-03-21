@@ -41,9 +41,9 @@ class DropDown extends Component {
     if (this.props.shopDropDown) {
       return (
         <div className="dropDwon">
-          <p onClick={this.turnOnHearts}>Most Liked</p>
-          <p onClick={this.turnOnNeww}>Most Recent</p>
-          <p onClick={this.turnOnOld}>Least Recent</p>
+          <p className="dropDownItem" onClick={this.turnOnHearts}>Most Liked</p>
+          <p className="dropDownItem" onClick={this.turnOnNeww}>Most Recent</p>
+          <p className="dropDownItem" onClick={this.turnOnOld}>Least Recent</p>
         </div>
       );
     } else {
