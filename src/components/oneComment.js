@@ -15,6 +15,7 @@ class OneComment extends Component {
       userID: '',
       comment: this.props.comment,
       author: this.props.author,
+      authorID: this.props.authorID,
       questionID: this.props.questionID,
       likes: 0,
       haveLiked: false,
@@ -70,6 +71,26 @@ class OneComment extends Component {
     }
   }
 
+  deleteComment = () => {
+    db.deleteComment(this.state.questionID, this.props.id);
+    this.setState({ authorID: 'gone' });
+  }
+
+  showDelete = () => {
+    if (this.state.userID === this.state.authorID) {
+      return (
+        <button type="button"
+          className="commentDeletion"
+          onClick={this.deleteComment}
+        >
+          Delete
+        </button>
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     const { zIndex } = this.props;
     return (
@@ -94,6 +115,7 @@ class OneComment extends Component {
                 {' '}
                 {this.state.date}
               </p>
+              <div>{this.showDelete()}</div>
             </div>
             <div className="heartAndCount">
               <button type="button" className="invisibleButton" onClick={this.handleButtonClick}>

@@ -10,7 +10,7 @@ class Letters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      letters: null, authenticated: false, username: '', showCreateLetterInfo: false,
+      letters: null, authenticated: false, username: '', showCreateLetterInfo: false, userID: '',
     };
   }
 
@@ -19,6 +19,7 @@ class Letters extends Component {
       if (user) {
         this.setState({ authenticated: true });
         this.setState({ username: user.displayName });
+        this.setState({ userID: user.uid });
       }
     });
 
@@ -26,14 +27,13 @@ class Letters extends Component {
   }
 
   recievedLetters = (letter) => {
-  //  console.log(letter);
     this.setState({ letters: letter });
   }
 
   sendLetter = (title, text) => {
     const date = this.getCurrentDate();
     document.body.style.overflow = 'unset';
-    db.addLetter(text, title, this.state.username, date);
+    db.addLetter(text, title, this.state.username, date, this.state.userID);
     this.setState({ showCreateLetterInfo: false });
   }
 
@@ -61,11 +61,13 @@ class Letters extends Component {
       if (this.state.letters != null) {
         letterObject = Object.keys(this.state.letters).map((id) => {
           const info = this.state.letters[id];
+          console.log(id);
           return (
           // assuming gets props ID, letter, amount of likes, title
             <OneLetter
-              key={info.date}
+              key={id}
               id={id}
+              authorID={info.authorID}
               author={info.author}
               letter={info.letter}
               title={info.title}
