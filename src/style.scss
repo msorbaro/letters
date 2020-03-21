@@ -372,6 +372,14 @@ body {
   margin-left: 15px;
 }
 
+.commentDeleteHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
 .deletion {
   background-color: #00693E;
   background-repeat:no-repeat;
@@ -407,12 +415,15 @@ body {
   border-color: white;
   border-width: 3px;
   border-radius: 1em;
+  width: 90px;
+  height: 20px;
+  padding-bottom: 15px;
+  margin-top: -5px;
   font-family: 'PT Serif', serif;
   color:white;
   font-size: .7em;
   justify-content: center;
   align-items: center;
-  margin-left:3px;
 }
 
 .twoButtons {

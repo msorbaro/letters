@@ -125,6 +125,7 @@ class Letters extends Component {
               key={info.item.date}
               id={info.id}
               author={info.item.author}
+              authorID={info.item.authorID}
               letter={info.item.letter}
               title={info.item.title}
               date={info.item.date}
