@@ -22,8 +22,7 @@ class Letters extends Component {
       shopDropDown: true,
       username: '',
       showCreateLetterInfo: false,
-
-
+      currentSort: '',
     };
   }
 
@@ -44,9 +43,9 @@ class Letters extends Component {
     this.setState(prevState => ({ shopDropDown: !prevState.shopDropDown }));
   }
 
-  choseDropDrow = (newState) => {
+  choseDropDrow = (newState, sortedBy) => {
+    this.setState({ currentSort: sortedBy });
     this.setState({ letters: newState });
-    console.log('why');
   }
 
   recievedLetters = (letter) => {
@@ -77,10 +76,17 @@ class Letters extends Component {
       return obj2Likes - obj1Likes;
     });
 
-
     this.setState({
       letters: newarrReverse, sortedByRecent: newarrReverse, sortedByOld: newarrOldFirst, sortedByHearts: hearts,
     });
+
+    if (this.state.currentSort === 'OLD') {
+      this.setState({ letters: newarrOldFirst });
+    } else if (this.state.currentSort === 'NEW') {
+      this.setState({ letters: newarrReverse });
+    } else if (this.state.currentSort === 'HEARTS') {
+      this.setState({ letters: hearts });
+    }
   }
 
   sendLetter = (title, text) => {
@@ -114,7 +120,6 @@ class Letters extends Component {
       if (this.state.letters != null) {
         letterObject = Object.keys(this.state.letters).map((id) => {
           const info = this.state.letters[id];
-          console.log(id);
           return (
             <OneLetter
               key={info.item.date}
@@ -133,7 +138,7 @@ class Letters extends Component {
           <button onClick={this.createLetter} className="createButton" type="button">
             <a href="#top">
               <div className="penIcon" />
-        Write A Letter
+              Write A Letter
             </a>
           </button>
         </div>

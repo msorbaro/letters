@@ -14,35 +14,27 @@ class DropDown extends Component {
   }
 
   chooseSet = () => {
-    console.log('DO I HAPPEN');
     if (this.state.hearts) {
-      console.log('I should be here');
       return this.state.sortedByHearts;
     } else if (this.state.old) {
-      console.log('maybe i came here');
       return this.state.sortedByOld;
     } else if (this.state.neww) {
-      console.log('I am deff here');
       return this.state.sortedByRecent;
     } else {
-      console.log('am i here?s');
       return this.state.letter;
     }
   }
 
   turnOnHearts = () => {
-    console.log('here I was clicked meep');
-    this.props.calback(this.props.sortedByHearts);
+    this.props.calback(this.props.sortedByHearts, 'HEARTS');
   }
 
   turnOnOld = () => {
-    console.log('here I was clicked meep');
-    this.props.calback(this.props.sortedByOld);
+    this.props.calback(this.props.sortedByOld, 'OLD');
   }
 
   turnOnNeww = () => {
-    console.log('here I was clicked meep');
-    this.props.calback(this.props.sortedByRecent);
+    this.props.calback(this.props.sortedByRecent, 'NEW');
   }
 
   render() {
@@ -55,7 +47,6 @@ class DropDown extends Component {
         </div>
       );
     } else {
-      console.log('sad here');
       return null;
     }
   }

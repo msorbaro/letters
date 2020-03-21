@@ -356,9 +356,9 @@ class OneQuestion extends Component {
                   >
                     {' '}
 
-                  Y (
+                    Y (
                     {this.state.agrees}
-)
+                    )
                   </div>
                 </div>
                 <div className="thumbAndCount">
@@ -366,10 +366,10 @@ class OneQuestion extends Component {
                     {this.showRightDownThumb()}
                   </button>
                   <div className="disagreeCount" style={{ color: '#690000' }}>
-                  N (
+                    N (
                     {this.state.disagrees}
                     {''}
-)
+                    )
                   </div>
                 </div>
               </div>
