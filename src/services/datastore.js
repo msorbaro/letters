@@ -87,12 +87,13 @@ export function getQuesions(callback) {
 }
 
 // Adds a quesiton
-export function addQuestion(question, userID) {
+export function addQuestion(question, userID, username) {
   const questions = firebase.database().ref('Questions/');
   const comments = [];
   const authorID = userID;
+  const author = username;
   questions.push({
-    question, comments, authorID,
+    question, comments, authorID, author,
   });
 }
 
