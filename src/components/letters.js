@@ -22,7 +22,7 @@ class Letters extends Component {
       shopDropDown: true,
       username: '',
       showCreateLetterInfo: false,
-      currentSort: '',
+      currentSort: 'NEW',
     };
   }
 
@@ -149,6 +149,7 @@ class Letters extends Component {
         return (
           <div className="lettersNormalMainStyle">
             <DropDown shopDropDown={this.state.shopDropDown}
+              currState={this.currentSort}
               sortedByOld={this.state.sortedByOld}
               sortedByHearts={this.state.sortedByHearts}
               sortedByRecent={this.state.sortedByRecent}
