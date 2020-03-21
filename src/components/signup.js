@@ -40,7 +40,7 @@ class SignUp extends Component {
 
 
   handleSignupButtonClick = (event) => {
-    if (this.state.email.endsWith('@dartmouth.edu') && this.state.password === this.state.passwordTwo) {
+    if ((this.state.email.endsWith('@dartmouth.edu') || this.state.email.endsWith('@Dartmouth.edu')) && this.state.password === this.state.passwordTwo) {
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
         alert(error);
       });
