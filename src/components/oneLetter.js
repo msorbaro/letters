@@ -71,7 +71,11 @@ class OneLetter extends Component {
   }
 
   showDelete = () => {
+    console.log(this.state.title);
+    console.log(this.state.userID);
+    console.log(this.state.authorID);
     if (this.state.userID === this.state.authorID) {
+      console.log('showing delte buyton!');
       return (
         <button type="button"
           className="deletion"
@@ -81,6 +85,7 @@ class OneLetter extends Component {
         </button>
       );
     } else {
+      console.log('not the same');
       return null;
     }
   }

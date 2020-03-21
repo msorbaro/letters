@@ -11,7 +11,8 @@ class SignUp extends Component {
 
     this.state = {
       email: '',
-      username: '',
+      firstusername: '',
+      lastusername: '',
       password: '',
       passwordTwo: '',
     };
@@ -29,8 +30,12 @@ class SignUp extends Component {
     this.setState({ passwordTwo: event.target.value });
   }
 
-  onUsernameChange= (event) => {
-    this.setState({ username: event.target.value });
+  onFirstUsernameChange= (event) => {
+    this.setState({ firstusername: event.target.value });
+  }
+
+  onLastUsernameChange= (event) => {
+    this.setState({ lastusername: event.target.value });
   }
 
 
@@ -44,11 +49,12 @@ class SignUp extends Component {
         if (user) {
           firebase.database().ref(`users/${user.uid}`).set({
             email: this.state.email,
-            username: this.state.username,
+            username: `${this.state.firstusername} ${this.state.lastusername}`,
           });
           user.updateProfile({
-            displayName: this.state.username,
+            displayName: `${this.state.firstusername} ${this.state.lastusername}`,
           });
+          console.log('pushing history');
           this.props.history.push('/');
         }
       });
@@ -70,8 +76,10 @@ class SignUp extends Component {
           <div className="leftJustify">
             <div className="prompt"> Enter your Dartmouth email: </div>
             <Input className="response" placeholder="Dartmouth Email" onChange={this.onEmailChange} value={this.state.email} />
-            <div className="prompt"> Enter your full name: </div>
-            <Input className="response" placeholder="Username" onChange={this.onUsernameChange} value={this.state.username} />
+            <div className="prompt"> Enter your first name: </div>
+            <Input className="response" placeholder="First name" onChange={this.onFirstUsernameChange} value={this.state.firstusername} />
+            <div className="prompt"> Enter your last name: </div>
+            <Input className="response" placeholder="Last name" onChange={this.onLastUsernameChange} value={this.state.lastusername} />
             <div className="prompt"> Enter a password: </div>
             <Input type="password" className="response" id="passwordInput" placeholder="Password" onChange={this.onPasswordChange} value={this.state.password} />
             <div className="prompt"> Confirm password: </div>

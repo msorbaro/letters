@@ -115,7 +115,7 @@ class OneComment extends Component {
                 {' '}
                 {this.state.date}
               </p>
-              <div>{this.showDelete()}</div>
+              <div className="commentDeleteHolder">{this.showDelete()}</div>
             </div>
             <div className="heartAndCount">
               <button type="button" className="invisibleButton" onClick={this.handleButtonClick}>
