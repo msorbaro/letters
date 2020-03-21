@@ -9,13 +9,16 @@ import '../style.scss';
 class Questions extends Component {
   constructor(props) {
     super(props);
-    this.state = { questions: {}, showCreateLetterInfo: false, userID: '' };
+    this.state = {
+      questions: {}, showCreateLetterInfo: false, userID: '', username: '',
+    };
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ userID: user.uid });
+        this.setState({ username: user.displayName });
       }
     });
     db.getQuesions(this.recievedQuestions);
@@ -28,7 +31,7 @@ class Questions extends Component {
 
   sendQuestion = (question) => {
     document.body.style.overflow = 'unset';
-    db.addQuestion(question, this.state.userID);
+    db.addQuestion(question, this.state.userID, this.state.username);
     this.setState({ showCreateLetterInfo: false });
   }
 

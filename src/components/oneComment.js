@@ -77,7 +77,7 @@ class OneComment extends Component {
   }
 
   showDelete = () => {
-    if (this.state.userID === this.state.authorID) {
+    if (this.state.userID === this.state.authorID || this.state.userID === 'AnnikaID' || this.state.userID === 'MorganID') {
       return (
         <button type="button"
           className="commentDeletion"
@@ -115,7 +115,7 @@ class OneComment extends Component {
                 {' '}
                 {this.state.date}
               </p>
-              <div>{this.showDelete()}</div>
+              <div className="commentDeleteHolder">{this.showDelete()}</div>
             </div>
             <div className="heartAndCount">
               <button type="button" className="invisibleButton" onClick={this.handleButtonClick}>
