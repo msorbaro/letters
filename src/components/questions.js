@@ -85,7 +85,6 @@ class Questions extends Component {
           <NewQuestionModal onCloseAndSubmit={this.sendQuestion} onClose={this.createQuestion} show={this.state.showCreateLetterInfo} />
         </div>
         {questionObject}
-
         {createButton}
       </div>
     );

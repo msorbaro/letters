@@ -107,10 +107,7 @@ class OneLetter extends Component {
     });
 
     return (
-      <div style={{
-        backgroundColor: 'white', width: '60vw', marginTop: 10, marginBottom: 10, borderRadius: '1em',
-      }}
-      >
+      <div className="letterOuterMainStyle">
         <div className="smallDiv" />
         <div className="mainLetter">
           <div className="heartAndCount">
@@ -122,10 +119,7 @@ class OneLetter extends Component {
             </div>
           </div>
           <div style={{ marginLeft: 10, marginRight: 10, width: '100%' }}>
-            <div style={{
-              display: 'flex', flexDirection: 'row', alignContent: 'flex-start', alignItems: 'flex-start', width: '100%', justifyContent: 'space-between',
-            }}
-            >
+            <div className="letterStyl">
               <h1 className="h1Letter">
                 {' '}
                 {this.state.title}
@@ -136,7 +130,7 @@ class OneLetter extends Component {
               }}
               >
                 {this.showDelete()}
-                <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
+                <p className="letterP">
                   {' '}
                   Written by:
                   {' '}
@@ -144,7 +138,7 @@ class OneLetter extends Component {
                   {' '}
                 </p>
 
-                <p style={{ fontSize: '.5em', marginTop: 5, marginBottom: 0 }}>
+                <p className="letterP">
                   {' '}
                   Date:
                   {' '}
@@ -153,7 +147,9 @@ class OneLetter extends Component {
                 </p>
               </div>
             </div>
-            {finalLetter}
+            <div className="addSomeMobilePadding">
+              {finalLetter}
+            </div>
           </div>
         </div>
       </div>
