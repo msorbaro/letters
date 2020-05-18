@@ -1,7 +1,9 @@
 /* eslint no-alert: 0 */
 import React, { Component } from 'react';
 
-
+/*
+Select menu for filtering
+*/
 class DropDown extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,7 @@ class DropDown extends Component {
     };
   }
 
+  // options someone can filter from
   chooseSet = () => {
     if (this.state.hearts) {
       return this.state.sortedByHearts;
@@ -26,21 +29,25 @@ class DropDown extends Component {
     }
   }
 
+  // user selected hearts
   turnOnHearts = () => {
     this.setState({ currState: 'HEARTS' });
     this.props.calback(this.props.sortedByHearts, 'HEARTS');
   }
 
+  // user selected old
   turnOnOld = () => {
     this.setState({ currState: 'OLD' });
     this.props.calback(this.props.sortedByOld, 'OLD');
   }
 
+ // user selected new
   turnOnNeww = () => {
     this.setState({ currState: 'NEW' });
     this.props.calback(this.props.sortedByRecent, 'NEW');
   }
 
+  // changes dropdown to reflect correct style with what was chosen 
   getDropdown = () => {
     if (this.state.currState === 'OLD') {
       return (

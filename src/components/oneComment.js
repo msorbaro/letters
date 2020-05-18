@@ -3,7 +3,9 @@ import firebase from 'firebase';
 import * as db from '../services/datastore';
 import '../style.scss';
 
-
+/*
+This component shows all the information for one comment on a question
+*/
 class OneComment extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +25,7 @@ class OneComment extends Component {
     };
   }
 
+  // here we get the current user and hte information about this comment from the database
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -33,10 +36,12 @@ class OneComment extends Component {
     });
   }
 
+  // this gets the amount of likes on a comment
   commentNumUpdate = (likeNum) => {
     this.setState({ likes: likeNum });
   }
 
+  // this determines if we have liked the comment or not
   commentUpdateStatus = (likeNum) => {
     if (likeNum === 1) {
       this.setState({ haveLiked: true });
@@ -45,16 +50,19 @@ class OneComment extends Component {
     }
   }
 
+  // tells the database we have liked the comment
   likeComment = () => {
     db.likeComment(this.props.id, this.state.questionID, this.state.userID, this.commentNumUpdate);
     this.setState({ haveLiked: true });
   }
 
+  // tells the database to unlike the comment
   unlikeComment = () => {
     db.unlikeComment(this.props.id, this.state.questionID, this.state.userID, this.commentNumUpdate);
     this.setState({ haveLiked: false });
   }
 
+  // handles when someone clicks the like button
   handleButtonClick = () => {
     if (this.state.haveLiked) {
       this.unlikeComment();
@@ -63,6 +71,7 @@ class OneComment extends Component {
     }
   }
 
+  // determines whether to show the comment as liked or not
   showRightHeart = () => {
     if (this.state.haveLiked) {
       return (<div className="smallerLiked" />);
@@ -71,11 +80,13 @@ class OneComment extends Component {
     }
   }
 
+  // tells database to delete the comment
   deleteComment = () => {
     db.deleteComment(this.state.questionID, this.props.id);
     this.setState({ authorID: '' });
   }
 
+  // shows the delete for the comment if the current user is the one who wrote the comment
   showDelete = () => {
     if (this.state.userID === this.state.authorID || this.state.userID === 'AVlLfxZZ0eZRj6hcowxNgy0Qtir2' || this.state.userID === 'uNzNPFZkAPbVKvYt9iI61FaXT4R2') {
       return (

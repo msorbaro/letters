@@ -10,6 +10,7 @@ class homepage extends Component {
     };
   }
 
+  // sees if someone is logged in for the homepage
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {

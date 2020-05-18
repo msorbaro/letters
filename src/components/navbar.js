@@ -4,7 +4,9 @@ import { Button } from 'react-bootstrap';
 import firebase from 'firebase';
 import '../style.scss';
 
-
+/*
+Component for all the nav links
+*/
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,7 @@ class NavBar extends Component {
     };
   }
 
+  // need to get if the user is logged in or not
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -22,6 +25,7 @@ class NavBar extends Component {
     });
   }
 
+  // allows the user to sign out
   signout = () => {
     firebase.auth().signOut().then(() => {
       console.log('logged out');
@@ -31,6 +35,7 @@ class NavBar extends Component {
     this.setState({ authenticated: false });
   }
 
+  // renter and routes all our links
   renderNav() {
     if (this.state.authenticated) {
       return (

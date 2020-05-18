@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import '../style.scss';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import OneLetter from './OneLetter';
 import DropDown from './dropdown';
 import NewLetterModal from './newLetterModal';
 
 import * as db from '../services/datastore';
 
+/*
+Main component that holds all of our letters and calls the one letter component
+*/
 class Letters extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +27,7 @@ class Letters extends Component {
     };
   }
 
+ // gets all the letters from the database
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -38,16 +40,18 @@ class Letters extends Component {
     db.getLetters(this.recievedLetters);
   }
 
-
+  // shows dropdown to filter
   showHideDropDown = () => {
     this.setState(prevState => ({ shopDropDown: !prevState.shopDropDown }));
   }
 
+  // allows someone to filter with the drop down
   choseDropDrow = (newState, sortedBy) => {
     this.setState({ currentSort: sortedBy });
     this.setState({ letters: newState });
   }
 
+   // filters the letters based on how the user wants to sort them
   recievedLetters = (letter) => {
     const newarrReverse = [];
     for (let i = 0; i < Object.keys(letter).length; i += 1) {
@@ -80,6 +84,7 @@ class Letters extends Component {
       letters: newarrReverse, sortedByRecent: newarrReverse, sortedByOld: newarrOldFirst, sortedByHearts: hearts,
     });
 
+    // decides which filtering to show
     if (this.state.currentSort === 'OLD') {
       this.setState({ letters: newarrOldFirst });
     } else if (this.state.currentSort === 'NEW') {
@@ -89,6 +94,7 @@ class Letters extends Component {
     }
   }
 
+   // sends new created letter to the backend
   sendLetter = (title, text) => {
     const date = this.getCurrentDate();
     document.body.style.overflow = 'unset';
@@ -96,7 +102,7 @@ class Letters extends Component {
     this.setState({ showCreateLetterInfo: false });
   }
 
-
+ // opens the modal to create a letter
   createLetter = () => {
     this.setState(prevState => ({ showCreateLetterInfo: !prevState.showCreateLetterInfo }));
     if (this.state.showCreateLetterInfo) {
@@ -104,6 +110,7 @@ class Letters extends Component {
     }
   }
 
+    // gets curretn date to submit letter
     getCurrentDate = (separator = '/') => {
       const newDate = new Date();
       const date = newDate.getDate();
@@ -116,6 +123,8 @@ class Letters extends Component {
     }
 
     render() {
+
+      // all the letter objects in their new letter components
       let letterObject = null;
       if (this.state.letters != null) {
         letterObject = Object.keys(this.state.letters).map((id) => {
@@ -134,6 +143,7 @@ class Letters extends Component {
         });
       }
 
+     // button that creates a new letter
       const createButton = this.state.showCreateLetterInfo ? null : (
         <div className="createLetterButtonContainer">
           <button onClick={this.createLetter} className="createButton" type="button">
@@ -145,7 +155,7 @@ class Letters extends Component {
         </div>
       );
 
-
+      // shows the letter if the user is sign in 
       if (this.state.authenticated) {
         return (
           <div className="lettersNormalMainStyle">

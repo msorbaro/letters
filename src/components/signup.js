@@ -5,6 +5,9 @@ import { Button } from 'react-bootstrap';
 import { Input } from 'reactstrap';
 import firebase from 'firebase';
 
+/*
+This is the component to sign up for an account
+*/
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -18,27 +21,32 @@ class SignUp extends Component {
     };
   }
 
+  // allows user to enter en amil for signup
   onEmailChange = (event) => {
     this.setState({ email: event.target.value });
   }
 
+  // allows user to enter a password for signup
   onPasswordChange= (event) => {
     this.setState({ password: event.target.value });
   }
 
+  // allows user to confirm their password
   onPasswordTwoChange= (event) => {
     this.setState({ passwordTwo: event.target.value });
   }
 
+  // allows user to enter a username
   onFirstUsernameChange= (event) => {
     this.setState({ firstusername: event.target.value });
   }
 
+  // allows users to enter a last name
   onLastUsernameChange= (event) => {
     this.setState({ lastusername: event.target.value });
   }
 
-
+  // runs when the user clicks submit. This creates an account with firebase and makes sure that the account info is valid
   handleSignupButtonClick = (event) => {
     if ((this.state.email.endsWith('@dartmouth.edu') || this.state.email.endsWith('@Dartmouth.edu')) && this.state.password === this.state.passwordTwo) {
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {

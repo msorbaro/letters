@@ -4,7 +4,9 @@ import firebase from 'firebase';
 import * as db from '../services/datastore';
 import '../style.scss';
 
-
+/*
+This component contains just information about a specific letter that was written
+*/
 class OneLetter extends Component {
   constructor(props) {
     super(props);
@@ -24,11 +26,11 @@ class OneLetter extends Component {
     };
   }
 
+  // get current user from the database.
+  // also get how many likes this letter has
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // this.setState({ authenticated: true });
-        // this.setState({ username: user.displayName });
         this.setState({ userID: user.uid });
         db.getLikes(this.props.id, this.updatedHeartCallBack);
         db.getLikeStatus(this.props.id, this.state.userID, this.likeStatusCallback);
@@ -36,6 +38,7 @@ class OneLetter extends Component {
     });
   }
 
+  // update the amount of likes a letter has
   handleButtonClick = () => {
     if (this.state.haveLiked) {
       this.updateHeartsDecrease();
@@ -44,20 +47,23 @@ class OneLetter extends Component {
     }
   }
 
+ // increases the likes in the database
   updateHeartsIncrease = () => {
     db.increaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
     this.setState({ haveLiked: true });
   }
-
+  // decreases the likes in the database
   updateHeartsDecrease = () => {
     db.decreaseLetterScore(this.props.id, this.state.userID, this.updatedHeartCallBack);
     this.setState({ haveLiked: false });
   }
 
+  // resets number in state
   updatedHeartCallBack = (likeNum) => {
     this.setState({ likes: likeNum });
   }
 
+  // works with a boolean to determine if a user has liked this letter or not
   likeStatusCallback = (liked) => {
     if (liked === 0) {
       this.setState({ haveLiked: false });
@@ -66,10 +72,12 @@ class OneLetter extends Component {
     }
   }
 
+  // removes letter from database
   deleteLetter = () => {
     db.deleteLetter(this.props.id);
   }
 
+  // shows the delete button only if this user is the one who wrote the letter
   showDelete = () => {
     if (this.state.userID === this.state.authorID || this.state.userID === 'AVlLfxZZ0eZRj6hcowxNgy0Qtir2' || this.state.userID === 'uNzNPFZkAPbVKvYt9iI61FaXT4R2') {
       return (
@@ -85,6 +93,7 @@ class OneLetter extends Component {
     }
   }
 
+  // displays the heart as green if the user has liked it
   showRightHeart = () => {
     if (this.state.haveLiked) {
       return (<div className="liked" />);
@@ -95,6 +104,7 @@ class OneLetter extends Component {
 
 
   render() {
+    // formatting the body of the letter into paragraphs
     const letterSnippits = this.state.letter.split('\n');
     const finalLetter = letterSnippits.map((id, index) => {
       return (
@@ -106,6 +116,7 @@ class OneLetter extends Component {
       );
     });
 
+    // returning majority of letter information
     return (
       <div className="letterOuterMainStyle">
         <div className="smallDiv" />

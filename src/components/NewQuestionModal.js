@@ -1,7 +1,9 @@
 import React from 'react';
 import '../style.scss';
 
-
+/*
+This is the modal for creating a new question
+*/
 export default class newQuestionModal extends React.Component {
   constructor(props) {
     super(props);
@@ -10,10 +12,12 @@ export default class newQuestionModal extends React.Component {
     };
   }
 
+  // closes the modal
   onClose = (e) => {
     this.props.onClose();
   };
 
+  // submits the new question
   onCloseAndSubmit = (e) => {
     if (this.state.title !== '' && this.state.text !== '') {
       this.props.onCloseAndSubmit(this.state.question);
@@ -23,10 +27,13 @@ export default class newQuestionModal extends React.Component {
     }
   };
 
+  // handles question input
   handleQuestionChange = (event) => {
     this.setState({ question: event.target.value });
   }
 
+
+  // shows error if question not all filled in 
   showErrorMessage = () => {
     if (this.state.unfilledBoxes) {
       return (<p className="errorMessage"> * Please fill out all fields </p>);

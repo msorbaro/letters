@@ -6,7 +6,10 @@ import { faPlus, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import OneComment from './oneComment';
 import * as db from '../services/datastore';
 
-
+/*
+This component holds all the information for one question
+This information includes who wrote the question, amount of likes it has, and comments associated with it.
+*/
 class OneQuestion extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +32,7 @@ class OneQuestion extends Component {
     };
   }
 
+  // before the component loads we need to get all the information about the users and the question
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -42,6 +46,7 @@ class OneQuestion extends Component {
     });
   }
 
+  // this calculates the current date for posting a question
   getCurrentDate = (separator = '/') => {
     const newDate = new Date();
     const date = newDate.getDate();
@@ -53,6 +58,7 @@ class OneQuestion extends Component {
     return `${month < 10 ? `0${month}` : `${month}`}${separator}${date}${separator}${year}${' '}${hours}${':'}${minute}`;
   }
 
+  // this increases the YES votes for a question in the back end
   increaseQuestionLike = () => {
     db.increaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
     this.setState({ haveAgreed: true });
@@ -61,6 +67,7 @@ class OneQuestion extends Component {
     }
   }
 
+  // this increases the NO votes for a function in the backend
   increaseQuestionDislike = () => {
     db.increaseQuestionNo(this.props.id, this.state.userID, this.updatedDisagreeCallback);
     this.setState({ haveDisagreed: true });
@@ -69,32 +76,39 @@ class OneQuestion extends Component {
     }
   }
 
+  // this decreases the YES votes in the backend
   decreaseQuestionLike = () => {
     db.decreaseQuestionYes(this.props.id, this.state.userID, this.updatedAgreeCallback);
     this.setState({ haveAgreed: false });
   }
 
+  // This decreases the no votes in the backend for this question
   decreaseQuestionDislike = () => {
     db.decreaseQuestionNo(this.props.id, this.state.userID, this.updatedDisagreeCallback);
     this.setState({ haveDisagreed: false });
   }
 
+  // This changes the state for a new style for adding a comment
   createNewComment = () => {
     this.setState({ createNewComment: true });
   }
 
+  // this updates the amount of agree numbers
   updatedAgreeCallback = (agreeNum) => {
     this.setState({ agrees: agreeNum });
   }
 
+  // this allows the user to add a comment
   handleCommentChange = (event) => {
     this.setState({ comment: event.target.value });
   }
 
+  // this updates the number of disagree votes
   updatedDisagreeCallback = (disagreeNum) => {
     this.setState({ disagrees: disagreeNum });
   }
 
+  // This handles the click by a user to like a question
   handleUpThumbClick = () => {
     if (this.state.haveAgreed) {
       this.decreaseQuestionLike();
@@ -103,6 +117,7 @@ class OneQuestion extends Component {
     }
   }
 
+  // this handles click by user to dislike a question
   handleDownThumbClick = () => {
     if (this.state.haveDisagreed) {
       this.decreaseQuestionDislike();
@@ -111,6 +126,7 @@ class OneQuestion extends Component {
     }
   }
 
+  // this shows that you have marked the question yes
   showRightUpThumb = () => {
     if (this.state.haveAgreed) {
       return (<div className="upThumbColor" />);
@@ -119,6 +135,7 @@ class OneQuestion extends Component {
     }
   }
 
+  // this shows if you have marked the question no
   showRightDownThumb = () => {
     if (this.state.haveDisagreed) {
       return (<div className="downThumbColor" />);
@@ -127,6 +144,7 @@ class OneQuestion extends Component {
     }
   }
 
+  // changes variables for liked
   upThumbCallback = (clicked) => {
     if (clicked === 0) {
       this.setState({ haveAgreed: false });
@@ -135,6 +153,7 @@ class OneQuestion extends Component {
     }
   }
 
+  // changes varaibles for disliked
   downThumbCallback = (clicked) => {
     if (clicked === 0) {
       this.setState({ haveDisagreed: false });
@@ -143,28 +162,35 @@ class OneQuestion extends Component {
     }
   }
 
+  // updates to get new comments from database
   refreshComments = (updatedComments) => {
     this.setState({ comments: updatedComments });
   }
 
+  // sends a new comment to the database
   sendComment = () => {
     const date = this.getCurrentDate();
     db.addComment(this.state.comment, this.state.username, this.state.userID, this.props.id, date, this.refreshComments);
     this.setState({ comment: '', createNewComment: false });
   }
 
+  // lets a user decide not to post their comment
   cancel = () => {
     this.setState({ comment: '', createNewComment: false });
   }
 
+  // lets a user see more comments
   viewMore = () => {
     this.setState(prevState => ({ numberToView: prevState.numberToView + 3 }));
   }
 
+
+  // deletes a question from the database
   deleteQuestion = () => {
     db.deleteQuestion(this.props.id);
   }
 
+  // shows a delete button only if the user is the one who wrote the question
   showDelete = () => {
     if (this.state.userID === this.state.authorID || this.state.userID === 'AVlLfxZZ0eZRj6hcowxNgy0Qtir2' || this.state.userID === 'uNzNPFZkAPbVKvYt9iI61FaXT4R2') {
       return (
@@ -181,6 +207,9 @@ class OneQuestion extends Component {
   }
 
   render() {
+
+    // make comment objects for all of the comments with this question.
+    // update Z index for nice stacking display
     let commentObject = null;
     if (this.state.comments != null && this.state.comments !== undefined) {
       let zIndex = 999;
@@ -188,11 +217,9 @@ class OneQuestion extends Component {
       commentObject = Object.keys(this.state.comments).map((id, index) => {
         const info = this.state.comments[id];
         zIndex -= 5;
-        //  const newZ = String(zIndex);
         count += 1;
         if (count <= this.state.numberToView) {
           return (
-          // assuming gets props ID, comment, likes, author
             <div>
               <OneComment
                 zIndex={zIndex}
@@ -211,6 +238,7 @@ class OneQuestion extends Component {
       });
     }
 
+    // decides whether there should be a show more comments button, whether or not more comments exist
     const size = this.state.comments !== undefined ? Object.keys(this.state.comments).length : 0;
     const showMoreOrNah = size < 3 || this.state.numberToView >= size;
     const showMore = showMoreOrNah ? null
@@ -222,6 +250,7 @@ class OneQuestion extends Component {
 
     const classNamee = showMoreOrNah ? 'noMoreToShow' : 'moreToShow';
 
+   // What the bottom bar should look like if the user is not commenting
     const underCommentPromptToAdd = (
       <div className="contentMainTakeTwo">
         <div style={{
@@ -249,7 +278,7 @@ class OneQuestion extends Component {
       </div>
     );
 
-
+    // what the bottom bar should look like if the user is commenting
     const commentingCurrently = (
       <div className="contentMainTakeThree">
         <textarea style={{ width: '90%', marginTop: 20, height: '7.5vh' }} type="text" value={this.state.comment} onChange={this.handleCommentChange} />
@@ -276,6 +305,7 @@ class OneQuestion extends Component {
     );
 
 
+    // deciding which box to show
     let commentToDisplay = null;
     if (this.state.createNewComment) {
       commentToDisplay = commentingCurrently;
@@ -283,11 +313,6 @@ class OneQuestion extends Component {
       commentToDisplay = underCommentPromptToAdd;
     }
 
-    // const filledRed = this.state.haveDisagreed ? 'filledRed' : 'thumbAndCount';
-    //  const filledGreen = this.state.haveAgreed ? 'filledGreen' : 'thumbAndCount';
-
-    // const agreeColorText = this.state.haveAgreed ? 'white' : '#00ac66';
-    // const disagreeColorText = this.state.haveDisagreed ? 'white' : '#f51818';
 
     const styleChoice = this.state.comments !== undefined ? 'outerStyle' : 'outerStyleTwo';
     return (

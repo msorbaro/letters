@@ -1,7 +1,9 @@
 import React from 'react';
 import '../style.scss';
 
-
+/*
+Modal for adding a new letter
+*/
 export default class NewLetterModal extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ export default class NewLetterModal extends React.Component {
     this.props.onClose();
   };
 
+  // submits the new letter to the databsae
   onCloseAndSubmit = (e) => {
     if (this.state.title !== '' && this.state.text !== '') {
       this.props.onCloseAndSubmit(this.state.title, this.state.text);
@@ -25,14 +28,18 @@ export default class NewLetterModal extends React.Component {
     }
   };
 
+
+  // allows user to add title for the letter
   handleTitleChange = (event) => {
     this.setState({ title: event.target.value });
   }
 
+  // allows user to add text for the question
   handleTextChange = (event) => {
     this.setState({ text: event.target.value });
   }
 
+  // shows error if everything not filled in 
   showErrorMessage = () => {
     if (this.state.unfilledBoxes) {
       return (<p className="errorMessage"> * Please fill out all fields </p>);

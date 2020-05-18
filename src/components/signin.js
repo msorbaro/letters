@@ -5,6 +5,9 @@ import { Button } from 'react-bootstrap';
 import { Input } from 'reactstrap';
 import firebase from 'firebase';
 
+/*
+This component lets users who already have an account sign in
+*/
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -15,14 +18,17 @@ class SignIn extends Component {
     };
   }
 
+  // allows the user to enter an email
   onEmailChange = (event) => {
     this.setState({ email: event.target.value });
   }
 
+  // alows the user to enter a password
   onPasswordChange= (event) => {
     this.setState({ password: event.target.value });
   }
 
+  // when the user clicks sign in, this uses firebase to validate sign in credentials 
   handleSigninButtonClick = (event) => {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
       alert(error);
